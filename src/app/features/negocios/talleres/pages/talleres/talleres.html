@@ -1,0 +1,238 @@
+<div class="page-container">
+
+  <!-- Header -->
+  <div class="page-header">
+    <div>
+      <h1>Talleres</h1>
+      <p>Gestiona los talleres que trabajan con MotorHub.</p>
+    </div>
+  </div>
+
+  <!-- KPIs -->
+  <div class="kpi-grid"> 
+    <mat-card class="kpi-total">
+      <mat-card-content>
+        <div class="kpi-title"> Total</div>
+        <div class="kpi-value">{{ totalTalleres }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-general">
+      <mat-card-content>
+        <div class="kpi-title">Mecanico general</div>
+        <div class="kpi-value">{{ mecGeneral }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-electrico">
+      <mat-card-content>
+        <div class="kpi-title">Electrico</div>
+        <div class="kpi-value">{{ mecElectrico }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-gomero">
+      <mat-card-content>
+        <div class="kpi-title">Gomero</div>
+        <div class="kpi-value">{{ mecGomero }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-chapero">
+      <mat-card-content>
+        <div class="kpi-title">Chapero</div>
+        <div class="kpi-value">{{ mecChapero }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-diesel">
+      <mat-card-content>
+        <div class="kpi-title">Diesel</div>
+        <div class="kpi-value">{{ mecDiesel }}</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-gas">
+      <mat-card-content>
+        <div class="kpi-title">Gas</div>
+        <div class="kpi-value">{{ mecGas }}</div>
+      </mat-card-content>
+    </mat-card> 
+  </div>
+
+  <!-- Filtros -->
+  <mat-card class="filters-card">
+    <mat-card-content>
+      <div class="filters-grid">
+        <mat-form-field appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input matInput placeholder="Nombre del taller"
+          [(ngModel)]="filtros.busqueda"
+          (keyup)="aplicarFiltros()">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo vehiculo</mat-label>
+          <mat-select 
+            [(ngModel)]="filtros.tipoVehiculo"
+            (selectionChange)="aplicarFiltros()">
+        
+            <mat-option value="">Todos</mat-option>
+        
+            <mat-option value="Automóvil">Automóvil</mat-option>
+            <mat-option value="Motocicleta">Motocicleta</mat-option>
+            <mat-option value="Ambos">Ambos</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Especialidad</mat-label>
+          <mat-select 
+            [(ngModel)]="filtros.especialidad"
+            (selectionChange)="aplicarFiltros()">
+
+            <mat-option value="">Todos</mat-option>
+
+            <mat-option value="Mecánico General">Mecánico General</mat-option>
+            <mat-option value="Eléctrico">Eléctrico</mat-option>
+            <mat-option value="Gomero">Gomero</mat-option>
+            <mat-option value="Chapero">Chapero</mat-option>
+            <mat-option value="Diésel">Diésel</mat-option>
+            <mat-option value="Gas">Gas</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad</mat-label>
+          <mat-select
+          [(ngModel)]="filtros.ciudad"
+          (selectionChange)="aplicarFiltros()">
+
+          <mat-option value="">Todas</mat-option>
+
+          @for (ciudad of ciudades; track ciudad) {
+            <mat-option [value]="ciudad">
+              {{ ciudad }}
+            </mat-option>
+          }
+
+        </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Hace rescate</mat-label>
+          <mat-select 
+            [(ngModel)]="filtros.haceRescate"
+            (selectionChange)="aplicarFiltros()">
+        
+            <mat-option [value]="null">Todos</mat-option>
+        
+            <mat-option [value]="true">Si hace rescate</mat-option>
+            <mat-option [value]="false">No hace rescate</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Verificado</mat-label>
+          <mat-select 
+            [(ngModel)]="filtros.verificado"
+            (selectionChange)="aplicarFiltros()">
+        
+            <mat-option [value]="null">Todos</mat-option>
+        
+            <mat-option [value]="true">Verificados</mat-option>
+            <mat-option [value]="false">No verficiados</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div> 
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Tabla -->
+  <mat-card>
+    <mat-card-content>
+
+      <table mat-table [dataSource]="dataSource" matSort>
+
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Taller</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.nombre }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="ciudad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.ciudad }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="especialidad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Especialidad</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.especialidad }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="tipoVehiculo">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de Vehiculo</th>
+          <td mat-cell *matCellDef="let row">
+            {{ row.tipoVehiculo }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="haceRescate">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Hace rescate
+          </th>
+        
+          <td mat-cell *matCellDef="let row"> 
+            @if (row.haceRescate) {
+              <span class="chip chip-success">Sí</span>
+            } @else {
+              <span class="chip chip-neutral">No</span>
+            }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="verificado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Verificado</th>
+          <td mat-cell *matCellDef="let row">
+            @if (row.verificado) {
+              <span class="chip chip-success">Sí</span>
+            } @else {
+              <span class="chip chip-neutral">No</span>
+            }
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let row">
+            <div class="acciones">
+              <mat-icon matTooltip="Ver detalle" (click)="verDetalle(row)">visibility</mat-icon>
+              <mat-icon matTooltip="Editar">edit</mat-icon>
+            </div>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+      </table>
+      @if (dataSource.filteredData.length === 0) {
+        <div class="empty-state">
+          <mat-icon>search_off</mat-icon>
+          <p>No se encontraron talleres con los filtros seleccionados.</p>
+        </div>
+      }
+      <mat-paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 50]" 
+        showFirstLastButtons>
+      </mat-paginator> 
+    </mat-card-content>
+  </mat-card>
+
+</div>

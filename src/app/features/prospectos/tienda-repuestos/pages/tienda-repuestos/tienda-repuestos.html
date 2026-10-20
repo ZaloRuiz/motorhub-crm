@@ -1,0 +1,282 @@
+<div class="page-container">
+
+  <!-- Encabezado -->
+  <header class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow">MOTORHUB / PROSPECTOS</span>
+      <h1>Tiendas de repuestos</h1>
+      <p>Gestiona y da seguimiento a las tiendas de repuestos que aún no trabajan con MotorHub.</p>
+    </div>
+
+    <button mat-flat-button class="primary-action" type="button">
+      <mat-icon>add</mat-icon>
+      <span>Nuevo prospecto</span>
+    </button>
+  </header>
+
+  <!-- Indicadores -->
+  <section class="kpi-grid" aria-label="Resumen de prospectos">
+
+    <mat-card class="kpi-card kpi-total">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Total de prospectos</span>
+          <span class="kpi-icon">
+            <mat-icon>groups</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ totalProspectos }}</div>
+        <div class="kpi-caption">Registros según los filtros</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-a">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Tipo A</span>
+          <span class="kpi-icon">
+            <mat-icon>star</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoA }}</div>
+        <div class="kpi-caption">Clasificación comercial A</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-b">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Tipo B</span>
+          <span class="kpi-icon">
+            <mat-icon>trending_up</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoB }}</div>
+        <div class="kpi-caption">Clasificación comercial B</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-c">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Tipo C</span>
+          <span class="kpi-icon">
+            <mat-icon>segment</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoC }}</div>
+        <div class="kpi-caption">Clasificación comercial C</div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  <!-- Filtros -->
+  <mat-card class="filters-card">
+    <mat-card-content>
+
+      <div class="section-heading">
+        <div class="section-heading-icon">
+          <mat-icon>filter_list</mat-icon>
+        </div>
+        <div>
+          <h2>Filtrar prospectos</h2>
+          <p>Encuentra tiendas de repuestos según sus datos y estado comercial.</p>
+        </div>
+        <button mat-button class="clear-filters" (click)="limpiarFiltros()">
+          <mat-icon>filter_alt_off</mat-icon>
+          Limpiar filtros
+        </button>
+      </div>
+
+      <div class="filters-grid">
+
+        <mat-form-field appearance="outline" class="search-field">
+          <mat-label>Buscar tienda de repuestos</mat-label>
+          <mat-icon matPrefix>search</mat-icon>
+          <input
+            matInput
+            placeholder="Nombre de la tienda de repuestos"
+            [(ngModel)]="filtros.busqueda"
+            (ngModelChange)="aplicarFiltros()"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Estado comercial</mat-label>
+          <mat-select
+            [(ngModel)]="filtros.estado"
+            (selectionChange)="aplicarFiltros()"
+          >
+            <mat-option value="">Todos los estados</mat-option>
+            <mat-option value="Nuevo">Nuevo</mat-option>
+            <mat-option value="Contactado">Contactado</mat-option>
+            <mat-option value="Negociación">Negociación</mat-option>
+            <mat-option value="Ganado">Ganado</mat-option>
+            <mat-option value="Perdido">Perdido</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Clasificación</mat-label>
+          <mat-select
+            [(ngModel)]="filtros.tipo"
+            (selectionChange)="aplicarFiltros()"
+          >
+            <mat-option value="">Todos los tipos</mat-option>
+            <mat-option value="A">Tipo A</mat-option>
+            <mat-option value="B">Tipo B</mat-option>
+            <mat-option value="C">Tipo C</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ciudad</mat-label>
+          <mat-select
+            [(ngModel)]="filtros.ciudad"
+            (selectionChange)="aplicarFiltros()"
+          >
+            <mat-option value="">Todas las ciudades</mat-option>
+            @for (ciudad of ciudades; track ciudad) {
+              <mat-option [value]="ciudad">
+                {{ ciudad }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+  <!-- Listado -->
+  <mat-card class="table-card">
+    <mat-card-content>
+
+      <div class="table-heading">
+        <div>
+          <h2>Listado de tiendas de repuestos</h2>
+          <p>Consulta la información y el estado de cada prospecto.</p>
+        </div>
+
+        <span class="results-count">
+          {{ dataSource.filteredData.length }}
+          {{ dataSource.filteredData.length === 1 ? 'registro' : 'registros' }}
+        </span>
+      </div>
+
+      <div class="table-scroll">
+        <table mat-table [dataSource]="dataSource" matSort>
+
+          <ng-container matColumnDef="nombre">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tienda de repuestos</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="business-name">{{ row.nombre }}</span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="contacto">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Contacto</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.contacto || '—' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="telefono">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Teléfono</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.telefono || '—' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="ciudad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.ciudad || '—' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="tipo">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="tipo-chip" [ngClass]="'tipo-' + row.tipo">
+                Tipo {{ row.tipo }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="estado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+            <td mat-cell *matCellDef="let row">
+              <span class="estado-chip" [ngClass]="'estado-' + row.estado">
+                {{ row.estado }}
+              </span>
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="especialidad">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>
+              Especialidad
+            </th>
+            <td mat-cell *matCellDef="let row">
+              {{ row.especialidad || '—' }}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="acciones">
+            <th mat-header-cell *matHeaderCellDef>
+              Acciones
+            </th>
+            <td mat-cell *matCellDef="let row">
+              <div class="acciones">
+
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Ver detalle del prospecto"
+                  matTooltip="Ver detalle"
+                  (click)="verDetalle(row)"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </button>
+
+                <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Editar prospecto"
+                  matTooltip="Editar"
+                  disabled
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        </table>
+      </div>
+
+      @if (dataSource.filteredData.length === 0) {
+        <div class="empty-state">
+          <div class="empty-state-icon">
+            <mat-icon>search_off</mat-icon>
+          </div>
+          <h3>No se encontraron tiendas de repuestos</h3>
+          <p>Prueba cambiando los filtros para ver otros prospectos.</p>
+        </div>
+      }
+
+      <mat-paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 25, 50]"
+        showFirstLastButtons
+      ></mat-paginator>
+
+    </mat-card-content>
+  </mat-card>
+
+</div>

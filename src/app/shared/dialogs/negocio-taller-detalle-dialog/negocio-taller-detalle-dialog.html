@@ -1,0 +1,71 @@
+<h2 mat-dialog-title>
+    {{ data.nombre }}
+  </h2>
+  
+  <mat-dialog-content>
+  
+    <section>
+      <h3>Información General</h3>
+      @if (data.verificado) {
+        <div class="detail-item">
+          <div class="detail-label">
+            <mat-icon>verified</mat-icon>
+            <span>   Taller Verificado</span>
+          </div> 
+        </div>
+    }
+      <div class="detail-grid">
+        <div class="detail-item">
+            <span class="detail-label">Telefono</span>
+            <span class="detail-value">{{ data.telefono1 }}</span>
+        </div>
+        @if(data.telefono2){
+          <div class="detail-item">
+            <span class="detail-label">Teléfono</span>
+            <span class="detail-value">{{ data.telefono2 }}</span>
+        </div>
+        } 
+        <div class="detail-item">
+            <span class="detail-label">Dirección</span>
+            <span class="detail-value">{{ data.direccion }}</span>
+        </div>
+        <div class="detail-item">
+          <span class="detail-label">Ciudad</span>
+          <span class="detail-value">{{ data.ciudad }}</span>
+        </div>
+        
+      </div>
+    </section>
+  
+    <section>
+      <h3>Características Técnicas</h3>
+  
+      <div class="detail-grid">
+        <div class="detail-item">
+          <span class="detail-label">Especialidad</span>
+          <span class="detail-value">{{ data.especialidad }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Tipo vehiculo</span>
+            <span class="detail-value">{{ data.tipoVehiculo }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Hace rescate</span>
+            @if (data.haceRescate) {
+              <span class="detail-value">Sí hace rescate</span>
+            } @else {
+              <span class="detail-value">No hace rescate</span>
+            } 
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Rango precio</span>
+            <span class="detail-value">{{ data.rangoPrecio }}</span>
+        </div>
+      </div>
+    </section>
+  </mat-dialog-content> 
+  <mat-dialog-actions align="end">
+    <button mat-flat-button mat-dialog-close>
+      Cerrar
+    </button>
+  </mat-dialog-actions>

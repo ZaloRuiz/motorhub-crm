@@ -1,0 +1,145 @@
+
+<mat-sidenav-container class="app-container">
+
+  <mat-sidenav
+    #sidenav
+    class="sidebar"
+    [mode]="modoSidenav"
+    [opened]="sidenavAbierto"
+    [fixedInViewport]="!esEscritorio"
+  >
+    <div class="sidebar-header">
+      <div class="logo-mark">M</div>
+      <div class="logo-text">
+        <span class="logo">MotorHub</span>
+        <span class="logo-caption">Panel de gestión</span>
+      </div>
+    </div>
+
+    <div class="sidebar-scroll">
+      <div class="menu-title">Principal</div>
+
+      <mat-nav-list class="main-navigation">
+        <a
+          mat-list-item
+          routerLink="/dashboard"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="cerrarMenuSiMovil()"
+        >
+          <mat-icon matListItemIcon>dashboard</mat-icon>
+          <span matListItemTitle>Dashboard</span>
+        </a>
+      </mat-nav-list>
+
+      <div class="menu-title">Gestión comercial</div>
+
+      <mat-accordion multi="false" class="menu-accordion">
+
+        <!-- Negocios -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">business_center</mat-icon>
+              <span>Negocios</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-nav-list>
+            <a mat-list-item routerLink="/negocios/talleres" (click)="cerrarMenuSiMovil()">Talleres</a>
+            <a mat-list-item routerLink="/negocios/lubricentros" (click)="cerrarMenuSiMovil()">Lubricentros</a>
+            <a mat-list-item routerLink="/negocios/tienda-repuestos" (click)="cerrarMenuSiMovil()">Tiendas de Repuestos</a>
+            <a mat-list-item routerLink="/negocios/gruas" (click)="cerrarMenuSiMovil()">Grúas</a>
+            <a mat-list-item routerLink="/negocios/ambulancias" (click)="cerrarMenuSiMovil()">Ambulancias</a>
+            <a mat-list-item routerLink="/negocios/surtidores" (click)="cerrarMenuSiMovil()">Surtidores</a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+        <!-- Prospectos -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">person_search</mat-icon>
+              <span>Prospectos</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-nav-list>
+            <a mat-list-item routerLink="/prospectos/talleres" (click)="cerrarMenuSiMovil()">Talleres</a>
+            <a mat-list-item routerLink="/prospectos/lubricentros" (click)="cerrarMenuSiMovil()">Lubricentros</a>
+            <a mat-list-item routerLink="/prospectos/tienda-repuestos" (click)="cerrarMenuSiMovil()">Tiendas de Repuestos</a>
+            <a mat-list-item routerLink="/prospectos/gruas" (click)="cerrarMenuSiMovil()">Grúas</a>
+            <a mat-list-item routerLink="/prospectos/ambulancias" (click)="cerrarMenuSiMovil()">Ambulancias</a>
+            <a mat-list-item routerLink="/prospectos/surtidores" (click)="cerrarMenuSiMovil()">Surtidores</a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+        <!-- Pre-ingresados -->
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">pending_actions</mat-icon>
+              <span>Pre-ingresados</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-nav-list>
+            <a mat-list-item routerLink="/pre-ingresados/talleres" (click)="cerrarMenuSiMovil()">Talleres</a>
+            <a mat-list-item routerLink="/pre-ingresados/lubricentros" (click)="cerrarMenuSiMovil()">Lubricentros</a>
+            <a mat-list-item routerLink="/pre-ingresados/repuestos" (click)="cerrarMenuSiMovil()">Tiendas de Repuestos</a>
+            <a mat-list-item routerLink="/pre-ingresados/gruas" (click)="cerrarMenuSiMovil()">Grúas</a>
+            <a mat-list-item routerLink="/pre-ingresados/ambulancias" (click)="cerrarMenuSiMovil()">Ambulancias</a>
+            <a mat-list-item routerLink="/pre-ingresados/surtidores" (click)="cerrarMenuSiMovil()">Surtidores</a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+
+      </mat-accordion>
+
+      <div class="menu-title">Administración</div>
+
+      <mat-accordion multi="false" class="menu-accordion">
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon class="section-icon">settings</mat-icon>
+              <span>Configuración</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <mat-nav-list>
+            <a mat-list-item routerLink="/configuracion/usuarios" (click)="cerrarMenuSiMovil()">Usuarios</a>
+            <a mat-list-item routerLink="/configuracion/roles" (click)="cerrarMenuSiMovil()">Roles</a>
+            <a mat-list-item routerLink="/configuracion/empresa" (click)="cerrarMenuSiMovil()">Empresa</a>
+          </mat-nav-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <div class="sidebar-footer">
+      <span class="status-dot"></span>
+      <span>Sistema de gestión</span>
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content class="main-content">
+
+    <header class="topbar">
+      <button
+        mat-icon-button
+        class="menu-toggle"
+        type="button"
+        aria-label="Abrir menú de navegación"
+        (click)="alternarMenu()"
+      >
+        <mat-icon>{{ sidenavAbierto ? 'menu_open' : 'menu' }}</mat-icon>
+      </button>
+
+      <!-- <div class="topbar-label">MotorHub <span>/</span> Gestión</div> -->
+    </header>
+
+    <main class="content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

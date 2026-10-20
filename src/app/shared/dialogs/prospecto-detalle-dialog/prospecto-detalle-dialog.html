@@ -1,0 +1,90 @@
+<h2 mat-dialog-title>
+    {{ data.nombre }}
+  </h2>
+  
+  <mat-dialog-content>
+  
+    <section>
+      <h3>Información General</h3>
+  
+      <div class="detail-grid">
+        <div class="detail-item">
+            <span class="detail-label">Contacto</span>
+            <span class="detail-value">{{ data.contacto }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Teléfono</span>
+            <span class="detail-value">{{ data.telefono }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Dirección</span>
+            <span class="detail-value">{{ data.direccion }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Tipo</span>
+            <span class="detail-value">Taller categoria {{ data.tipo }}</span>
+        </div>
+      </div>
+    </section>
+  
+    <section>
+      <h3>Seguimiento Comercial</h3>
+  
+      <div class="detail-grid">
+        <div class="detail-item">
+            <span class="detail-label">Prioridad</span>
+            <span class="detail-value">{{ data.prioridad }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Método</span>
+            <span class="detail-value">{{ data.metodoContacto }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Respuesta</span>
+            <span class="detail-value">{{ data.respuestaContacto }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Próxima acción</span>
+            <span class="detail-value">{{ data.proximaAccion }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Próximo contacto</span>
+            <span class="detail-value">{{ data.proximoContacto }}</span>
+        </div>
+      </div>
+    </section>
+  
+    <section>
+      <h3>Características Técnicas</h3>
+  
+      <div class="detail-grid">
+        <div class="detail-item">
+            <span class="detail-label">Especialidad</span>
+            <span class="detail-value">{{ data.especialidad }}</span>
+        </div>
+        <div class="detail-item">
+            <span class="detail-label">Tipo Vehículo</span>
+            <span class="detail-value">{{ data.tipoVehiculo }}</span>
+        </div>
+  
+        @if (data.caracteristicasEtiqueta) {
+            <div class="detail-item">
+                <span class="detail-label">Etiqueta</span>
+                <span class="detail-value">{{ data.caracteristicasEtiqueta }}</span>
+            </div>
+        }
+  
+        @if (data.caracteristicasAdicional) {
+            <div class="detail-item">
+                <span class="detail-label">Características</span>
+                <span class="detail-value">{{ data.caracteristicasAdicional }}</span>
+            </div>
+        }
+      </div>
+    </section> 
+  </mat-dialog-content> 
+  <mat-dialog-actions align="end">
+    <button mat-flat-button mat-dialog-close>
+      Cerrar
+    </button>
+  </mat-dialog-actions>

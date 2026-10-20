@@ -1,0 +1,174 @@
+.page-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .page-header h1 {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 600;
+  }
+  
+  .page-header p {
+    margin-top: 4px;
+    color: #64748b;
+  }
+  
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 18px;
+  }
+  
+  .kpi-title {
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+  }
+  
+  .kpi-value {
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 8px;
+  }
+  .kpi-total {
+    border-top: 4px solid #334155;
+  }
+  
+  .kpi-general {
+    border-top: 4px solid #2563eb;
+  }
+  
+  .kpi-electrico {
+    border-top: 4px solid #f59e0b;
+  }
+  
+  .kpi-gomero {
+    border-top: 4px solid #10b981;
+  }
+  
+  .kpi-chapero {
+    border-top: 4px solid #8b5cf6;
+  }
+  
+  .kpi-diesel {
+    border-top: 4px solid #ef4444;
+  }
+  
+  .kpi-gas {
+    border-top: 4px solid #06b6d4;
+  }
+  .filters-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .filters-card mat-card-content {
+    padding-top: 36px;
+  }
+  
+  table {
+    width: 100%;
+    background-color: #ffffff;
+  }
+  .tipo-chip {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .tipo-A {
+    background: #dcfce7;
+    color: #166534;
+  }
+  
+  .tipo-B {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+  
+  .tipo-C {
+    background: #e5e7eb;
+    color: #374151;
+  }
+  .mat-mdc-row:hover {
+    background: #f8fafc;
+  }
+  .mat-mdc-header-row {
+    background-color: #1976d2;
+  }
+  
+  .mat-mdc-header-row .mat-mdc-header-cell {
+    color: white;
+  }
+  .mat-mdc-paginator {
+    background-color: #ffffff;
+    padding: 12px 0;
+    border-top: 1px solid #e5e7eb;
+  }
+  .selected-row {
+    background: #eff6ff;
+  }
+  .acciones {
+    display: flex;
+    gap: 12px;
+  }
+  .acciones mat-icon {
+    cursor: pointer;
+    color: #64748b;
+  }
+  
+  .acciones mat-icon:hover {
+    color: #2563eb;
+  }
+  .estado-chip {
+    padding: 4px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  .estado-Nuevo {
+    background: #e5e7eb;
+    color: #374151;
+  }
+  
+  .estado-Contactado {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+  
+  .estado-Negociación {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  
+  .estado-Ganado {
+    background: #dcfce7;
+    color: #166534;
+  }
+  
+  .estado-Perdido {
+    background: #fee2e2;
+    color: #991b1b;
+  }
+  .empty-state {
+    padding: 48px;
+    text-align: center;
+    color: #64748b;
+  }
+  
+  .empty-state mat-icon {
+    font-size: 48px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 12px;
+  }

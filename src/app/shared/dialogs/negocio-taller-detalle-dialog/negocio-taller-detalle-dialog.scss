@@ -1,0 +1,49 @@
+mat-dialog-content {
+    overflow-x: hidden;
+  }
+  
+  section {
+    margin-bottom: 18px;
+  }
+  
+  h3 {
+    margin: 0 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+    color: #1e293b;
+    font-size: 16px;
+  }
+   
+  .detail-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  
+  .detail-item {
+    padding: 9px;
+    border-radius: 9px;
+    background: #f8fafc;
+  }
+  
+  .detail-label {
+    display: block;
+    font-size: 16px;
+    color: #64748b;
+    margin-bottom: 4px;
+  }
+  
+  .detail-value {
+    font-weight: 500;
+  }
+  .detail-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+} 
+.detail-label mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
