@@ -1,0 +1,76 @@
+<section class="dashboard-card">
+    <div class="card-header">
+      <div class="card-heading">
+        <h3>Embudo comercial</h3>
+        <p>Avance de los prospectos por etapa comercial</p>
+      </div>
+  
+      <span class="card-badge">{{ textoPeriodo() }}</span>
+    </div>
+  
+    <div class="funnel-context">
+      <div class="context-icon">
+        <mat-icon>groups</mat-icon>
+      </div>
+  
+      <div class="context-info">
+        <span class="context-label">Vista seleccionada</span>
+        <strong>{{ nombreVendedor() }}</strong>
+      </div>
+  
+      <div class="context-result">
+        <span>Tasa de incorporación</span>
+        <strong>{{ tasaIncorporacion() }}%</strong>
+      </div>
+    </div>
+  
+    <div class="funnel-list">
+      @for (etapa of etapas(); track etapa.titulo; let i = $index) {
+        <div class="funnel-stage">
+          <div class="stage-heading">
+            <div class="stage-title">
+              <div class="stage-icon" [class.final-stage]="i === 3">
+                <mat-icon>{{ etapa.icono }}</mat-icon>
+              </div>
+  
+              <div class="stage-text">
+                <span class="stage-name">{{ etapa.titulo }}</span>
+                <span class="stage-description">
+                  {{ etapa.descripcion }}
+                </span>
+              </div>
+            </div>
+  
+            <div class="stage-metrics">
+              <strong class="stage-count">{{ etapa.cantidad }}</strong>
+              <span class="stage-percentage">{{ etapa.porcentaje }}%</span>
+            </div>
+          </div>
+  
+          <div
+            class="stage-track"
+            role="progressbar"
+            [attr.aria-label]="etapa.titulo"
+            [attr.aria-valuenow]="etapa.porcentaje"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div
+              class="stage-fill"
+              [class.final-fill]="i === 3"
+              [style.width.%]="etapa.porcentaje"
+            ></div>
+          </div>
+        </div>
+      }
+    </div>
+  
+    <div class="funnel-footer">
+      <mat-icon>info_outline</mat-icon>
+      <p>
+        Los porcentajes muestran cada etapa respecto al total de prospectos
+        identificados. Los datos son ilustrativos y deberán conectarse con
+        los registros comerciales reales.
+      </p>
+    </div>
+  </section>

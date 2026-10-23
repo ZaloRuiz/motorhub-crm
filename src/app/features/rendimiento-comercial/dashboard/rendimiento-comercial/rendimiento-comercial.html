@@ -1,0 +1,93 @@
+
+<div class="dashboard">
+
+    <!-- Encabezado y filtros globales -->
+    <header class="dashboard-header">
+      <div class="header-content"> 
+  
+        <h1>Desempeño comercial</h1>
+        <p>Analiza la actividad y los resultados del equipo comercial.</p>
+      </div>
+  
+      <div class="dashboard-filters">
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Período</mat-label>
+          <mat-select
+            [value]="periodoSeleccionado()"
+            (selectionChange)="cambiarPeriodo($event.value)">
+            @for (periodo of periodos; track periodo.valor) {
+              <mat-option [value]="periodo.valor">
+                {{ periodo.etiqueta }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+  
+        <mat-form-field appearance="outline" class="filter-field">
+          <mat-label>Vendedor</mat-label>
+          <mat-select
+            [value]="vendedorSeleccionado()"
+            (selectionChange)="cambiarVendedor($event.value)">
+            @for (vendedor of vendedores; track vendedor.id) {
+              <mat-option [value]="vendedor.id">
+                {{ vendedor.nombre }}
+              </mat-option>
+            }
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </header>
+  
+    <!-- Resumen del equipo comercial -->
+    <section class="dashboard-section">
+      <div class="section-heading">
+        <div>
+          <h2>Resumen comercial</h2>
+          <p>Indicadores principales del período seleccionado.</p>
+        </div>
+      </div>
+  
+      <app-resumen-vendedores
+        [periodo]="periodoSeleccionado()"
+        [vendedorId]="vendedorSeleccionado()">
+      </app-resumen-vendedores>
+    </section>
+  
+    <!-- Comparación y embudo -->
+    <section class="dashboard-section">
+      <div class="section-heading">
+        <div>
+          <h2>Gestión de oportunidades</h2>
+          <p>Compara resultados e identifica las etapas comerciales que requieren atención.</p>
+        </div>
+      </div>
+  
+      <div class="dashboard-grid">
+        <app-comparativa-vendedores
+          [periodo]="periodoSeleccionado()">
+        </app-comparativa-vendedores>
+  
+        <app-embudo-por-vendedor
+          [periodo]="periodoSeleccionado()"
+          [vendedorId]="vendedorSeleccionado()">
+        </app-embudo-por-vendedor>
+      </div>
+    </section>
+  
+    <!-- Incorporaciones -->
+    <section class="dashboard-section">
+      <div class="section-heading">
+        <div>
+          <h2>Incorporación de negocios</h2>
+          <p>Consulta los resultados de incorporación durante el período.</p>
+        </div>
+      </div>
+  
+      <app-incorporaciones-por-vendedor
+        [periodo]="periodoSeleccionado()"
+        [vendedorId]="vendedorSeleccionado()">
+      </app-incorporaciones-por-vendedor>
+    </section>
+  
+  </div>
+  

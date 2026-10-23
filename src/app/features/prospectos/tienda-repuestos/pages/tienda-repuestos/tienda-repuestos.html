@@ -20,12 +20,12 @@
     <mat-card class="kpi-card kpi-total">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Total de prospectos</span>
+          <span class="kpi-title">Total de negocios</span>
           <span class="kpi-icon">
             <mat-icon>groups</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ totalProspectos }}</div>
+        <div class="kpi-value">{{ totalNegocios }}</div>
         <div class="kpi-caption">Registros según los filtros</div>
       </mat-card-content>
     </mat-card>
@@ -53,19 +53,6 @@
         </div>
         <div class="kpi-value">{{ tipoB }}</div>
         <div class="kpi-caption">Clasificación comercial B</div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="kpi-card kpi-c">
-      <mat-card-content>
-        <div class="kpi-top">
-          <span class="kpi-title">Tipo C</span>
-          <span class="kpi-icon">
-            <mat-icon>segment</mat-icon>
-          </span>
-        </div>
-        <div class="kpi-value">{{ tipoC }}</div>
-        <div class="kpi-caption">Clasificación comercial C</div>
       </mat-card-content>
     </mat-card>
 
@@ -126,7 +113,6 @@
             <mat-option value="">Todos los tipos</mat-option>
             <mat-option value="A">Tipo A</mat-option>
             <mat-option value="B">Tipo B</mat-option>
-            <mat-option value="C">Tipo C</mat-option>
           </mat-select>
         </mat-form-field>
 

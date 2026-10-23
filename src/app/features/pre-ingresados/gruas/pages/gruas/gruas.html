@@ -1,26 +1,273 @@
-<main class="page-container">
-    <header class="page-header">
-      <div class="page-heading">
-        <span class="page-eyebrow">MOTORHUB / PRE-INGRESADOS</span>
-  
-        <h1>{{ titulo }}</h1>
-  
-        <p>{{ descripcion }}</p>
-      </div>
-    </header>
-  
-    <section class="content-card">
-      <div class="empty-state">
-        <div class="empty-state-icon">
-          <mat-icon>pending_actions</mat-icon>
+<div class="page-container">
+
+  <!-- Encabezado -->
+  <header class="page-header">
+    <div class="page-heading">
+      <span class="page-eyebrow">MOTORHUB / PRE-INGRESADOS</span>
+      <h1>Grúas</h1>
+      <p>Administra y realiza seguimiento a las grúas pre-ingresadas.</p>
+    </div>
+  </header>
+
+  <!-- Indicadores -->
+  <section class="kpi-grid" aria-label="Resumen de pre-ingresados">
+
+    <mat-card class="kpi-card kpi-total">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Total de negocios</span>
+          <span class="kpi-icon">
+            <mat-icon>groups</mat-icon>
+          </span>
         </div>
-  
-        <h2>Módulo en preparación</h2>
-  
-        <p>
-          Aquí se mostrará la información de los negocios pre-ingresados
-          de esta categoría.
-        </p>
+        <div class="kpi-value">{{ totalPreIngresados }}</div>
+        <div class="kpi-caption">Registros según los filtros</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-a">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Integral</span>
+          <span class="kpi-icon">
+            <mat-icon>star</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoIntegral }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-b">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Plataforma</span>
+          <span class="kpi-icon">
+            <mat-icon>trending_up</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoPlataforma }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-c">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Arrastre con gancho</span>
+          <span class="kpi-icon">
+            <mat-icon>segment</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoArrastreGancho }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-c">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Arrastre con elevador</span>
+          <span class="kpi-icon">
+            <mat-icon>segment</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoArrastreElevador }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
+      </mat-card-content>
+    </mat-card>
+
+  </section>
+
+  <!-- Filtros -->
+  <section class="filter-card">
+    <div class="section-heading">
+      <div class="section-heading-icon">
+        <mat-icon>filter_list</mat-icon>
       </div>
-    </section>
-  </main>
+      <div>
+        <h2>Filtrar negocios</h2>
+        <p>Encuentra gruas según sus datos y estado comercial.</p>
+      </div>
+      <button mat-button class="clear-filters" (click)="limpiarFiltros()">
+        <mat-icon>filter_alt_off</mat-icon>
+        Limpiar filtros
+      </button>
+    </div>
+
+    <div class="filters-grid">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar grúa</mat-label>
+        <mat-icon matPrefix>search</mat-icon>
+        <input
+          matInput
+          [(ngModel)]="filtros.busqueda"
+          (ngModelChange)="aplicarFiltros()"
+          placeholder="Nombre del negocio..."
+        />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Estado de contacto</mat-label>
+        <mat-select
+          [(ngModel)]="filtros.estado"
+          (ngModelChange)="aplicarFiltros()"
+        >
+          <mat-option value="">Todos los estados</mat-option>
+          <mat-option value="Pendiente">Pendiente</mat-option>
+          <mat-option value="Contactado">Contactado</mat-option>
+          <mat-option value="Perdido">Perdido</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Tipo de grua</mat-label>
+        <mat-select
+          [(ngModel)]="filtros.tipo"
+          (ngModelChange)="aplicarFiltros()"
+        >
+          <mat-option value="">Todos los tipos</mat-option>
+          <mat-option value="Integral">Integral</mat-option>
+          <mat-option value="Plataforma">Plataforma</mat-option>
+          <mat-option value="Arrastre con gancho">Arrastre con gancho</mat-option>
+          <mat-option value="Arrastre con elevador">Arrastre con elevador</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Ciudad</mat-label>
+        <mat-select
+          [(ngModel)]="filtros.ciudad"
+          (ngModelChange)="aplicarFiltros()"
+        >
+          <mat-option value="">Todas las ciudades</mat-option>
+          @for (ciudad of ciudades; track ciudad) {
+            <mat-option [value]="ciudad">{{ ciudad }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </section>
+
+  <!-- Tabla -->
+  <section class="table-card">
+    <mat-card-content>
+    <div class="table-heading">
+      <div>
+        <h2>Listado de grúas</h2>
+        <p>Consulta los datos y el estado comercial de cada negocio.</p>
+      </div>
+
+      <span class="results-count">
+        {{ dataSource.filteredData.length }}
+        {{ dataSource.filteredData.length === 1 ? 'resultado' : 'resultados' }}
+      </span>
+    </div>
+
+    <div class="table-scroll">
+      <table
+        mat-table
+        [dataSource]="dataSource"
+        matSort
+        class="prospectos-table"
+      >
+
+        <!-- Nombre -->
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Grúa</th>
+          <td mat-cell *matCellDef="let prospecto">
+            <span class="business-name">{{ prospecto.nombre }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Contacto -->
+        <ng-container matColumnDef="contacto">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Contacto</th>
+          <td mat-cell *matCellDef="let prospecto">
+            {{ prospecto.contacto }}
+          </td>
+        </ng-container>
+
+        <!-- Teléfono -->
+        <ng-container matColumnDef="telefono">
+          <th mat-header-cell *matHeaderCellDef>Teléfono</th>
+          <td mat-cell *matCellDef="let prospecto">
+            {{ prospecto.telefono }}
+          </td>
+        </ng-container>
+
+        <!-- Ciudad -->
+        <ng-container matColumnDef="ciudad">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
+          <td mat-cell *matCellDef="let prospecto">
+            {{ prospecto.ciudad }}
+          </td>
+        </ng-container>
+
+        <!-- Tipo de grúa -->
+        <ng-container matColumnDef="tipoGrua">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de grúa</th>
+          <td mat-cell *matCellDef="let prospecto">
+            <span class="tipo-grua">{{ prospecto.tipoGrua }}</span>
+          </td>
+        </ng-container>
+
+        <!-- Estado -->
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
+          <td mat-cell *matCellDef="let prospecto">
+            <span class="estado-chip" [ngClass]="'estado-' + prospecto.estado">
+              {{ prospecto.estado }}
+            </span>
+          </td>
+        </ng-container>
+
+        <!-- Acciones -->
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef>Acciones</th>
+          <td mat-cell *matCellDef="let negocio">
+            <button
+              mat-icon-button
+              matTooltip="Ver detalles"
+              aria-label="Ver detalles del negocio"
+              (click)="verDetalle(negocio)"
+            >
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button
+                  mat-icon-button
+                  type="button"
+                  aria-label="Editar prospecto"
+                  matTooltip="Editar"
+                  disabled
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+        <tr *matNoDataRow>
+          <td [attr.colspan]="displayedColumns.length">
+            <div class="empty-state">
+              <mat-icon>search_off</mat-icon>
+              <h3>No se encontraron grúas</h3>
+              <p>Prueba modificando los filtros de búsqueda.</p>
+            </div>
+          </td>
+        </tr>
+
+      </table>
+    </div>
+
+    <mat-paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 25, 50]"
+      showFirstLastButtons
+      aria-label="Paginación de grúas"
+    /></mat-card-content>
+  </section>
+
+</div>

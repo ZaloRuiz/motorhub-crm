@@ -1,12 +1,26 @@
-<div class="bg-white rounded-xl p-5 shadow-sm card-container">
-    <h3 class="text-lg font-semibold mb-4">
-      Nuevos Prospectos (30 días)
-    </h3>
-  
+
+<section class="dashboard-card">
+  <div class="card-header">
+    <div class="card-heading">
+      <h3>Nuevos prospectos</h3>
+      <p>Evolución de la captación comercial</p>
+    </div>
+
+    <span class="card-badge">Últimos 30 días</span>
+  </div>
+
+  <div class="chart-container">
     <apx-chart
       [series]="chartSeries"
       [chart]="chartDetails"
       [stroke]="chartStroke"
-      [xaxis]="chartXAxis">
+      [xaxis]="chartXAxis"
+      [yaxis]="chartYAxis"
+      [markers]="chartMarkers"
+      [fill]="chartFill"
+      [grid]="chartGrid"
+      [dataLabels]="chartDataLabels"
+      [tooltip]="chartTooltip">
     </apx-chart>
   </div>
+</section>

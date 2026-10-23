@@ -1,14 +1,48 @@
+
 <div class="dashboard">
+
+  <!-- 1. Resumen general -->
   <div class="kpis">
-    <app-kpi-card titulo="Prospectos Totales" valor="128"></app-kpi-card>
-    <app-kpi-card titulo="Prospectos Activos" valor="47"></app-kpi-card>
-    <app-kpi-card titulo="Negocios pre-ingresados" valor="240"></app-kpi-card>
-    <app-kpi-card titulo="Negocios Activos" valor="83"></app-kpi-card>
-    <app-kpi-card titulo="Conversión" valor="64%"></app-kpi-card>
+    <app-kpi-card
+      titulo="Prospectos Totales"
+      valor="128">
+    </app-kpi-card>
+
+    <app-kpi-card
+      titulo="Prospectos Activos"
+      valor="47">
+    </app-kpi-card>
+
+    <app-kpi-card
+      titulo="Negocios pre-ingresados"
+      valor="240">
+    </app-kpi-card>
+
+    <app-kpi-card
+      titulo="Negocios Activos"
+      valor="83">
+    </app-kpi-card>
   </div>
+
+  <!-- 2. Situación comercial -->
   <div class="grid">
     <app-estados-card></app-estados-card>
-    <app-rubros-card></app-rubros-card>
+    <app-embudo-comercial></app-embudo-comercial>
   </div>
+
+  <!-- 3. Incorporación y crecimiento -->
+  <div class="grid">
+    <app-nuevos-negocios-periodo></app-nuevos-negocios-periodo>
+    <app-crecimiento-mensual></app-crecimiento-mensual>
+  </div>
+
+  <!-- 4. Composición de la red y objetivos -->
+  <div class="grid">
+    <app-rubros-card></app-rubros-card>
+    <app-avance-objetivos></app-avance-objetivos>
+  </div>
+
+  <!-- 5. Actividad comercial reciente -->
   <app-nuevos-prospectos-card></app-nuevos-prospectos-card>
+
 </div>

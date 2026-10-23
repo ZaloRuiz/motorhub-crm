@@ -1,0 +1,64 @@
+<section class="dashboard-card">
+    <div class="card-header">
+      <div class="card-heading">
+        <h3>Incorporaciones de negocios</h3>
+        <p>Evolución de los negocios incorporados al sistema</p>
+      </div>
+  
+      <span class="card-badge">{{ textoPeriodo() }}</span>
+    </div>
+  
+    <div class="incorporation-summary">
+      <div class="summary-icon">
+        <mat-icon>domain_add</mat-icon>
+      </div>
+  
+      <div class="summary-main">
+        <span class="summary-label">Total de incorporaciones</span>
+        <strong class="summary-total">{{ totalIncorporaciones() }}</strong>
+        <span class="summary-description">{{ nombreVendedor() }}</span>
+      </div>
+  
+      <div class="summary-leader">
+        <span class="leader-label">
+          {{ vendedorId() === 'todos' ? 'Líder del período' : 'Vendedor seleccionado' }}
+        </span>
+  
+        <strong>{{ liderIncorporaciones() }}</strong>
+  
+        <span class="leader-description">
+          {{ vendedorId() === 'todos' ? 'Según incorporaciones registradas' : 'Vista individual' }}
+        </span>
+      </div>
+    </div>
+  
+    <div class="chart-heading">
+      <div>
+        <h4>Negocios incorporados</h4>
+        <p>Comparación por {{ periodo() === '7d' ? 'día' : periodo() === '30d' ? 'semana' : 'tramo del período' }}</p>
+      </div>
+    </div>
+  
+    <div class="chart-container">
+      <apx-chart
+        [series]="chartSeries()"
+        [chart]="chartDetails"
+        [colors]="chartColors"
+        [plotOptions]="chartPlotOptions"
+        [xaxis]="chartXAxis()"
+        [yaxis]="chartYAxis"
+        [legend]="chartLegend"
+        [dataLabels]="chartDataLabels"
+        [grid]="chartGrid"
+        [tooltip]="chartTooltip"
+      ></apx-chart>
+    </div>
+  
+    <div class="chart-footer">
+      <mat-icon>info_outline</mat-icon>
+      <p>
+        Se contabilizan las incorporaciones registradas dentro del período seleccionado.
+        Los valores actuales son de demostración.
+      </p>
+    </div>
+  </section>

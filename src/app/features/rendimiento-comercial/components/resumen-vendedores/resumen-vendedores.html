@@ -1,0 +1,35 @@
+
+<div class="resumen-grid">
+    @for (tarjeta of tarjetas(); track tarjeta.titulo) {
+      <article class="resumen-card">
+        <div class="card-top">
+          <span class="card-icon">
+            <mat-icon>{{ tarjeta.icono }}</mat-icon>
+          </span>
+  
+          <span class="card-period">
+            {{ periodo() === '7d'
+              ? '7 días'
+              : periodo() === '30d'
+                ? '30 días'
+                : '90 días' }}
+          </span>
+        </div>
+  
+        <div class="card-content">
+          <p class="card-title">{{ tarjeta.titulo }}</p>
+  
+          <strong class="card-value">
+            @if (tarjeta.tipo === 'porcentaje') {
+              {{ tarjeta.valor }}%
+            } @else {
+              {{ tarjeta.valor }}
+            }
+          </strong>
+  
+          <p class="card-description">{{ tarjeta.descripcion }}</p>
+        </div>
+      </article>
+    }
+  </div>
+  

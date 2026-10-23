@@ -16,10 +16,12 @@ import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatDialog } from '@angular/material/dialog';
 import { NegocioTallerDetalleDialog } from '../../../../../shared/dialogs/negocio-taller-detalle-dialog/negocio-taller-detalle-dialog';
+import { ProspectoDetalleDialog } from '../../../../../shared/dialogs/prospecto-detalle-dialog/prospecto-detalle-dialog';
 
 @Component({
   selector: 'app-talleres',
   imports: [
+    NgClass,
     MatSortModule,
     MatCardModule,
     MatButtonModule,
@@ -44,32 +46,20 @@ export class NegociosTalleresComponent implements AfterViewInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  get totalTalleres(): number {
+  get totalNegocios(): number {
     return this.dataSource.filteredData.length;
   }
   
-  get mecGeneral(): number {
-    return this.dataSource.filteredData.filter(x => x.especialidad === 'Mecánico General').length;
+  get tipoA(): number {
+    return this.dataSource.filteredData.filter(x => x.tipo === 'A').length;
   }
   
-  get mecElectrico(): number {
-    return this.dataSource.filteredData.filter(x => x.especialidad === 'Eléctrico').length;
+  get tipoB(): number {
+    return this.dataSource.filteredData.filter(x => x.tipo === 'B').length;
   }
   
-  get mecGomero(): number {
-    return this.dataSource.filteredData.filter(x => x.especialidad === 'Gomero').length;
-  }
-
-  get mecChapero(): number {
-    return this.dataSource.filteredData.filter(x => x.especialidad === 'Chapero').length;
-  }
-
-  get mecDiesel(): number {
-    return this.dataSource.filteredData.filter(x => x.especialidad === 'Diésel').length;
-  }
-
-  get mecGas(): number {
-    return this.dataSource.filteredData.filter(x => x.especialidad === 'Gas').length;
+  get tipoC(): number {
+    return this.dataSource.filteredData.filter(x => x.tipo === 'C').length;
   }
 
   constructor(private dialog: MatDialog) {
@@ -81,27 +71,23 @@ export class NegociosTalleresComponent implements AfterViewInit {
         !filtros.busqueda ||
         data.nombre.toLowerCase().includes(filtros.busqueda.toLowerCase());
   
-      const coincideTipoVehiculo =
-        !filtros.tipoVehiculo ||
-        data.tipoVehiculo === filtros.tipoVehiculo;
+      const coincideEstado =
+        !filtros.estado ||
+        data.estado === filtros.estado;
   
-      const coincideEspecialidad =
-        !filtros.especialidad ||
-        data.especialidad === filtros.especialidad;
+      const coincideTipo =
+        !filtros.tipo ||
+        data.tipo === filtros.tipo;
   
       const coincideCiudad =
         !filtros.ciudad ||
         data.ciudad === filtros.ciudad;
-
-      const coincideRescate = filtros.haceRescate === null || data.haceRescate === filtros.haceRescate;
-
-      const coincideVerficado = filtros.verificado === null || data.verificado === filtros.verificado;
   
       return (
         coincideBusqueda &&
-        coincideTipoVehiculo &&
-        coincideEspecialidad &&
-        coincideCiudad && coincideRescate && coincideVerficado
+        coincideEstado &&
+        coincideTipo &&
+        coincideCiudad
       );
     };
   }
@@ -113,26 +99,34 @@ export class NegociosTalleresComponent implements AfterViewInit {
       this.paginator.firstPage();
     }
   }
-
+  limpiarFiltros(): void {
+    this.filtros = {
+      busqueda: '',
+      estado: '',
+      tipo: '',
+      ciudad: ''
+    };
+  
+    this.aplicarFiltros();
+  }
   displayedColumns: string[] = [
     'nombre',
+    'contacto',
+    'telefono',
     'ciudad',
+    'tipo',
+    'estado',
     'especialidad',
-    'tipoVehiculo',
-    'haceRescate',
-    'verificado',
     'acciones'
   ];
   filtros = {
     busqueda: '',
-    tipoVehiculo: '',
-    especialidad: '',
-    ciudad: '',
-    haceRescate: null,
-    verificado: null
+    estado: '',
+    tipo: '',
+    ciudad: ''
   };
   verDetalle(prospecto: any): void {
-    this.dialog.open(NegocioTallerDetalleDialog, {
+    this.dialog.open(ProspectoDetalleDialog, {
       width: '900px',
       maxWidth: '95vw',
       data: prospecto
@@ -140,509 +134,437 @@ export class NegociosTalleresComponent implements AfterViewInit {
   }
   dataSource = new MatTableDataSource([
     {
-      nombre: 'Taller Central Motors',
-      telefono1: 70123456,
-      telefono2: 72123456,
-      direccion: 'Av. Banzer 5to Anillo',
-      ubLatitud: '-17.7421',
-      ubLongitud: '-63.1524',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Medio',
-      ciudad: 'Santa Cruz de la Sierra'
-    },
-    {
-      nombre: 'Electro Auto Service',
-      telefono1: 70234567,
-      telefono2: null,
-      direccion: 'Av. Cristo Redentor',
-      ubLatitud: '-17.7308',
-      ubLongitud: '-63.1682',
-      especialidad: 'Eléctrico',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto',
-      ciudad: 'Santa Cruz de la Sierra'
-    },
-    {
-      nombre: 'Moto Express',
-      telefono1: 70345678,
-      telefono2: null,
+      nombre: 'Taller ABC',
+      contacto: 'Juan Pérez',
+      telefono: '70123456',
+      ciudad: 'Santa Cruz de la Sierra',
+      tipo: 'A',
+      estado: 'Nuevo',
+      
+      direccion: 'Av. Banzer Km 8',
+      ubLatitud: '-17.7445',
+      ubLongitud: '-63.1561',
+      prioridad: 1,
+      idTipoNegocio: 1,
+      idVendedor: 101,
+      especialidad: 'Mecánica General',
+      fechaActual: '15/06/2026',
+      proximoContacto: '20/06/2026',
+      metodoContacto: 'WhatsApp',
+      respuestaContacto: 'Solicitó información',
+      proximaAccion: 'Enviar propuesta comercial',
+      tipoVehiculo: 'Automóviles',
+      caracteristicasEtiqueta: 'Elevador, Scanner',
+      caracteristicasAdicional: 'Área de recepción climatizada'
+      },
+      {
+      nombre: 'Moto Service',
+      contacto: 'Carlos Flores',
+      telefono: '71234567',
+      ciudad: 'Santa Cruz de la Sierra',
+      tipo: 'B',
+      estado: 'Contactado',
+      
       direccion: 'Av. Santos Dumont',
-      ubLatitud: '-17.8124',
-      ubLongitud: '-63.1805',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Motocicleta',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Bajo',
-      ciudad: 'Santa Cruz de la Sierra'
-    },
-    {
-      nombre: 'Diesel Pro Warnes',
-      telefono1: 70456789,
-      telefono2: 72456789,
+      ubLatitud: '-17.8123',
+      ubLongitud: '-63.1812',
+      prioridad: 2,
+      idTipoNegocio: 1,
+      idVendedor: 102,
+      especialidad: 'Motocicletas',
+      fechaActual: '14/06/2026',
+      proximoContacto: '18/06/2026',
+      metodoContacto: 'Llamada',
+      respuestaContacto: 'Interesado',
+      proximaAccion: 'Agendar visita',
+      tipoVehiculo: 'Motocicletas',
+      caracteristicasEtiqueta: 'Motores, Inyección',
+      caracteristicasAdicional: 'Especialista en motos deportivas'
+      },
+      {
+      nombre: 'Garage Premium',
+      contacto: 'Luis Vargas',
+      telefono: '72345678',
+      ciudad: 'Warnes',
+      tipo: 'A',
+      estado: 'Negociación',
+      
       direccion: 'Zona Industrial Warnes',
-      ubLatitud: '-17.5162',
-      ubLongitud: '-63.1743',
-      especialidad: 'Diésel',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Alto',
-      ciudad: 'Warnes'
-    },
-    {
-      nombre: 'Gomería El Rápido',
-      telefono1: 70567890,
-      telefono2: null,
-      direccion: 'Av. Alemania',
-      ubLatitud: '-17.7689',
-      ubLongitud: '-63.1712',
-      especialidad: 'Gomero',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: false,
-      rangoPrecio: 'Bajo',
-      ciudad: 'Santa Cruz de la Sierra'
-    },
-    {
-      nombre: 'Chapistería Premium',
-      telefono1: 70678901,
-      telefono2: null,
-      direccion: 'Av. Virgen de Cotoca',
-      ubLatitud: '-17.7764',
-      ubLongitud: '-63.1348',
-      especialidad: 'Chapero',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto',
-      ciudad: 'Montero'
-    },
-    {
-      nombre: 'Gas Car Solutions',
-      telefono1: 70789012,
-      telefono2: 72789012,
-      direccion: 'Doble Vía La Guardia',
-      ubLatitud: '-17.8235',
-      ubLongitud: '-63.2098',
-      especialidad: 'Gas',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Medio',
-      ciudad: 'Santa Cruz de la Sierra'
-    },
-    {
-      nombre: 'Moto y Auto Center',
-      telefono1: 70890123,
-      telefono2: null,
-      direccion: 'Zona Norte',
-      ubLatitud: '-17.7054',
-      ubLongitud: '-63.1401',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: false,
-      rangoPrecio: 'Medio',
-      ciudad: 'Cotoca'
-    },
-    {
-      nombre: 'Rescate 24/7 Taller',
-      telefono1: 70901234,
-      telefono2: 72901234,
-      direccion: 'Av. Mutualista',
-      ubLatitud: '-17.7802',
-      ubLongitud: '-63.1465',
-      especialidad: 'Eléctrico',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Medio',
-      ciudad: 'Santa Cruz de la Sierra'
-    },
-    {
-      nombre: 'Taller San Jorge',
-      telefono1: 71012345,
-      telefono2: null,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Av. Busch',
-      ubLatitud: '-17.7831',
-      ubLongitud: '-63.1825',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Electro Diesel Montero',
-      telefono1: 71123456,
-      telefono2: 73123456,
+      ubLatitud: '-17.5123',
+      ubLongitud: '-63.1734',
+      prioridad: 1,
+      idTipoNegocio: 1,
+      idVendedor: 101,
+      especialidad: 'Suspensión y Frenos',
+      fechaActual: '12/06/2026',
+      proximoContacto: '19/06/2026',
+      metodoContacto: 'Visita',
+      respuestaContacto: 'Evaluando propuesta',
+      proximaAccion: 'Presentar contrato',
+      tipoVehiculo: 'Automóviles',
+      caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
+      caracteristicasAdicional: 'Instalaciones modernas'
+      },
+      {
+      nombre: 'Taller Express',
+      contacto: 'Pedro Rojas',
+      telefono: '73456789',
       ciudad: 'Montero',
-      direccion: 'Barrio Centro',
-      ubLatitud: '-17.3418',
-      ubLongitud: '-63.2541',
-      especialidad: 'Diésel',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Moto Racing',
-      telefono1: 71234567,
-      telefono2: null,
-      ciudad: 'Warnes',
-      direccion: 'Zona Norte',
-      ubLatitud: '-17.5211',
-      ubLongitud: '-63.1738',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Motocicleta',
-      haceRescate: false,
-      verificado: false,
-      rangoPrecio: 'Bajo'
-    },
-    {
-      nombre: 'Gomería Cotoca',
-      telefono1: 71345678,
-      telefono2: null,
-      ciudad: 'Cotoca',
-      direccion: 'Plaza Principal',
-      ubLatitud: '-17.8154',
-      ubLongitud: '-63.0523',
-      especialidad: 'Gomero',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Bajo'
-    },
-    {
-      nombre: 'Taller El Campeón',
-      telefono1: 71456789,
-      telefono2: null,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Av. Paraguá',
-      ubLatitud: '-17.7485',
-      ubLongitud: '-63.1287',
-      especialidad: 'Chapero',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Warnes Service Center',
-      telefono1: 71567890,
-      telefono2: 73567890,
-      ciudad: 'Warnes',
-      direccion: 'Carretera al Norte',
-      ubLatitud: '-17.5102',
-      ubLongitud: '-63.1806',
-      especialidad: 'Gas',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Montero Auto Electric',
-      telefono1: 71678901,
-      telefono2: null,
-      ciudad: 'Montero',
-      direccion: 'Zona Sur',
-      ubLatitud: '-17.3558',
-      ubLongitud: '-63.2624',
-      especialidad: 'Eléctrico',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: false,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Cotoca Motors',
-      telefono1: 71789012,
-      telefono2: null,
-      ciudad: 'Cotoca',
-      direccion: 'Av. Virgen de Cotoca',
-      ubLatitud: '-17.8091',
-      ubLongitud: '-63.0485',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Taller Los Hermanos',
-      telefono1: 71890123,
-      telefono2: 73890123,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Plan 3000',
-      ubLatitud: '-17.8415',
-      ubLongitud: '-63.1468',
-      especialidad: 'Diésel',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Auto Mecánica Integral',
-      telefono1: 71901234,
-      telefono2: null,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Av. Roca y Coronado',
-      ubLatitud: '-17.8012',
-      ubLongitud: '-63.1874',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Diesel Master',
-      telefono1: 72012345,
-      telefono2: 74012345,
-      ciudad: 'Warnes',
-      direccion: 'Zona Industrial Norte',
-      ubLatitud: '-17.5043',
-      ubLongitud: '-63.1678',
-      especialidad: 'Diésel',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Moto Garage',
-      telefono1: 72123456,
-      telefono2: null,
-      ciudad: 'Montero',
-      direccion: 'Barrio Guabirá',
-      ubLatitud: '-17.3491',
-      ubLongitud: '-63.2482',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Motocicleta',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Bajo'
-    },
-    {
-      nombre: 'Electro Car Center',
-      telefono1: 72234567,
-      telefono2: null,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Av. Beni',
-      ubLatitud: '-17.7542',
-      ubLongitud: '-63.1623',
-      especialidad: 'Eléctrico',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Cotoca Diesel Service',
-      telefono1: 72345678,
-      telefono2: null,
-      ciudad: 'Cotoca',
-      direccion: 'Carretera Principal',
-      ubLatitud: '-17.8138',
-      ubLongitud: '-63.0561',
-      especialidad: 'Diésel',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: false,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Gomería La Rueda',
-      telefono1: 72456789,
-      telefono2: null,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Av. Tres Pasos al Frente',
-      ubLatitud: '-17.7684',
-      ubLongitud: '-63.1192',
-      especialidad: 'Gomero',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Bajo'
-    },
-    {
-      nombre: 'Chapistería Oriental',
-      telefono1: 72567890,
-      telefono2: 74567890,
-      ciudad: 'Warnes',
-      direccion: 'Barrio Satélite Norte',
-      ubLatitud: '-17.4937',
-      ubLongitud: '-63.1864',
-      especialidad: 'Chapero',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Gas Motors',
-      telefono1: 72678901,
-      telefono2: null,
-      ciudad: 'Montero',
-      direccion: 'Zona Oeste',
-      ubLatitud: '-17.3369',
-      ubLongitud: '-63.2695',
-      especialidad: 'Gas',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: false,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Servicio Técnico Universal',
-      telefono1: 72789012,
-      telefono2: 74789012,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Av. Cumavi',
-      ubLatitud: '-17.8207',
-      ubLongitud: '-63.1541',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Taller El Progreso',
-      telefono1: 72890123,
-      telefono2: null,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Av. Moscú',
-      ubLatitud: '-17.7852',
-      ubLongitud: '-63.1784',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Bajo'
-    },
-    {
-      nombre: 'Moto Racing Center',
-      telefono1: 72901234,
-      telefono2: null,
-      ciudad: 'Montero',
-      direccion: 'Barrio Fabril',
-      ubLatitud: '-17.3436',
-      ubLongitud: '-63.2589',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Motocicleta',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Electro Warnes',
-      telefono1: 73012345,
-      telefono2: 75012345,
-      ciudad: 'Warnes',
-      direccion: 'Zona Central',
-      ubLatitud: '-17.5188',
-      ubLongitud: '-63.1724',
-      especialidad: 'Eléctrico',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Gomería Cotoca Express',
-      telefono1: 73123456,
-      telefono2: null,
-      ciudad: 'Cotoca',
-      direccion: 'Av. Principal',
-      ubLatitud: '-17.8104',
-      ubLongitud: '-63.0507',
-      especialidad: 'Gomero',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: false,
-      rangoPrecio: 'Bajo'
-    },
-    {
-      nombre: 'Diesel Heavy Service',
-      telefono1: 73234567,
-      telefono2: 75234567,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Parque Industrial',
-      ubLatitud: '-17.7921',
-      ubLongitud: '-63.0945',
-      especialidad: 'Diésel',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Chapistería El Maestro',
-      telefono1: 73345678,
-      telefono2: null,
-      ciudad: 'Montero',
-      direccion: 'Zona Norte',
-      ubLatitud: '-17.3375',
-      ubLongitud: '-63.2478',
-      especialidad: 'Chapero',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    },
-    {
-      nombre: 'Gas Auto Cotoca',
-      telefono1: 73456789,
-      telefono2: null,
-      ciudad: 'Cotoca',
-      direccion: 'Barrio 12 de Octubre',
-      ubLatitud: '-17.8187',
-      ubLongitud: '-63.0602',
-      especialidad: 'Gas',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Taller Norte Motors',
-      telefono1: 73567890,
-      telefono2: 75567890,
-      ciudad: 'Warnes',
-      direccion: 'Satélite Norte',
-      ubLatitud: '-17.4876',
-      ubLongitud: '-63.1893',
-      especialidad: 'Mecánico General',
-      tipoVehiculo: 'Ambos',
-      haceRescate: true,
-      verificado: true,
-      rangoPrecio: 'Medio'
-    },
-    {
-      nombre: 'Auto Clínica Premium',
-      telefono1: 73678901,
-      telefono2: null,
-      ciudad: 'Santa Cruz de la Sierra',
-      direccion: 'Equipetrol',
-      ubLatitud: '-17.7628',
-      ubLongitud: '-63.1954',
-      especialidad: 'Eléctrico',
-      tipoVehiculo: 'Automóvil',
-      haceRescate: false,
-      verificado: true,
-      rangoPrecio: 'Alto'
-    }
+      tipo: 'C',
+      estado: 'Ganado',
+      
+      direccion: 'Av. Circunvalación',
+      ubLatitud: '-17.3382',
+      ubLongitud: '-63.2501',
+      prioridad: 3,
+      idTipoNegocio: 1,
+      idVendedor: 103,
+      especialidad: 'Electricidad Automotriz',
+      fechaActual: '10/06/2026',
+      proximoContacto: '25/06/2026',
+      metodoContacto: 'Seguimiento',
+      respuestaContacto: 'Aceptó trabajar con nosotros',
+      proximaAccion: 'Capacitación inicial',
+      tipoVehiculo: 'Automóviles',
+      caracteristicasEtiqueta: 'Scanner',
+      caracteristicasAdicional: 'Taller consolidado'
+      },
+      {
+        nombre: 'Taller Perez',
+        contacto: 'Miguel Pérez',
+        telefono: '74567890',
+        ciudad: 'Montero',
+        tipo: 'B',
+        estado: 'Negociación',
+        
+        direccion: 'Barrio Centro',
+        ubLatitud: '-17.3421',
+        ubLongitud: '-63.2554',
+        prioridad: 2,
+        idTipoNegocio: 1,
+        idVendedor: 102,
+        especialidad: 'Mecánica General',
+        fechaActual: '13/06/2026',
+        proximoContacto: '18/06/2026',
+        metodoContacto: 'Visita',
+        respuestaContacto: 'Solicitó propuesta',
+        proximaAccion: 'Presentar convenio',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Elevador',
+        caracteristicasAdicional: 'Negocio familiar'
+        },
+        {
+        nombre: 'Taller Los Junos',
+        contacto: 'José Suárez',
+        telefono: '75678901',
+        ciudad: 'Santa Cruz de la Sierra',
+        tipo: 'B',
+        estado: 'Negociación',
+        
+        direccion: 'Av. Virgen de Cotoca',
+        ubLatitud: '-17.7754',
+        ubLongitud: '-63.1321',
+        prioridad: 2,
+        idTipoNegocio: 1,
+        idVendedor: 101,
+        especialidad: 'Suspensión',
+        fechaActual: '11/06/2026',
+        proximoContacto: '17/06/2026',
+        metodoContacto: 'Llamada',
+        respuestaContacto: 'Interesado',
+        proximaAccion: 'Coordinar visita',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Alineadora',
+        caracteristicasAdicional: 'Buen flujo de clientes'
+        },
+        {
+        nombre: 'Pro Mecanics',
+        contacto: 'Andrés Molina',
+        telefono: '76789012',
+        ciudad: 'Warnes',
+        tipo: 'A',
+        estado: 'Nuevo',
+        
+        direccion: 'Zona Norte Warnes',
+        ubLatitud: '-17.5087',
+        ubLongitud: '-63.1698',
+        prioridad: 1,
+        idTipoNegocio: 1,
+        idVendedor: 103,
+        especialidad: 'Diagnóstico Computarizado',
+        fechaActual: '16/06/2026',
+        proximoContacto: '19/06/2026',
+        metodoContacto: 'WhatsApp',
+        respuestaContacto: 'Pendiente',
+        proximaAccion: 'Primer contacto',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Scanner, Elevador',
+        caracteristicasAdicional: 'Infraestructura moderna'
+        },
+        {
+        nombre: 'Taller San Pedro',
+        contacto: 'Mario Quiroga',
+        telefono: '77890123',
+        ciudad: 'Santa Cruz de la Sierra',
+        tipo: 'C',
+        estado: 'Nuevo',
+        
+        direccion: 'Barrio San Pedro',
+        ubLatitud: '-17.7842',
+        ubLongitud: '-63.1745',
+        prioridad: 3,
+        idTipoNegocio: 1,
+        idVendedor: 102,
+        especialidad: 'Mecánica General',
+        fechaActual: '15/06/2026',
+        proximoContacto: '21/06/2026',
+        metodoContacto: 'WhatsApp',
+        respuestaContacto: 'Sin respuesta',
+        proximaAccion: 'Reintentar contacto',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Herramientas básicas',
+        caracteristicasAdicional: 'Taller pequeño'
+        },
+        {
+        nombre: 'Masters',
+        contacto: 'Raúl Fernández',
+        telefono: '78901234',
+        ciudad: 'Camiri',
+        tipo: 'B',
+        estado: 'Negociación',
+        
+        direccion: 'Zona Central',
+        ubLatitud: '-20.0381',
+        ubLongitud: '-63.5187',
+        prioridad: 2,
+        idTipoNegocio: 1,
+        idVendedor: 101,
+        especialidad: 'Motores',
+        fechaActual: '09/06/2026',
+        proximoContacto: '18/06/2026',
+        metodoContacto: 'Visita',
+        respuestaContacto: 'Analizando propuesta',
+        proximaAccion: 'Seguimiento',
+        tipoVehiculo: 'Camionetas',
+        caracteristicasEtiqueta: 'Banco de pruebas',
+        caracteristicasAdicional: 'Experiencia en motores diésel'
+        },
+        {
+        nombre: 'Don Julio',
+        contacto: 'Julio Mendoza',
+        telefono: '79012345',
+        ciudad: 'Warnes',
+        tipo: 'B',
+        estado: 'Nuevo',
+        
+        direccion: 'Carretera al Norte',
+        ubLatitud: '-17.5201',
+        ubLongitud: '-63.1810',
+        prioridad: 2,
+        idTipoNegocio: 1,
+        idVendedor: 103,
+        especialidad: 'Mecánica General',
+        fechaActual: '16/06/2026',
+        proximoContacto: '20/06/2026',
+        metodoContacto: 'WhatsApp',
+        respuestaContacto: 'Pendiente',
+        proximaAccion: 'Primer contacto',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Elevador',
+        caracteristicasAdicional: 'Buen potencial comercial'
+        },
+        {
+        nombre: 'Taller Rojas',
+        contacto: 'Fernando Rojas',
+        telefono: '70111222',
+        ciudad: 'Santa Cruz de la Sierra',
+        tipo: 'B',
+        estado: 'Negociación',
+        
+        direccion: 'Av. Alemana',
+        ubLatitud: '-17.7610',
+        ubLongitud: '-63.1701',
+        prioridad: 2,
+        idTipoNegocio: 1,
+        idVendedor: 102,
+        especialidad: 'Electricidad Automotriz',
+        fechaActual: '08/06/2026',
+        proximoContacto: '17/06/2026',
+        metodoContacto: 'Llamada',
+        respuestaContacto: 'Interesado',
+        proximaAccion: 'Enviar información',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Scanner',
+        caracteristicasAdicional: 'Especialista en sistemas eléctricos'
+        },
+        {
+        nombre: 'Saucedo Motors',
+        contacto: 'Ricardo Saucedo',
+        telefono: '70222333',
+        ciudad: 'Santa Cruz de la Sierra',
+        tipo: 'A',
+        estado: 'Negociación',
+        
+        direccion: 'Av. Cristo Redentor',
+        ubLatitud: '-17.7350',
+        ubLongitud: '-63.1654',
+        prioridad: 1,
+        idTipoNegocio: 1,
+        idVendedor: 101,
+        especialidad: 'Mecánica Integral',
+        fechaActual: '07/06/2026',
+        proximoContacto: '18/06/2026',
+        metodoContacto: 'Visita',
+        respuestaContacto: 'Muy interesado',
+        proximaAccion: 'Revisión contractual',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
+        caracteristicasAdicional: 'Instalaciones premium'
+        },
+        {
+        nombre: 'AutoWorks',
+        contacto: 'Diego Salvatierra',
+        telefono: '70333444',
+        ciudad: 'Santa Cruz de la Sierra',
+        tipo: 'A',
+        estado: 'Negociación',
+        
+        direccion: 'Av. Beni',
+        ubLatitud: '-17.7488',
+        ubLongitud: '-63.1569',
+        prioridad: 1,
+        idTipoNegocio: 1,
+        idVendedor: 103,
+        especialidad: 'Diagnóstico y Electrónica',
+        fechaActual: '06/06/2026',
+        proximoContacto: '19/06/2026',
+        metodoContacto: 'Visita',
+        respuestaContacto: 'Evaluando beneficios',
+        proximaAccion: 'Presentar propuesta final',
+        tipoVehiculo: 'Automóviles',
+        caracteristicasEtiqueta: 'Scanner, Elevador',
+        caracteristicasAdicional: 'Taller de alta tecnología'
+        },
+        {
+          nombre: 'Turbo Center',
+          contacto: 'Héctor Salinas',
+          telefono: '70444555',
+          ciudad: 'Santa Cruz de la Sierra',
+          tipo: 'A',
+          estado: 'Contactado',
+          
+          direccion: 'Av. Mutualista',
+          ubLatitud: '-17.7812',
+          ubLongitud: '-63.1458',
+          prioridad: 1,
+          idTipoNegocio: 1,
+          idVendedor: 101,
+          especialidad: 'Motores Turbo',
+          fechaActual: '16/06/2026',
+          proximoContacto: '21/06/2026',
+          metodoContacto: 'Llamada',
+          respuestaContacto: 'Interesado en conocer beneficios',
+          proximaAccion: 'Agendar demostración',
+          tipoVehiculo: 'Automóviles',
+          caracteristicasEtiqueta: 'Scanner, Banco de pruebas',
+          caracteristicasAdicional: 'Especialista en vehículos turbo'
+          },
+          {
+          nombre: 'Elite Garage',
+          contacto: 'Patricia Méndez',
+          telefono: '70555666',
+          ciudad: 'Cochabamba',
+          tipo: 'A',
+          estado: 'Negociación',
+          
+          direccion: 'Av. América',
+          ubLatitud: '-17.3895',
+          ubLongitud: '-66.1568',
+          prioridad: 1,
+          idTipoNegocio: 1,
+          idVendedor: 102,
+          especialidad: 'Mecánica Premium',
+          fechaActual: '15/06/2026',
+          proximoContacto: '22/06/2026',
+          metodoContacto: 'Visita',
+          respuestaContacto: 'Solicitó propuesta formal',
+          proximaAccion: 'Presentar propuesta económica',
+          tipoVehiculo: 'Automóviles',
+          caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
+          caracteristicasAdicional: 'Atención a vehículos de gama alta'
+          },
+          {
+          nombre: 'Taller El Mecánico',
+          contacto: 'Roberto Velasco',
+          telefono: '70666777',
+          ciudad: 'Montero',
+          tipo: 'C',
+          estado: 'Nuevo',
+          
+          direccion: 'Barrio Villa Busch',
+          ubLatitud: '-17.3465',
+          ubLongitud: '-63.2492',
+          prioridad: 3,
+          idTipoNegocio: 1,
+          idVendedor: 103,
+          especialidad: 'Mecánica General',
+          fechaActual: '17/06/2026',
+          proximoContacto: '23/06/2026',
+          metodoContacto: 'WhatsApp',
+          respuestaContacto: 'Pendiente',
+          proximaAccion: 'Realizar primer contacto',
+          tipoVehiculo: 'Automóviles',
+          caracteristicasEtiqueta: 'Herramientas básicas',
+          caracteristicasAdicional: 'Taller de barrio con clientela estable'
+          },
+          {
+          nombre: 'Diesel Pro',
+          contacto: 'Óscar Gutiérrez',
+          telefono: '70777888',
+          ciudad: 'Camiri',
+          tipo: 'B',
+          estado: 'Contactado',
+          
+          direccion: 'Av. Petrolera',
+          ubLatitud: '-20.0405',
+          ubLongitud: '-63.5202',
+          prioridad: 2,
+          idTipoNegocio: 1,
+          idVendedor: 101,
+          especialidad: 'Motores Diésel',
+          fechaActual: '16/06/2026',
+          proximoContacto: '20/06/2026',
+          metodoContacto: 'Llamada',
+          respuestaContacto: 'Mostró interés',
+          proximaAccion: 'Coordinar visita técnica',
+          tipoVehiculo: 'Camiones',
+          caracteristicasEtiqueta: 'Banco de pruebas',
+          caracteristicasAdicional: 'Especializado en transporte pesado'
+          },
+          {
+          nombre: 'Auto Clínica',
+          contacto: 'María Fernanda Ruiz',
+          telefono: '70888999',
+          ciudad: 'Warnes',
+          tipo: 'B',
+          estado: 'Ganado',
+          
+          direccion: 'Zona Industrial',
+          ubLatitud: '-17.5174',
+          ubLongitud: '-63.1763',
+          prioridad: 2,
+          idTipoNegocio: 1,
+          idVendedor: 102,
+          especialidad: 'Mantenimiento Preventivo',
+          fechaActual: '14/06/2026',
+          proximoContacto: '30/06/2026',
+          metodoContacto: 'Seguimiento',
+          respuestaContacto: 'Aceptó la propuesta',
+          proximaAccion: 'Capacitación y onboarding',
+          tipoVehiculo: 'Automóviles',
+          caracteristicasEtiqueta: 'Elevador, Scanner',
+          caracteristicasAdicional: 'Cliente recientemente incorporado'
+          }
   ]);
   ciudades = [
     ...new Set(

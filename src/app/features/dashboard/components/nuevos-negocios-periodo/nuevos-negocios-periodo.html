@@ -1,0 +1,68 @@
+
+<section class="dashboard-card">
+    <div class="card-header">
+      <div class="card-heading">
+        <h3>Nuevos negocios incorporados</h3>
+        <p>Negocios que completaron su incorporación</p>
+      </div>
+  
+      <span class="card-badge">Captación</span>
+    </div>
+  
+    <div class="period-selector" role="group" aria-label="Período de análisis">
+      @for (periodo of periodos; track periodo.valor) {
+        <button
+          type="button"
+          class="period-button"
+          [class.period-button-active]="periodoSeleccionado === periodo.valor"
+          [attr.aria-pressed]="periodoSeleccionado === periodo.valor"
+          (click)="cambiarPeriodo(periodo.valor)">
+          {{ periodo.etiqueta }}
+        </button>
+      }
+    </div>
+  
+    <div class="period-summary">
+      <div class="summary-main">
+        <span class="summary-label">Negocios incorporados</span>
+        <strong class="summary-value">{{ totalPeriodo }}</strong>
+        <span class="summary-caption">
+          {{ descripcionPeriodo }}
+        </span>
+      </div>
+  
+      <div
+        class="comparison"
+        [class.comparison-positive]="variacionPorcentual > 0"
+        [class.comparison-negative]="variacionPorcentual < 0"
+        [class.comparison-neutral]="variacionPorcentual === 0">
+  
+        <mat-icon>{{ iconoVariacion }}</mat-icon>
+  
+        <strong>
+          {{ variacionPorcentual > 0 ? '+' : '' }}{{ variacionPorcentual }}%
+        </strong>
+  
+        <span>vs. período anterior</span>
+      </div>
+    </div>
+  
+    <div class="chart-container">
+      <apx-chart
+        [series]="chartSeries"
+        [chart]="chartDetails"
+        [xaxis]="chartXAxis"
+        [yaxis]="chartYAxis"
+        [plotOptions]="chartPlotOptions"
+        [dataLabels]="chartDataLabels"
+        [grid]="chartGrid"
+        [tooltip]="chartTooltip">
+      </apx-chart>
+    </div>
+  
+    <div class="chart-footer">
+      <span class="footer-dot"></span>
+      <span>{{ textoPie }}</span>
+    </div>
+  </section>
+  

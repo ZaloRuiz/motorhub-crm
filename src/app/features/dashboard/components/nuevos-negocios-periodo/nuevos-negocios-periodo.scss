@@ -1,0 +1,283 @@
+
+:host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+  }
+  
+  .dashboard-card {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e8edf3;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(3, 45, 87, 0.045);
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .card-heading {
+    min-width: 0;
+  }
+  
+  .card-heading h3 {
+    margin: 0;
+    color: #26282c;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  
+  .card-heading p {
+    margin: 5px 0 0;
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  
+  .card-badge {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #edf5ff;
+    color: #0979eb;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  .period-selector {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    width: fit-content;
+    max-width: 100%;
+    margin-bottom: 22px;
+    padding: 4px;
+    background: #f3f6fa;
+    border-radius: 10px;
+  }
+  
+  .period-button {
+    padding: 8px 12px;
+    border: 0;
+    border-radius: 7px;
+    background: transparent;
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      background 180ms ease,
+      color 180ms ease,
+      box-shadow 180ms ease;
+  }
+  
+  .period-button:hover {
+    color: #032d57;
+  }
+  
+  .period-button-active {
+    background: #ffffff;
+    color: #0979eb;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(3, 45, 87, 0.10);
+  }
+  
+  .period-button:focus-visible {
+    outline: 2px solid #0979eb;
+    outline-offset: 2px;
+  }
+  
+  .period-summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+  
+  .summary-main {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+    min-width: 0;
+  }
+  
+  .summary-label {
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+  }
+  
+  .summary-value {
+    color: #032d57;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.8px;
+  }
+  
+  .summary-caption {
+    color: #8791a0;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+  }
+  
+  .comparison {
+    display: grid;
+    grid-template-columns: 18px auto;
+    align-items: center;
+    column-gap: 5px;
+    row-gap: 3px;
+    flex-shrink: 0;
+    padding: 10px 12px;
+    border-radius: 10px;
+  }
+  
+  .comparison mat-icon {
+    width: 17px;
+    height: 17px;
+    font-size: 17px;
+  }
+  
+  .comparison strong {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  
+  .comparison span {
+    grid-column: 1 / -1;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    line-height: 1.4;
+  }
+  
+  .comparison-positive {
+    background: #ecfdf3;
+    color: #16834a;
+  }
+  
+  .comparison-negative {
+    background: #fff1f0;
+    color: #c43d3d;
+  }
+  
+  .comparison-neutral {
+    background: #f3f6fa;
+    color: #64748b;
+  }
+  
+  .chart-container {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+  
+  .chart-container apx-chart {
+    display: block;
+    width: 100%;
+  }
+  
+  .chart-footer {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-top: 4px;
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  
+  .footer-dot {
+    width: 7px;
+    height: 7px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    border-radius: 50%;
+    background: #0979eb;
+  }
+  
+  @media (max-width: 600px) {
+    .dashboard-card {
+      padding: 16px;
+      border-radius: 13px;
+    }
+  
+    .card-header {
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+  
+    .card-heading h3 {
+      font-size: 14px;
+    }
+  
+    .card-heading p {
+      font-size: 11px;
+    }
+  
+    .card-badge {
+      padding: 5px 8px;
+      font-size: 10px;
+    }
+  
+    .period-selector {
+      margin-bottom: 18px;
+    }
+  
+    .period-button {
+      padding: 8px 10px;
+      font-size: 10px;
+    }
+  
+    .period-summary {
+      align-items: flex-start;
+      gap: 8px;
+    }
+  
+    .summary-value {
+      font-size: 28px;
+    }
+  
+    .summary-label {
+      font-size: 11px;
+    }
+  
+    .comparison {
+      padding: 8px;
+    }
+  
+    .comparison strong {
+      font-size: 12px;
+    }
+  
+    .comparison span {
+      font-size: 9px;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .period-button {
+      transition: none;
+    }
+  }
+  

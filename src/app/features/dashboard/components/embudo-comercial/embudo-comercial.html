@@ -1,0 +1,76 @@
+
+<section class="dashboard-card">
+    <div class="card-header">
+      <div class="card-heading">
+        <h3>Embudo comercial</h3>
+        <p>Estado actual de las oportunidades comerciales</p>
+      </div>
+  
+      <span class="card-badge">Pipeline comercial</span>
+    </div>
+  
+    <div class="funnel-summary">
+      <div class="summary-indicator">
+        <span class="summary-label">Prospectos iniciales</span>
+        <strong>{{ totalInicial }}</strong>
+      </div>
+  
+      <div class="summary-indicator summary-result">
+        <span class="summary-label">Llegaron a incorporarse</span>
+        <strong>{{ totalIncorporados }}</strong>
+      </div>
+    </div>
+  
+    <div class="funnel-stages">
+      @for (etapa of etapas; track etapa.nombre; let i = $index) {
+        <div class="funnel-stage">
+          <div class="stage-information">
+            <div class="stage-title">
+              <span class="stage-number">{{ i + 1 }}</span>
+  
+              <div class="stage-text">
+                <span class="stage-name">{{ etapa.nombre }}</span>
+                <span class="stage-description">
+                  {{ etapa.descripcion }}
+                </span>
+              </div>
+            </div>
+  
+            <div class="stage-metrics">
+              <strong class="stage-count">{{ etapa.cantidad }}</strong>
+              <span class="stage-percentage">
+                {{ etapa.porcentaje | number:'1.0-1' }}%
+              </span>
+            </div>
+          </div>
+  
+          <div
+            class="stage-track"
+            role="progressbar"
+            [attr.aria-label]="etapa.nombre"
+            [attr.aria-valuenow]="etapa.porcentaje"
+            aria-valuemin="0"
+            aria-valuemax="100">
+            <div
+              class="stage-progress"
+              [class.stage-progress-final]="i === etapas.length - 1"
+              [style.width.%]="etapa.porcentaje">
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+  
+    <div class="funnel-footer">
+      <span class="footer-icon">
+        <mat-icon>info_outline</mat-icon>
+      </span>
+  
+      <p>
+        Los porcentajes representan la proporción de cada etapa respecto
+        al total inicial. La conversión real entre etapas requiere registrar
+        el historial de avances comerciales.
+      </p>
+    </div>
+  </section>
+  

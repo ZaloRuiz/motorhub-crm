@@ -1,41 +1,44 @@
 
 <mat-sidenav-container class="app-container">
-
   <mat-sidenav
-    #sidenav
-    class="sidebar"
-    [mode]="modoSidenav"
-    [opened]="sidenavAbierto"
-    [fixedInViewport]="!esEscritorio"
-  >
+  #sidenav
+  class="sidebar"
+  [mode]="modoSidenav"
+  [opened]="sidenavAbierto"
+  [fixedInViewport]="!esEscritorio"
+  (openedChange)="sidenavAbierto = $event">
     <div class="sidebar-header">
-      <div class="logo-mark">M</div>
+      <div class="logo-mark">MH</div>
       <div class="logo-text">
         <span class="logo">MotorHub</span>
         <span class="logo-caption">Panel de gestión</span>
       </div>
     </div>
-
     <div class="sidebar-scroll">
       <div class="menu-title">Principal</div>
-
       <mat-nav-list class="main-navigation">
         <a
           mat-list-item
           routerLink="/dashboard"
           routerLinkActive="active-link"
           [routerLinkActiveOptions]="{ exact: true }"
-          (click)="cerrarMenuSiMovil()"
-        >
+          (click)="cerrarMenuSiMovil()">
           <mat-icon matListItemIcon>dashboard</mat-icon>
           <span matListItemTitle>Dashboard</span>
+        </a> 
+        <a
+          mat-list-item
+          routerLink="/rendimiento-comercial"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }"
+          (click)="cerrarMenuSiMovil()"
+        >
+          <mat-icon matListItemIcon>trending_up</mat-icon>
+          <span matListItemTitle>Desempeño comercial</span>
         </a>
       </mat-nav-list>
-
       <div class="menu-title">Gestión comercial</div>
-
       <mat-accordion multi="false" class="menu-accordion">
-
         <!-- Negocios -->
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -44,7 +47,6 @@
               <span>Negocios</span>
             </mat-panel-title>
           </mat-expansion-panel-header>
-
           <mat-nav-list>
             <a mat-list-item routerLink="/negocios/talleres" (click)="cerrarMenuSiMovil()">Talleres</a>
             <a mat-list-item routerLink="/negocios/lubricentros" (click)="cerrarMenuSiMovil()">Lubricentros</a>
@@ -54,7 +56,6 @@
             <a mat-list-item routerLink="/negocios/surtidores" (click)="cerrarMenuSiMovil()">Surtidores</a>
           </mat-nav-list>
         </mat-expansion-panel>
-
         <!-- Prospectos -->
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -63,7 +64,6 @@
               <span>Prospectos</span>
             </mat-panel-title>
           </mat-expansion-panel-header>
-
           <mat-nav-list>
             <a mat-list-item routerLink="/prospectos/talleres" (click)="cerrarMenuSiMovil()">Talleres</a>
             <a mat-list-item routerLink="/prospectos/lubricentros" (click)="cerrarMenuSiMovil()">Lubricentros</a>
@@ -73,7 +73,6 @@
             <a mat-list-item routerLink="/prospectos/surtidores" (click)="cerrarMenuSiMovil()">Surtidores</a>
           </mat-nav-list>
         </mat-expansion-panel>
-
         <!-- Pre-ingresados -->
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -82,7 +81,6 @@
               <span>Pre-ingresados</span>
             </mat-panel-title>
           </mat-expansion-panel-header>
-
           <mat-nav-list>
             <a mat-list-item routerLink="/pre-ingresados/talleres" (click)="cerrarMenuSiMovil()">Talleres</a>
             <a mat-list-item routerLink="/pre-ingresados/lubricentros" (click)="cerrarMenuSiMovil()">Lubricentros</a>
@@ -92,11 +90,8 @@
             <a mat-list-item routerLink="/pre-ingresados/surtidores" (click)="cerrarMenuSiMovil()">Surtidores</a>
           </mat-nav-list>
         </mat-expansion-panel>
-
       </mat-accordion>
-
       <div class="menu-title">Administración</div>
-
       <mat-accordion multi="false" class="menu-accordion">
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -105,7 +100,6 @@
               <span>Configuración</span>
             </mat-panel-title>
           </mat-expansion-panel-header>
-
           <mat-nav-list>
             <a mat-list-item routerLink="/configuracion/usuarios" (click)="cerrarMenuSiMovil()">Usuarios</a>
             <a mat-list-item routerLink="/configuracion/roles" (click)="cerrarMenuSiMovil()">Roles</a>
@@ -114,32 +108,24 @@
         </mat-expansion-panel>
       </mat-accordion>
     </div>
-
     <div class="sidebar-footer">
       <span class="status-dot"></span>
       <span>Sistema de gestión</span>
     </div>
   </mat-sidenav>
-
   <mat-sidenav-content class="main-content">
-
     <header class="topbar">
       <button
         mat-icon-button
         class="menu-toggle"
         type="button"
         aria-label="Abrir menú de navegación"
-        (click)="alternarMenu()"
-      >
+        (click)="alternarMenu()">
         <mat-icon>{{ sidenavAbierto ? 'menu_open' : 'menu' }}</mat-icon>
       </button>
-
-      <!-- <div class="topbar-label">MotorHub <span>/</span> Gestión</div> -->
     </header>
-
     <main class="content">
       <router-outlet></router-outlet>
     </main>
-
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -33,39 +33,52 @@
     <mat-card class="kpi-card kpi-a">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Tipo A</span>
+          <span class="kpi-title">Integral</span>
           <span class="kpi-icon">
             <mat-icon>star</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ tipoA }}</div>
-        <div class="kpi-caption">Clasificación comercial A</div>
+        <div class="kpi-value">{{ tipoIntegral }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="kpi-card kpi-b">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Tipo B</span>
+          <span class="kpi-title">Plataforma</span>
           <span class="kpi-icon">
             <mat-icon>trending_up</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ tipoB }}</div>
-        <div class="kpi-caption">Clasificación comercial B</div>
+        <div class="kpi-value">{{ tipoPlataforma }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="kpi-card kpi-c">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Tipo C</span>
+          <span class="kpi-title">Arrastre con gancho</span>
           <span class="kpi-icon">
             <mat-icon>segment</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ tipoC }}</div>
-        <div class="kpi-caption">Clasificación comercial C</div>
+        <div class="kpi-value">{{ tipoArrastreGancho }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card class="kpi-card kpi-c">
+      <mat-card-content>
+        <div class="kpi-top">
+          <span class="kpi-title">Arrastre con elevador</span>
+          <span class="kpi-icon">
+            <mat-icon>segment</mat-icon>
+          </span>
+        </div>
+        <div class="kpi-value">{{ tipoArrastreElevador }}</div>
+        <div class="kpi-caption">Tipo de grua</div>
       </mat-card-content>
     </mat-card>
 
@@ -115,15 +128,16 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Tipo de prospecto</mat-label>
+        <mat-label>Tipo de grua</mat-label>
         <mat-select
           [(ngModel)]="filtros.tipo"
           (ngModelChange)="aplicarFiltros()"
         >
           <mat-option value="">Todos los tipos</mat-option>
-          <mat-option value="A">Tipo A</mat-option>
-          <mat-option value="B">Tipo B</mat-option>
-          <mat-option value="C">Tipo C</mat-option>
+          <mat-option value="Integral">Integral</mat-option>
+          <mat-option value="Plataforma">Plataforma</mat-option>
+          <mat-option value="Arrastre con gancho">Arrastre con gancho</mat-option>
+          <mat-option value="Arrastre con elevador">Arrastre con elevador</mat-option>
         </mat-select>
       </mat-form-field>
 

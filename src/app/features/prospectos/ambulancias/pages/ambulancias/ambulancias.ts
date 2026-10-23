@@ -49,16 +49,16 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
     return this.dataSource.filteredData.length;
   }
   
-  get tipoA(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'A').length;
+  get servicioInterhospitalario(): number {
+    return this.dataSource.filteredData.filter(x => x.otroServicio.includes('interhospitalario')).length;
   }
   
-  get tipoB(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'B').length;
+  get servicioAsistencial(): number {
+    return this.dataSource.filteredData.filter(x => x.otroServicio.includes('asistencial')).length;
   }
   
-  get tipoC(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'C').length;
+  get servicioEventos(): number {
+    return this.dataSource.filteredData.filter(x => x.otroServicio.includes('eventos')).length;
   }
 
   constructor(private dialog: MatDialog) {
@@ -74,9 +74,9 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         !filtros.estado ||
         data.estado === filtros.estado;
   
-      const coincideTipo =
-        !filtros.tipo ||
-        data.tipo === filtros.tipo;
+        const coincideServicio =
+        !filtros.servicio || filtros.servicio === '' ||
+        data.otroServicio.includes(filtros.servicio);
   
       const coincideCiudad =
         !filtros.ciudad ||
@@ -85,7 +85,7 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
       return (
         coincideBusqueda &&
         coincideEstado &&
-        coincideTipo &&
+        coincideServicio &&
         coincideCiudad
       );
     };
@@ -102,7 +102,7 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
     this.filtros = {
       busqueda: '',
       estado: '',
-      tipo: '',
+      servicio: '',
       ciudad: ''
     };
   
@@ -119,7 +119,7 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
   filtros = {
     busqueda: '',
     estado: '',
-    tipo: '',
+    servicio: '',
     ciudad: ''
   };
   verDetalle(prospecto: any): void {
@@ -135,7 +135,7 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
       contacto: 'Juan Pérez',
       telefono: '70123456',
       ciudad: 'Santa Cruz de la Sierra',
-      tipo: 'A',
+      otroServicio: ['interhospitalario', 'asistencial', 'eventos'],
       estado: 'Nuevo',
       direccion: 'Av. Banzer Km 8',
       ubLatitud: '-17.7445',
@@ -158,7 +158,7 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
       contacto: 'Carlos Flores',
       telefono: '71234567',
       ciudad: 'Santa Cruz de la Sierra',
-      tipo: 'B',
+      otroServicio: ['asistencial', 'eventos'],
       estado: 'Contactado',
       direccion: 'Av. Santos Dumont',
       ubLatitud: '-17.8123',
@@ -181,9 +181,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
       contacto: 'Luis Vargas',
       telefono: '72345678',
       ciudad: 'Warnes',
-      tipo: 'A',
+      otroServicio: ['eventos'],
       estado: 'Negociación',
-      
       direccion: 'Zona Industrial Warnes',
       ubLatitud: '-17.5123',
       ubLongitud: '-63.1734',
@@ -205,9 +204,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
       contacto: 'Pedro Rojas',
       telefono: '73456789',
       ciudad: 'Montero',
-      tipo: 'C',
+      otroServicio: ['asistencial'],
       estado: 'Ganado',
-      
       direccion: 'Av. Circunvalación',
       ubLatitud: '-17.3382',
       ubLongitud: '-63.2501',
@@ -229,9 +227,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Miguel Pérez',
         telefono: '74567890',
         ciudad: 'Montero',
-        tipo: 'B',
+        otroServicio: ['interhospitalario', 'asistencial', 'eventos'],
         estado: 'Negociación',
-        
         direccion: 'Barrio Centro',
         ubLatitud: '-17.3421',
         ubLongitud: '-63.2554',
@@ -253,9 +250,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'José Suárez',
         telefono: '75678901',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'B',
-        estado: 'Negociación',
-        
+        otroServicio: ['interhospitalario', 'eventos'],
+        estado: 'Negociación',        
         direccion: 'Av. Virgen de Cotoca',
         ubLatitud: '-17.7754',
         ubLongitud: '-63.1321',
@@ -277,9 +273,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Andrés Molina',
         telefono: '76789012',
         ciudad: 'Warnes',
-        tipo: 'A',
+        otroServicio: ['interhospitalario', 'asistencial'],
         estado: 'Nuevo',
-        
         direccion: 'Zona Norte Warnes',
         ubLatitud: '-17.5087',
         ubLongitud: '-63.1698',
@@ -301,9 +296,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Mario Quiroga',
         telefono: '77890123',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'C',
-        estado: 'Nuevo',
-        
+        otroServicio: ['asistencial'],
+        estado: 'Nuevo',        
         direccion: 'Barrio San Pedro',
         ubLatitud: '-17.7842',
         ubLongitud: '-63.1745',
@@ -325,9 +319,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Raúl Fernández',
         telefono: '78901234',
         ciudad: 'Camiri',
-        tipo: 'B',
-        estado: 'Negociación',
-        
+        otroServicio: ['interhospitalario', 'asistencial', 'eventos'],
+        estado: 'Negociación',        
         direccion: 'Zona Central',
         ubLatitud: '-20.0381',
         ubLongitud: '-63.5187',
@@ -349,9 +342,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Julio Mendoza',
         telefono: '79012345',
         ciudad: 'Warnes',
-        tipo: 'B',
-        estado: 'Nuevo',
-        
+        otroServicio: ['asistencial', 'eventos'],
+        estado: 'Nuevo',        
         direccion: 'Carretera al Norte',
         ubLatitud: '-17.5201',
         ubLongitud: '-63.1810',
@@ -373,9 +365,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Fernando Rojas',
         telefono: '70111222',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'B',
-        estado: 'Negociación',
-        
+        otroServicio: ['interhospitalario', 'asistencial'],
+        estado: 'Negociación',        
         direccion: 'Av. Alemana',
         ubLatitud: '-17.7610',
         ubLongitud: '-63.1701',
@@ -397,9 +388,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Ricardo Saucedo',
         telefono: '70222333',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'A',
-        estado: 'Negociación',
-        
+        otroServicio: ['asistencial'],
+        estado: 'Negociación',        
         direccion: 'Av. Cristo Redentor',
         ubLatitud: '-17.7350',
         ubLongitud: '-63.1654',
@@ -421,9 +411,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
         contacto: 'Diego Salvatierra',
         telefono: '70333444',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'A',
-        estado: 'Negociación',
-        
+        otroServicio: ['interhospitalario', 'asistencial'],
+        estado: 'Negociación',        
         direccion: 'Av. Beni',
         ubLatitud: '-17.7488',
         ubLongitud: '-63.1569',
@@ -445,9 +434,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
           contacto: 'Héctor Salinas',
           telefono: '70444555',
           ciudad: 'Santa Cruz de la Sierra',
-          tipo: 'A',
-          estado: 'Contactado',
-          
+          otroServicio: ['interhospitalario', 'asistencial', 'eventos'],
+          estado: 'Contactado',          
           direccion: 'Av. Mutualista',
           ubLatitud: '-17.7812',
           ubLongitud: '-63.1458',
@@ -469,9 +457,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
           contacto: 'Patricia Méndez',
           telefono: '70555666',
           ciudad: 'Cochabamba',
-          tipo: 'A',
-          estado: 'Negociación',
-          
+          otroServicio: ['asistencial'],
+          estado: 'Negociación',          
           direccion: 'Av. América',
           ubLatitud: '-17.3895',
           ubLongitud: '-66.1568',
@@ -493,9 +480,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
           contacto: 'Roberto Velasco',
           telefono: '70666777',
           ciudad: 'Montero',
-          tipo: 'C',
-          estado: 'Nuevo',
-          
+          otroServicio: ['interhospitalario', 'asistencial', 'eventos'],
+          estado: 'Nuevo',          
           direccion: 'Barrio Villa Busch',
           ubLatitud: '-17.3465',
           ubLongitud: '-63.2492',
@@ -517,9 +503,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
           contacto: 'Óscar Gutiérrez',
           telefono: '70777888',
           ciudad: 'Camiri',
-          tipo: 'B',
-          estado: 'Contactado',
-          
+          otroServicio: ['asistencial', 'eventos'],
+          estado: 'Contactado',          
           direccion: 'Av. Petrolera',
           ubLatitud: '-20.0405',
           ubLongitud: '-63.5202',
@@ -541,9 +526,8 @@ export class ProspectosAmbulanciasComponent implements AfterViewInit {
           contacto: 'María Fernanda Ruiz',
           telefono: '70888999',
           ciudad: 'Warnes',
-          tipo: 'B',
-          estado: 'Ganado',
-          
+          otroServicio: ['interhospitalario', 'asistencial'],
+          estado: 'Ganado',          
           direccion: 'Zona Industrial',
           ubLatitud: '-17.5174',
           ubLongitud: '-63.1763',

@@ -1,0 +1,77 @@
+
+<section class="dashboard-card">
+    <div class="card-header">
+      <div class="card-heading">
+        <h3>Crecimiento mensual</h3>
+        <p>Evolución de los negocios activos en MotorHub</p>
+      </div>
+  
+      <span class="card-badge">Últimos 6 meses</span>
+    </div>
+  
+    <div class="growth-summary">
+      <div class="summary-main">
+        <span class="summary-label">Negocios activos</span>
+        <strong class="summary-value">{{ totalActual }}</strong>
+        <span class="summary-caption">Al cierre del último mes registrado</span>
+      </div>
+  
+      <div
+        class="growth-indicator"
+        [class.growth-positive]="variacionMensual > 0"
+        [class.growth-negative]="variacionMensual < 0"
+        [class.growth-neutral]="variacionMensual === 0">
+  
+        <mat-icon>{{ iconoVariacion }}</mat-icon>
+  
+        <strong>
+          {{ variacionMensual > 0 ? '+' : '' }}{{ variacionMensual }}%
+        </strong>
+  
+        <span>Variación mensual</span>
+      </div>
+    </div>
+  
+    <div class="chart-container">
+      <apx-chart
+        [series]="chartSeries"
+        [chart]="chartDetails"
+        [xaxis]="chartXAxis"
+        [yaxis]="chartYAxis"
+        [stroke]="chartStroke"
+        [markers]="chartMarkers"
+        [grid]="chartGrid"
+        [dataLabels]="chartDataLabels"
+        [tooltip]="chartTooltip"
+        [colors]="chartColors">
+      </apx-chart>
+    </div>
+  
+    <div class="growth-detail">
+      <div class="detail-indicator">
+        <span class="detail-label">Crecimiento acumulado</span>
+        <strong
+          [class.positive-text]="crecimientoAcumulado > 0"
+          [class.negative-text]="crecimientoAcumulado < 0">
+          {{ crecimientoAcumulado > 0 ? '+' : '' }}{{ crecimientoAcumulado }}%
+        </strong>
+      </div>
+  
+      <div class="detail-indicator">
+        <span class="detail-label">Cambio neto en el período</span>
+        <strong>
+          {{ diferenciaPeriodo > 0 ? '+' : '' }}{{ diferenciaPeriodo }}
+          negocios
+        </strong>
+      </div>
+    </div>
+  
+    <div class="chart-footer">
+      <mat-icon>info_outline</mat-icon>
+      <p>
+        Se muestra el total de negocios activos al cierre de cada mes.
+        El cambio neto refleja incorporaciones, bajas y reactivaciones
+        durante el período.
+      </p>
+    </div>
+  </section>  

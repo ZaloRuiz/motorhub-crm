@@ -1,0 +1,75 @@
+
+<section class="dashboard-card">
+
+    <div class="card-header">
+      <div class="card-heading">
+        <h3>Comparativa de vendedores</h3>
+        <p>Actividad y resultados del equipo comercial</p>
+      </div>
+  
+      <span class="card-badge">{{ textoPeriodo() }}</span>
+    </div>
+  
+    <div class="chart-container">
+      <apx-chart
+        [series]="chartSeries()"
+        [chart]="chartDetails"
+        [colors]="chartColors"
+        [plotOptions]="chartPlotOptions"
+        [xaxis]="chartXAxis"
+        [yaxis]="chartYAxis"
+        [legend]="chartLegend"
+        [dataLabels]="chartDataLabels"
+        [grid]="chartGrid"
+        [tooltip]="chartTooltip">
+      </apx-chart>
+    </div>
+  
+    <div class="comparison-summary">
+  
+      <div class="summary-item">
+        <span class="summary-label">Diferencia de contactos</span>
+  
+        <strong
+          class="summary-value"
+          [class.value-negative]="diferenciaContactados() < 0"
+          [class.value-neutral]="diferenciaContactados() === 0">
+          {{ diferenciaContactados() > 0 ? '+' : '' }}{{ diferenciaContactados() }}
+        </strong>
+  
+        <span class="summary-description">
+          {{ diferenciaContactados() === 0
+            ? 'Mismo volumen de contactos'
+            : 'Vendedor 1 respecto al vendedor 2' }}
+        </span>
+      </div>
+  
+      <div class="summary-item">
+        <span class="summary-label">Líder en incorporaciones</span>
+  
+        <strong class="summary-value leader-value">
+          {{ liderIncorporaciones() }}
+        </strong>
+  
+        <span class="summary-description">
+          @if (diferenciaIncorporados() === 0) {
+            Ambos incorporaron la misma cantidad
+          } @else {
+            Diferencia de {{ Math.abs(diferenciaIncorporados()) }} negocios
+          }
+        </span>
+      </div>
+  
+    </div>
+  
+    <div class="chart-footer">
+      <mat-icon>info_outline</mat-icon>
+      <p>
+        Comparación de cantidades registradas durante el período.
+        Los contactos representan actividad y las incorporaciones,
+        resultados comerciales.
+      </p>
+    </div>
+  
+  </section>
+  

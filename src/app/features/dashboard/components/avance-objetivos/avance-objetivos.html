@@ -1,0 +1,90 @@
+
+<section class="dashboard-card">
+    <div class="card-header">
+      <div class="card-heading">
+        <h3>Avance frente a objetivos</h3>
+        <p>Seguimiento de la meta comercial mensual</p>
+      </div>
+  
+      <span class="card-badge">Meta mensual</span>
+    </div>
+  
+    <div class="goal-overview">
+      <div class="goal-main">
+        <span class="goal-label">Negocios incorporados</span>
+  
+        <div class="goal-values">
+          <strong class="goal-current">{{ incorporados }}</strong>
+          <span class="goal-separator">de</span>
+          <span class="goal-target">{{ objetivo }}</span>
+        </div>
+  
+        <span class="goal-caption">Negocios incorporados / meta mensual</span>
+      </div>
+  
+      <div
+        class="goal-percentage"
+        [class.goal-complete]="porcentajeAvance >= 100">
+        <strong>{{ porcentajeAvance }}%</strong>
+        <span>de la meta</span>
+      </div>
+    </div>
+  
+    <div
+      class="goal-progress-track"
+      role="progressbar"
+      aria-label="Avance de la meta mensual"
+      [attr.aria-valuenow]="porcentajeAvance"
+      aria-valuemin="0"
+      aria-valuemax="100">
+      <div
+        class="goal-progress-fill"
+        [class.goal-progress-complete]="porcentajeAvance >= 100"
+        [style.width.%]="anchoProgreso">
+      </div>
+    </div>
+  
+    <div class="progress-labels">
+      <span>0</span>
+      <span>Meta: {{ objetivo }} negocios</span>
+    </div>
+  
+    <div class="goal-metrics">
+      <div class="metric-item">
+        <span class="metric-icon metric-icon-blue">
+          <mat-icon>flag</mat-icon>
+        </span>
+  
+        <div class="metric-content">
+          <span class="metric-label">Faltan por incorporar</span>
+          <strong>{{ negociosRestantes }}</strong>
+          <span class="metric-caption">para cumplir la meta</span>
+        </div>
+      </div>
+  
+      <div class="metric-item">
+        <span
+          class="metric-icon"
+          [class.metric-icon-green]="porcentajeAvance >= 100"
+          [class.metric-icon-amber]="porcentajeAvance < 100">
+          <mat-icon>{{ iconoEstado }}</mat-icon>
+        </span>
+  
+        <div class="metric-content">
+          <span class="metric-label">Estado del objetivo</span>
+          <strong
+            class="status-text"
+            [class.status-complete]="porcentajeAvance >= 100">
+            {{ estadoObjetivo }}
+          </strong>
+          <span class="metric-caption">{{ descripcionEstado }}</span>
+        </div>
+      </div>
+    </div>
+  
+    <div class="goal-insight">
+      <mat-icon>{{ iconoMensaje }}</mat-icon>
+      <p>{{ mensajeObjetivo }}</p>
+    </div>
+  </section>
+  

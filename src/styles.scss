@@ -33,13 +33,22 @@ body {
   font: var(--mat-sys-body-medium);
   margin: 0;
   height: 100%;
+  .filters-grid .mdc-notched-outline__leading {
+    border-top-left-radius: 18px !important;
+    border-bottom-left-radius: 18px !important;
+    width: 22px !important; 
+  }
+  .filters-grid .mdc-notched-outline__trailing {
+    border-top-right-radius: 18px !important;
+    border-bottom-right-radius: 18px !important;
+  }
 }
 .mat-mdc-card {
   background: #ffffff !important;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 18px;
   box-shadow: none !important;
-}
+} 
 /* You can add global styles to this file, and also import other style files */
 @tailwind base;
 @tailwind components;

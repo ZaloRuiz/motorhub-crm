@@ -49,16 +49,20 @@ export class ProspectosGruasComponent implements AfterViewInit {
     return this.dataSource.filteredData.length;
   }
   
-  get tipoA(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'A').length;
+  get tipoIntegral(): number {
+    return this.dataSource.filteredData.filter(x => x.tipoGrua === 'Integral').length;
   }
   
-  get tipoB(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'B').length;
+  get tipoPlataforma(): number {
+    return this.dataSource.filteredData.filter(x => x.tipoGrua === 'Plataforma').length;
   }
   
-  get tipoC(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'C').length;
+  get tipoArrastreGancho(): number {
+    return this.dataSource.filteredData.filter(x => x.tipoGrua === 'Arrastre con gancho').length;
+  }
+
+  get tipoArrastreElevador(): number {
+    return this.dataSource.filteredData.filter(x => x.tipoGrua === 'Arrastre con elevador').length;
   }
 
   constructor(private dialog: MatDialog) {
@@ -75,7 +79,7 @@ export class ProspectosGruasComponent implements AfterViewInit {
         !filtros.estado || data.estado === filtros.estado;
   
       const coincideTipo =
-        !filtros.tipo || data.tipo === filtros.tipo;
+        !filtros.tipo || data.tipoGrua === filtros.tipo;
   
       const coincideCiudad =
         !filtros.ciudad || data.ciudad === filtros.ciudad;

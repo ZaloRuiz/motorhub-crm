@@ -1,13 +1,26 @@
-<div class="bg-white rounded-xl p-5 shadow-sm card-container">
-    <h3 class="text-lg font-semibold mb-4">
-      Distribución por Rubro
-    </h3>
-  
+
+<section class="dashboard-card">
+  <div class="card-header">
+    <div class="card-heading">
+      <h3>Negocios por rubro</h3>
+      <p>Distribución de negocios registrados por categoría</p>
+    </div>
+
+    <span class="card-badge">Por categoría</span>
+  </div>
+
+  <div class="chart-container">
     <apx-chart
       [series]="chartSeries"
       [chart]="chartDetails"
       [labels]="chartLabels"
       [legend]="chartLegend"
-      [colors]="chartColors">
+      [colors]="chartColors"
+      [dataLabels]="chartDataLabels"
+      [stroke]="chartStroke"
+      [plotOptions]="chartPlotOptions"
+      [tooltip]="chartTooltip"
+      [responsive]="chartResponsive">
     </apx-chart>
   </div>
+</section>

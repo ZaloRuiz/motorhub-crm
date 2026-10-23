@@ -36,7 +36,7 @@ import { ProspectoDetalleDialog } from '../../../../../shared/dialogs/prospecto-
   templateUrl: './tienda-repuestos.html',
   styleUrl: './tienda-repuestos.scss',
 })
-export class ProspectosTiendaRepuestosComponent {
+export class ProspectosTiendaRepuestosComponent implements AfterViewInit {
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
@@ -45,7 +45,7 @@ export class ProspectosTiendaRepuestosComponent {
     this.dataSource.paginator = this.paginator;
   }
 
-  get totalProspectos(): number {
+  get totalNegocios(): number {
     return this.dataSource.filteredData.length;
   }
   
@@ -202,7 +202,7 @@ export class ProspectosTiendaRepuestosComponent {
       contacto: 'Pedro Rojas',
       telefono: '73456789',
       ciudad: 'Montero',
-      tipo: 'C',
+      tipo: 'B',
       estado: 'Ganado',
       
       direccion: 'Av. Circunvalación',
@@ -290,7 +290,7 @@ export class ProspectosTiendaRepuestosComponent {
         contacto: 'Mario Quiroga',
         telefono: '77890123',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'C',
+        tipo: 'B',
         estado: 'Nuevo',
         
         direccion: 'Barrio San Pedro',
@@ -466,7 +466,7 @@ export class ProspectosTiendaRepuestosComponent {
           contacto: 'Roberto Velasco',
           telefono: '70666777',
           ciudad: 'Montero',
-          tipo: 'C',
+          tipo: 'B',
           estado: 'Nuevo',
           
           direccion: 'Barrio Villa Busch',
@@ -534,4 +534,3 @@ export class ProspectosTiendaRepuestosComponent {
     )
   ].sort();
 }
-

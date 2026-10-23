@@ -1,0 +1,281 @@
+:host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+  }
+  
+  .dashboard-card {
+    min-width: 0;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e8edf3;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgb(15 23 42 / 3%);
+    box-sizing: border-box;
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+  }
+  
+  .card-heading {
+    min-width: 0;
+  
+    h3 {
+      margin: 0;
+      color: #032d57;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+  
+    p {
+      margin: 5px 0 0;
+      color: #64748b;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+  }
+  
+  .card-badge {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    color: #0979eb;
+    background: #eff6ff;
+    border: 1px solid #dbeafe;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  .incorporation-summary {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 17px;
+    background: #f8fafc;
+    border: 1px solid #edf1f6;
+    border-radius: 13px;
+  }
+  
+  .summary-icon {
+    display: grid;
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    place-items: center;
+    color: #0979eb;
+    background: #eaf3ff;
+    border-radius: 12px;
+  
+    mat-icon {
+      width: 23px;
+      height: 23px;
+      font-size: 23px;
+    }
+  }
+  
+  .summary-main {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+    min-width: 0;
+  }
+  
+  .summary-label,
+  .leader-label {
+    color: #64748b;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    line-height: 1.5;
+  }
+  
+  .summary-total {
+    color: #032d57;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 27px;
+    font-weight: 700;
+    line-height: 1.2;
+    font-variant-numeric: tabular-nums;
+  }
+  
+  .summary-description {
+    color: #64748b;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+  }
+  
+  .summary-leader {
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 5px;
+    padding-left: 15px;
+    border-left: 1px solid #dbe3ec;
+  
+    strong {
+      color: #0979eb;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      text-align: right;
+    }
+  }
+  
+  .leader-description {
+    max-width: 170px;
+    color: #94a3b8;
+    font-family: 'Inter', sans-serif;
+    font-size: 9px;
+    line-height: 1.5;
+    text-align: right;
+  }
+  
+  .chart-heading {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 26px;
+    margin-bottom: 8px;
+  
+    h4 {
+      margin: 0;
+      color: #26282c;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+    }
+  
+    p {
+      margin: 5px 0 0;
+      color: #94a3b8;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+    }
+  }
+  
+  .chart-container {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+  }
+  
+  .chart-footer {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 12px;
+    padding-top: 15px;
+    border-top: 1px solid #edf1f6;
+  
+    mat-icon {
+      flex-shrink: 0;
+      width: 17px;
+      height: 17px;
+      color: #94a3b8;
+      font-size: 17px;
+    }
+  
+    p {
+      margin: 0;
+      color: #64748b;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+  }
+  
+  @media (max-width: 600px) {
+    .dashboard-card {
+      padding: 17px;
+    }
+  
+    .card-header {
+      gap: 10px;
+    }
+  
+    .card-heading {
+      h3 {
+        font-size: 14px;
+      }
+  
+      p {
+        font-size: 11px;
+      }
+    }
+  
+    .card-badge {
+      padding: 5px 7px;
+      font-size: 9px;
+    }
+  
+    .incorporation-summary {
+      gap: 10px;
+      padding: 12px;
+    }
+  
+    .summary-icon {
+      width: 36px;
+      height: 36px;
+  
+      mat-icon {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+      }
+    }
+  
+    .summary-total {
+      font-size: 23px;
+    }
+  
+    .summary-leader {
+      padding-left: 10px;
+  
+      strong {
+        font-size: 11px;
+      }
+    }
+  
+    .leader-description {
+      max-width: 115px;
+    }
+  }
+  
+  @media (max-width: 380px) {
+    .incorporation-summary {
+      flex-wrap: wrap;
+    }
+  
+    .summary-main {
+      flex-basis: calc(100% - 60px);
+    }
+  
+    .summary-leader {
+      flex-basis: 100%;
+      align-items: flex-start;
+      padding: 10px 0 0;
+      border-top: 1px solid #dbe3ec;
+      border-left: 0;
+  
+      strong {
+        text-align: left;
+      }
+    }
+  
+    .leader-description {
+      max-width: none;
+      text-align: left;
+    }
+  }

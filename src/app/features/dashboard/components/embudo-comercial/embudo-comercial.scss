@@ -1,0 +1,324 @@
+
+:host {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+  }
+  
+  .dashboard-card {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    height: 100%;
+    padding: 22px;
+    background: #ffffff;
+    border: 1px solid #e8edf3;
+    border-radius: 16px;
+    box-shadow: 0 3px 12px rgba(3, 45, 87, 0.045);
+  }
+  
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  
+  .card-heading {
+    min-width: 0;
+  }
+  
+  .card-heading h3 {
+    margin: 0;
+    color: #26282c;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+  
+  .card-heading p {
+    margin: 5px 0 0;
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+  }
+  
+  .card-badge {
+    flex-shrink: 0;
+    padding: 6px 10px;
+    border-radius: 8px;
+    background: #edf5ff;
+    color: #0979eb;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  
+  .funnel-summary {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  
+  .summary-indicator {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    min-width: 0;
+    padding: 14px;
+    background: #f6f9fc;
+    border: 1px solid #edf1f6;
+    border-radius: 12px;
+  }
+  
+  .summary-label {
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    line-height: 1.5;
+  }
+  
+  .summary-indicator strong {
+    color: #032d57;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 25px;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  
+  .summary-result strong {
+    color: #0979eb;
+  }
+  
+  .funnel-stages {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+  }
+  
+  .funnel-stage {
+    min-width: 0;
+  }
+  
+  .stage-information {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  
+  .stage-title {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+  }
+  
+  .stage-number {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    background: #edf5ff;
+    color: #0979eb;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  
+  .stage-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  
+  .stage-name {
+    color: #26282c;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.4;
+  }
+  
+  .stage-description {
+    color: #8791a0;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+  }
+  
+  .stage-metrics {
+    display: flex;
+    flex-shrink: 0;
+    align-items: baseline;
+    gap: 9px;
+  }
+  
+  .stage-count {
+    color: #032d57;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  
+  .stage-percentage {
+    min-width: 43px;
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    text-align: right;
+  }
+  
+  .stage-track {
+    width: 100%;
+    height: 9px;
+    overflow: hidden;
+    background: #edf1f6;
+    border-radius: 999px;
+  }
+  
+  .stage-progress {
+    height: 100%;
+    min-width: 0;
+    background: linear-gradient(90deg, #0979eb, #43a5f5);
+    border-radius: inherit;
+    transition: width 350ms ease;
+  }
+  
+  .stage-progress-final {
+    background: #032d57;
+  }
+  
+  .funnel-footer {
+    display: flex;
+    align-items: flex-start;
+    gap: 9px;
+    margin-top: 24px;
+    padding: 12px;
+    background: #f6f9fc;
+    border-radius: 10px;
+  }
+  
+  .footer-icon {
+    display: flex;
+    flex-shrink: 0;
+    color: #0979eb;
+  }
+  
+  .footer-icon mat-icon {
+    width: 17px;
+    height: 17px;
+    font-size: 17px;
+  }
+  
+  .funnel-footer p {
+    margin: 0;
+    color: #737d8b;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    line-height: 1.6;
+  }
+  
+  @media (max-width: 600px) {
+    .dashboard-card {
+      padding: 16px;
+      border-radius: 13px;
+    }
+  
+    .card-header {
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+  
+    .card-heading h3 {
+      font-size: 14px;
+    }
+  
+    .card-heading p {
+      font-size: 11px;
+    }
+  
+    .card-badge {
+      padding: 5px 8px;
+      font-size: 10px;
+    }
+  
+    .funnel-summary {
+      gap: 8px;
+      margin-bottom: 21px;
+    }
+  
+    .summary-indicator {
+      padding: 11px;
+    }
+  
+    .summary-label {
+      font-size: 10px;
+    }
+  
+    .summary-indicator strong {
+      font-size: 22px;
+    }
+  
+    .funnel-stages {
+      gap: 20px;
+    }
+  
+    .stage-information {
+      gap: 8px;
+    }
+  
+    .stage-title {
+      gap: 8px;
+    }
+  
+    .stage-number {
+      width: 29px;
+      height: 29px;
+      border-radius: 8px;
+    }
+  
+    .stage-name {
+      font-size: 12px;
+    }
+  
+    .stage-description {
+      font-size: 10px;
+    }
+  
+    .stage-metrics {
+      gap: 6px;
+    }
+  
+    .stage-count {
+      font-size: 16px;
+    }
+  
+    .stage-percentage {
+      min-width: 37px;
+      font-size: 10px;
+    }
+  
+    .funnel-footer {
+      margin-top: 20px;
+      padding: 10px;
+    }
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    .stage-progress {
+      transition: none;
+    }
+  }
+  

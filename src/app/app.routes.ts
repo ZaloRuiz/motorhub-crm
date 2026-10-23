@@ -21,11 +21,14 @@ import { PreIngresadosGruasComponent } from "./features/pre-ingresados/gruas/pag
 import { PreIngresadosAmbulanciasComponent } from "./features/pre-ingresados/ambulancias/pages/ambulancias/ambulancias";
 import { PreIngresadosSurtidoresComponent } from "./features/pre-ingresados/surtidores/pages/surtidores/surtidores";
 import { NegociosRepuestosComponent } from "./features/negocios/repuestos/pages/repuesteras/repuestos";
+import { RendimientoComercial } from "./features/rendimiento-comercial/dashboard/rendimiento-comercial/rendimiento-comercial";
 
 export const routes: Routes = [
     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
   
     { path: 'dashboard', component: Dashboard },
+
+    {path: 'rendimiento-comercial', component: RendimientoComercial},
 
     { path: 'negocios/talleres', component: NegociosTalleresComponent },
     { path: 'negocios/lubricentros', component: NegociosLubricentrosComponent },
