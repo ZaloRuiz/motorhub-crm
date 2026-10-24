@@ -29,5 +29,5 @@ jobs:
       - name: Deploy to GH Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: dist/${{ github.event.repository.name }}/browser # Verifica si tu Angular compila aquí (versiones 17+)
+          folder: dist/motorhub-web/browser
           branch: gh-pages
