@@ -44,16 +44,16 @@ export class NegociosLubricentrosComponent  implements AfterViewInit {@ViewChild
     return this.dataSource.filteredData.length;
   }
   
-  get tipoA(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'A').length;
+  get estadoVerificado(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Verificado').length;
   }
   
-  get tipoB(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'B').length;
+  get estadoSinverificar(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Sin verificar').length;
   }
   
-  get tipoC(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'C').length;
+  get estadoNegociacion(): number {
+    return this.dataSource.filteredData.filter(x => x.estado === 'Negociacion').length;
   }
 
   constructor(private dialog: MatDialog) {
@@ -65,9 +65,9 @@ export class NegociosLubricentrosComponent  implements AfterViewInit {@ViewChild
         !filtros.busqueda ||
         data.nombre.toLowerCase().includes(filtros.busqueda.toLowerCase());
   
-      const coincideEstado =
-        !filtros.estado ||
-        data.estado === filtros.estado;
+      const coincideVerificado =
+      !filtros.verificado ||
+      data.verificado === filtros.verificado;
   
       const coincideTipo =
         !filtros.tipo ||
@@ -79,7 +79,7 @@ export class NegociosLubricentrosComponent  implements AfterViewInit {@ViewChild
   
       return (
         coincideBusqueda &&
-        coincideEstado &&
+        coincideVerificado &&
         coincideTipo &&
         coincideCiudad
       );
@@ -96,7 +96,7 @@ export class NegociosLubricentrosComponent  implements AfterViewInit {@ViewChild
   limpiarFiltros(): void {
     this.filtros = {
       busqueda: '',
-      estado: '',
+      verificado: '',
       tipo: '',
       ciudad: ''
     };
@@ -107,14 +107,13 @@ export class NegociosLubricentrosComponent  implements AfterViewInit {@ViewChild
     'nombre',
     'contacto',
     'telefono',
-    'ciudad',
-    'tipo',
-    'estado',
+    'ciudad', 
+    'verificado',
     'acciones'
   ];
   filtros = {
     busqueda: '',
-    estado: '',
+    verificado: '',
     tipo: '',
     ciudad: ''
   };
@@ -131,430 +130,267 @@ export class NegociosLubricentrosComponent  implements AfterViewInit {@ViewChild
       contacto: 'Juan Pérez',
       telefono: '70123456',
       ciudad: 'Santa Cruz de la Sierra',
-      tipo: 'A',
-      estado: 'Nuevo',
+      estado: 'Verificado',
       direccion: 'Av. Banzer Km 8',
       ubLatitud: '-17.7445',
       ubLongitud: '-63.1561',
       prioridad: 1,
       idTipoNegocio: 1,
       idVendedor: 101,
-      especialidad: 'Mecánica General',
-      fechaActual: '15/06/2026',
-      proximoContacto: '20/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Solicitó información',
-      proximaAccion: 'Enviar propuesta comercial',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Elevador, Scanner',
-      caracteristicasAdicional: 'Área de recepción climatizada'
+      verificado: 'Sin verificar'
       },
       {
       nombre: 'Moto Service',
       contacto: 'Carlos Flores',
       telefono: '71234567',
       ciudad: 'Santa Cruz de la Sierra',
-      tipo: 'B',
-      estado: 'Contactado',
+      estado: 'Sin verificar',
       direccion: 'Av. Santos Dumont',
       ubLatitud: '-17.8123',
       ubLongitud: '-63.1812',
       prioridad: 2,
       idTipoNegocio: 1,
       idVendedor: 102,
-      especialidad: 'Motocicletas',
-      fechaActual: '14/06/2026',
-      proximoContacto: '18/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Interesado',
-      proximaAccion: 'Agendar visita',
-      tipoVehiculo: 'Motocicletas',
-      caracteristicasEtiqueta: 'Motores, Inyección',
-      caracteristicasAdicional: 'Especialista en motos deportivas'
+          verificado: 'Verificado'
       },
       {
       nombre: 'Garage Premium',
       contacto: 'Luis Vargas',
       telefono: '72345678',
       ciudad: 'Warnes',
-      tipo: 'A',
-      estado: 'Negociación',
+      estado: 'Verificado',
       direccion: 'Zona Industrial Warnes',
       ubLatitud: '-17.5123',
       ubLongitud: '-63.1734',
       prioridad: 1,
       idTipoNegocio: 1,
       idVendedor: 101,
-      especialidad: 'Suspensión y Frenos',
-      fechaActual: '12/06/2026',
-      proximoContacto: '19/06/2026',
-      metodoContacto: 'Visita',
-      respuestaContacto: 'Evaluando propuesta',
-      proximaAccion: 'Presentar contrato',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-      caracteristicasAdicional: 'Instalaciones modernas'
+      verificado: 'Sin verificar'
       },
       {
       nombre: 'Express Lubricantes',
       contacto: 'Pedro Rojas',
       telefono: '73456789',
       ciudad: 'Montero',
-      tipo: 'C',
-      estado: 'Ganado',
-      
+      estado: 'Sin verificar',
       direccion: 'Av. Circunvalación',
       ubLatitud: '-17.3382',
       ubLongitud: '-63.2501',
       prioridad: 3,
       idTipoNegocio: 1,
       idVendedor: 103,
-      especialidad: 'Electricidad Automotriz',
-      fechaActual: '10/06/2026',
-      proximoContacto: '25/06/2026',
-      metodoContacto: 'Seguimiento',
-      respuestaContacto: 'Aceptó trabajar con nosotros',
-      proximaAccion: 'Capacitación inicial',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Scanner',
-      caracteristicasAdicional: 'Taller consolidado'
+      verificado: 'Sin verificar'
       },
       {
         nombre: 'Lubricantes Perez',
         contacto: 'Miguel Pérez',
         telefono: '74567890',
         ciudad: 'Montero',
-        tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Sin verificar',
         direccion: 'Barrio Centro',
         ubLatitud: '-17.3421',
         ubLongitud: '-63.2554',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 102,
-        especialidad: 'Mecánica General',
-        fechaActual: '13/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Solicitó propuesta',
-        proximaAccion: 'Presentar convenio',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador',
-        caracteristicasAdicional: 'Negocio familiar'
+          verificado: 'Verificado'
         },
         {
         nombre: 'Lubricentro Los Junos',
         contacto: 'José Suárez',
         telefono: '75678901',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Verificado',
         direccion: 'Av. Virgen de Cotoca',
         ubLatitud: '-17.7754',
         ubLongitud: '-63.1321',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 101,
-        especialidad: 'Suspensión',
-        fechaActual: '11/06/2026',
-        proximoContacto: '17/06/2026',
-        metodoContacto: 'Llamada',
-        respuestaContacto: 'Interesado',
-        proximaAccion: 'Coordinar visita',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Alineadora',
-        caracteristicasAdicional: 'Buen flujo de clientes'
+          verificado: 'Verificado'
         },
         {
         nombre: 'Pro Mecanics',
         contacto: 'Andrés Molina',
         telefono: '76789012',
         ciudad: 'Warnes',
-        tipo: 'A',
-        estado: 'Nuevo',
-        
+        estado: 'Verificado',
         direccion: 'Zona Norte Warnes',
         ubLatitud: '-17.5087',
         ubLongitud: '-63.1698',
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 103,
-        especialidad: 'Diagnóstico Computarizado',
-        fechaActual: '16/06/2026',
-        proximoContacto: '19/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Pendiente',
-        proximaAccion: 'Primer contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner, Elevador',
-        caracteristicasAdicional: 'Infraestructura moderna'
+      verificado: 'Sin verificar'
         },
         {
         nombre: 'Lubricentro San Pedro',
         contacto: 'Mario Quiroga',
         telefono: '77890123',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'C',
-        estado: 'Nuevo',
-        
+        estado: 'Sin verificar',
         direccion: 'Barrio San Pedro',
         ubLatitud: '-17.7842',
         ubLongitud: '-63.1745',
         prioridad: 3,
         idTipoNegocio: 1,
         idVendedor: 102,
-        especialidad: 'Mecánica General',
-        fechaActual: '15/06/2026',
-        proximoContacto: '21/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Sin respuesta',
-        proximaAccion: 'Reintentar contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Herramientas básicas',
-        caracteristicasAdicional: 'Taller pequeño'
+          verificado: 'Verificado'
         },
         {
         nombre: 'Masters',
         contacto: 'Raúl Fernández',
         telefono: '78901234',
         ciudad: 'Camiri',
-        tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Sin verificar',
         direccion: 'Zona Central',
         ubLatitud: '-20.0381',
         ubLongitud: '-63.5187',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 101,
-        especialidad: 'Motores',
-        fechaActual: '09/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Analizando propuesta',
-        proximaAccion: 'Seguimiento',
-        tipoVehiculo: 'Camionetas',
-        caracteristicasEtiqueta: 'Banco de pruebas',
-        caracteristicasAdicional: 'Experiencia en motores diésel'
+          verificado: 'Verificado'
         },
         {
         nombre: 'Don Julio',
         contacto: 'Julio Mendoza',
         telefono: '79012345',
         ciudad: 'Warnes',
-        tipo: 'B',
-        estado: 'Nuevo',
-        
+        estado: 'Verificado',
         direccion: 'Carretera al Norte',
         ubLatitud: '-17.5201',
         ubLongitud: '-63.1810',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 103,
-        especialidad: 'Mecánica General',
-        fechaActual: '16/06/2026',
-        proximoContacto: '20/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Pendiente',
-        proximaAccion: 'Primer contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador',
-        caracteristicasAdicional: 'Buen potencial comercial'
+      verificado: 'Sin verificar'
         },
         {
         nombre: 'Lubricentro Rojas',
         contacto: 'Fernando Rojas',
         telefono: '70111222',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Verificado',
         direccion: 'Av. Alemana',
         ubLatitud: '-17.7610',
         ubLongitud: '-63.1701',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 102,
-        especialidad: 'Electricidad Automotriz',
-        fechaActual: '08/06/2026',
-        proximoContacto: '17/06/2026',
-        metodoContacto: 'Llamada',
-        respuestaContacto: 'Interesado',
-        proximaAccion: 'Enviar información',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner',
-        caracteristicasAdicional: 'Especialista en sistemas eléctricos'
+      verificado: 'Sin verificar'
         },
         {
         nombre: 'Lubricentros Saucedo',
         contacto: 'Ricardo Saucedo',
         telefono: '70222333',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'A',
-        estado: 'Negociación',
-        
+        estado: 'Sin verificar',
         direccion: 'Av. Cristo Redentor',
         ubLatitud: '-17.7350',
         ubLongitud: '-63.1654',
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 101,
-        especialidad: 'Mecánica Integral',
-        fechaActual: '07/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Muy interesado',
-        proximaAccion: 'Revisión contractual',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-        caracteristicasAdicional: 'Instalaciones premium'
+          verificado: 'Verificado'
         },
         {
         nombre: 'AutoWorks Lubricantes',
         contacto: 'Diego Salvatierra',
         telefono: '70333444',
         ciudad: 'Santa Cruz de la Sierra',
-        tipo: 'A',
-        estado: 'Negociación',
-        
+        estado: 'Verificado',
         direccion: 'Av. Beni',
         ubLatitud: '-17.7488',
         ubLongitud: '-63.1569',
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 103,
-        especialidad: 'Diagnóstico y Electrónica',
-        fechaActual: '06/06/2026',
-        proximoContacto: '19/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Evaluando beneficios',
-        proximaAccion: 'Presentar propuesta final',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner, Elevador',
-        caracteristicasAdicional: 'Taller de alta tecnología'
+          verificado: 'Verificado'
         },
         {
           nombre: 'Turbo Lubricenter',
           contacto: 'Héctor Salinas',
           telefono: '70444555',
           ciudad: 'Santa Cruz de la Sierra',
-          tipo: 'A',
-          estado: 'Contactado',
-          
+          estado: 'Sin verificar',
           direccion: 'Av. Mutualista',
           ubLatitud: '-17.7812',
           ubLongitud: '-63.1458',
           prioridad: 1,
           idTipoNegocio: 1,
           idVendedor: 101,
-          especialidad: 'Motores Turbo',
-          fechaActual: '16/06/2026',
-          proximoContacto: '21/06/2026',
-          metodoContacto: 'Llamada',
-          respuestaContacto: 'Interesado en conocer beneficios',
-          proximaAccion: 'Agendar demostración',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Scanner, Banco de pruebas',
-          caracteristicasAdicional: 'Especialista en vehículos turbo'
+      verificado: 'Sin verificar'
           },
           {
           nombre: 'Elite Lubricantes',
           contacto: 'Patricia Méndez',
           telefono: '70555666',
           ciudad: 'Cochabamba',
-          tipo: 'A',
-          estado: 'Negociación',
-          
+          estado: 'Verificado',
           direccion: 'Av. América',
           ubLatitud: '-17.3895',
           ubLongitud: '-66.1568',
           prioridad: 1,
           idTipoNegocio: 1,
           idVendedor: 102,
-          especialidad: 'Mecánica Premium',
-          fechaActual: '15/06/2026',
-          proximoContacto: '22/06/2026',
-          metodoContacto: 'Visita',
-          respuestaContacto: 'Solicitó propuesta formal',
-          proximaAccion: 'Presentar propuesta económica',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-          caracteristicasAdicional: 'Atención a vehículos de gama alta'
+          verificado: 'Verificado'
           },
           {
           nombre: 'Lubricentro El Mecánico',
           contacto: 'Roberto Velasco',
           telefono: '70666777',
           ciudad: 'Montero',
-          tipo: 'C',
-          estado: 'Nuevo',
-          
+          estado: 'Sin verificar',
           direccion: 'Barrio Villa Busch',
           ubLatitud: '-17.3465',
           ubLongitud: '-63.2492',
           prioridad: 3,
           idTipoNegocio: 1,
           idVendedor: 103,
-          especialidad: 'Mecánica General',
-          fechaActual: '17/06/2026',
-          proximoContacto: '23/06/2026',
-          metodoContacto: 'WhatsApp',
-          respuestaContacto: 'Pendiente',
-          proximaAccion: 'Realizar primer contacto',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Herramientas básicas',
-          caracteristicasAdicional: 'Taller de barrio con clientela estable'
+          verificado: 'Verificado'
           },
           {
           nombre: 'Lubri Pro',
           contacto: 'Óscar Gutiérrez',
           telefono: '70777888',
           ciudad: 'Camiri',
-          tipo: 'B',
-          estado: 'Contactado',
-          
+          estado: 'Verificado',
           direccion: 'Av. Petrolera',
           ubLatitud: '-20.0405',
           ubLongitud: '-63.5202',
           prioridad: 2,
           idTipoNegocio: 1,
           idVendedor: 101,
-          especialidad: 'Motores Diésel',
-          fechaActual: '16/06/2026',
-          proximoContacto: '20/06/2026',
-          metodoContacto: 'Llamada',
-          respuestaContacto: 'Mostró interés',
-          proximaAccion: 'Coordinar visita técnica',
-          tipoVehiculo: 'Camiones',
-          caracteristicasEtiqueta: 'Banco de pruebas',
-          caracteristicasAdicional: 'Especializado en transporte pesado'
+      verificado: 'Sin verificar'
           },
           {
           nombre: 'Auto Clínica',
           contacto: 'María Fernanda Ruiz',
           telefono: '70888999',
           ciudad: 'Warnes',
-          tipo: 'B',
-          estado: 'Ganado',
-          
+          estado: 'Sin verificar',
           direccion: 'Zona Industrial',
           ubLatitud: '-17.5174',
           ubLongitud: '-63.1763',
           prioridad: 2,
           idTipoNegocio: 1,
           idVendedor: 102,
-          especialidad: 'Mantenimiento Preventivo',
-          fechaActual: '14/06/2026',
-          proximoContacto: '30/06/2026',
-          metodoContacto: 'Seguimiento',
-          respuestaContacto: 'Aceptó la propuesta',
-          proximaAccion: 'Capacitación y onboarding',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Elevador, Scanner',
-          caracteristicasAdicional: 'Cliente recientemente incorporado'
-          }
+          verificado: 'Verificado'
+          },
+          {
+            nombre: 'Lubricentro San Ramon',
+            contacto: 'Jorge Salazar',
+            telefono: '70123456',
+            ciudad: 'Santa Cruz de la Sierra',
+            estado: 'Sin verificar',
+            direccion: 'Av. 4to Anillo entre Av. Doble via La Guardia y Av. Radial 17 1/2',
+            ubLatitud: '-17.5174',
+            ubLongitud: '-63.1763',
+            prioridad: 1,
+            idTipoNegocio: 4,
+            idVendedor: 102,
+      verificado: 'Sin verificar'
+            }
         ]);
         ciudades = [
           ...new Set(

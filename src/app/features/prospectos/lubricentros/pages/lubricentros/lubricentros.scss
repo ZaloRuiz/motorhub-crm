@@ -58,7 +58,7 @@
   align-items: center;
   gap: 7px;
   padding: 0 16px;
-  border-radius: 9px;
+  border-radius: 18px;
   background: #0979eb;
   color: #ffffff;
   font-size: 14px;
@@ -86,7 +86,7 @@
   min-width: 0;
   overflow: hidden;
   border: 1px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 18px;
   background: #ffffff;
   box-shadow: none !important;
 }
@@ -104,11 +104,11 @@
 }
 
 .kpi-b {
-  border-top-color: #d97706;
+  border-top-color: #c734b3;
 }
 
 .kpi-c {
-  border-top-color: #64748b;
+  border-top-color: #1bb98a;
 }
 
 .kpi-card mat-card-content {
@@ -184,7 +184,7 @@
   flex: 0 0 38px;
   align-items: center;
   justify-content: center;
-  border-radius: 10px;
+  border-radius: 9px;
   background: #eff6ff;
   color: #0979eb;
 }
@@ -246,7 +246,7 @@
   align-items: center;
   padding: 6px 10px;
   border: 1px solid #dbeafe;
-  border-radius: 7px;
+  border-radius: 9px;
   background: #eff6ff;
   color: #075db5;
   font-size: 14px;
@@ -259,7 +259,7 @@
   overflow-x: auto;
   overscroll-behavior-x: contain;
   border: 1px solid #e2e8f0;
-  border-radius: 9px;
+  border-radius: 18px;
 }
 
 table {
@@ -318,7 +318,7 @@ table {
   align-items: center;
   justify-content: center;
   padding: 4px 9px;
-  border-radius: 6px;
+  border-radius: 9px;
   font-size: 12px;
   font-weight: 600;
   line-height: 1.2;
@@ -352,9 +352,9 @@ table {
   color: #1d4ed8;
 }
 
-.estado-Negociación {
+.estado-Negociacion {
   background: #fffbeb;
-  color: #92400e;
+  color: #e2600f;
 }
 
 .estado-Ganado {
@@ -425,7 +425,7 @@ table {
   align-items: center;
   justify-content: center;
   margin-bottom: 14px;
-  border-radius: 15px;
+  border-radius: 18px;
   background: #eff6ff;
   color: #0979eb;
 }

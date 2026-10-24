@@ -25,44 +25,18 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="kpi-card kpi-a">
+    <mat-card class="kpi-card kpi-verificado">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Traslado Interhospitalario</span>
+          <span class="kpi-title">Verificados / Sin verificar</span>
           <span class="kpi-icon">
-            <mat-icon>star</mat-icon>
+            <mat-icon>verified</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ servicioInterhospitalario }}</div>
-        <div class="kpi-caption">Otros servicios realizados</div>
+        <div class="kpi-value">{{ estadoVerificado }} / {{ estadoSinverificar }}</div>
+        <div class="kpi-caption">Estado de verificacion</div>
       </mat-card-content>
-    </mat-card>
-
-    <mat-card class="kpi-card kpi-b">
-      <mat-card-content>
-        <div class="kpi-top">
-          <span class="kpi-title">Traslado Asistencial</span>
-          <span class="kpi-icon">
-            <mat-icon>trending_up</mat-icon>
-          </span>
-        </div>
-        <div class="kpi-value">{{ servicioAsistencial }}</div>
-        <div class="kpi-caption">Otros servicios realizados</div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="kpi-card kpi-c">
-      <mat-card-content>
-        <div class="kpi-top">
-          <span class="kpi-title">Cobertura de Eventos</span>
-          <span class="kpi-icon">
-            <mat-icon>segment</mat-icon>
-          </span>
-        </div>
-        <div class="kpi-value">{{ servicioEventos }}</div>
-        <div class="kpi-caption">Otros servicios realizados</div>
-      </mat-card-content>
-    </mat-card>
+    </mat-card> 
   </section>
 
   <!-- Filtros -->
@@ -97,14 +71,14 @@
         </mat-form-field>
 
         <mat-form-field appearance="outline">
-          <mat-label>Estado de actividad</mat-label>
+          <mat-label>Estado de verificacion</mat-label>
           <mat-select
-            [(ngModel)]="filtros.estado"
+            [(ngModel)]="filtros.verificado"
             (selectionChange)="aplicarFiltros()"
           >
             <mat-option value="">Todos los estados</mat-option>
-            <mat-option value="Activo">Activo</mat-option>
-            <mat-option value="Inactivo">Inactivo</mat-option>
+            <mat-option value="Verificado">Verificado</mat-option>
+            <mat-option value="Sin verificar">Sin verificar</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -195,24 +169,11 @@
             </td>
           </ng-container>
 
-          <ng-container matColumnDef="tipo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tipo
-            </th>
+          <ng-container matColumnDef="verificado">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header>Verificado</th>
             <td mat-cell *matCellDef="let row">
-              <span class="tipo-chip" [ngClass]="'tipo-' + row.tipo">
-                Tipo {{ row.tipo }}
-              </span>
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="estado">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Estado
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <span class="estado-chip" [ngClass]="'estado-' + row.estado">
-                {{ row.estado }}
+              <span class="estado-chip" [ngClass]="'estado-' + row.verificado">
+                {{ row.verificado }}
               </span>
             </td>
           </ng-container>

@@ -20,7 +20,7 @@ import { PreIngresadosRepuestosComponent } from "./features/pre-ingresados/repue
 import { PreIngresadosGruasComponent } from "./features/pre-ingresados/gruas/pages/gruas/gruas";
 import { PreIngresadosAmbulanciasComponent } from "./features/pre-ingresados/ambulancias/pages/ambulancias/ambulancias";
 import { PreIngresadosSurtidoresComponent } from "./features/pre-ingresados/surtidores/pages/surtidores/surtidores";
-import { NegociosRepuestosComponent } from "./features/negocios/repuestos/pages/repuesteras/repuestos";
+import { NegociosRepuestosComponent } from "./features/negocios/repuestos/pages/repuestos/repuestos";
 import { RendimientoComercial } from "./features/rendimiento-comercial/dashboard/rendimiento-comercial/rendimiento-comercial";
 
 export const routes: Routes = [

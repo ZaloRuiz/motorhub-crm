@@ -43,6 +43,14 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
   get totalNegocios(): number {
     return this.dataSource.filteredData.length;
   }
+
+  get estadoVerificado(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Verificado').length;
+  }
+  
+  get estadoSinverificar(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Sin verificar').length;
+  }
   
   get servicioInterhospitalario(): number {
     return this.dataSource.filteredData.filter(x => x.otroServicio.includes('interhospitalario')).length;
@@ -65,9 +73,9 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         !filtros.busqueda ||
         data.nombre.toLowerCase().includes(filtros.busqueda.toLowerCase());
   
-      const coincideEstado =
-        !filtros.estado ||
-        data.estado === filtros.estado;
+      const coincideVerificado =
+      !filtros.verificado ||
+      data.verificado === filtros.verificado;
   
       const coincideServicio =
         !filtros.servicio || filtros.servicio === '' ||
@@ -79,7 +87,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
   
       return (
         coincideBusqueda &&
-        coincideEstado &&
+        coincideVerificado &&
         coincideServicio &&
         coincideCiudad
       );
@@ -96,7 +104,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
   limpiarFiltros(): void {
     this.filtros = {
       busqueda: '',
-      estado: '',
+      verificado: '',
       servicio: '',
       ciudad: ''
     };
@@ -108,12 +116,12 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
     'contacto',
     'telefono',
     'ciudad',
-    'estado',
+    'verificado',
     'acciones'
   ];
   filtros = {
     busqueda: '',
-    estado: '',
+    verificado: '',
     servicio: '',
     ciudad: ''
   };
@@ -138,6 +146,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
       prioridad: 1,
       idTipoNegocio: 1,
       idVendedor: 101,
+      verificado: 'Verificado'
       },
       {
       nombre: 'UTEM Ambulancias',
@@ -152,6 +161,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
       prioridad: 2,
       idTipoNegocio: 1,
       idVendedor: 102,
+          verificado: 'Sin verificar'
       },
       {
       nombre: 'AME Ambulancias',
@@ -166,6 +176,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
       prioridad: 1,
       idTipoNegocio: 1,
       idVendedor: 101,
+      verificado: 'Verificado'
       },
       {
       nombre: 'Ambulancias Santa Cruz',
@@ -180,6 +191,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
       prioridad: 3,
       idTipoNegocio: 1,
       idVendedor: 103,
+      verificado: 'Verificado'
       },
       {
         nombre: 'SISME',
@@ -194,6 +206,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 102,
+          verificado: 'Sin verificar'
         },
         {
         nombre: 'Ambulancias Cardiomedcruz SRL',
@@ -208,6 +221,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 101,
+          verificado: 'Sin verificar'
         },
         {
         nombre: 'CIEM Central',
@@ -215,13 +229,14 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         telefono: '76789012',
         ciudad: 'Warnes',
         otroServicio: ['interhospitalario', 'asistencial'],
-        estado: 'Activo',
+        estado: 'Inactivo',
         direccion: 'Zona Norte Warnes',
         ubLatitud: '-17.5087',
         ubLongitud: '-63.1698',
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 103,
+      verificado: 'Verificado'
         },
         {
         nombre: 'Lemcruz SRL',
@@ -236,6 +251,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 3,
         idTipoNegocio: 1,
         idVendedor: 102,
+          verificado: 'Sin verificar'
         },
         {
         nombre: 'UMA',
@@ -250,6 +266,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 101,
+          verificado: 'Sin verificar'
         },
         {
         nombre: 'CIEM Parque Sur',
@@ -264,6 +281,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 103,
+      verificado: 'Verificado'
         },
         {
         nombre: 'Sepacruz Emergencias Medicas',
@@ -278,6 +296,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 102,
+          verificado: 'Sin verificar'
         },
         {
         nombre: 'ATP SCZ',
@@ -292,6 +311,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 101,
+          verificado: 'Sin verificar'
         },
         {
         nombre: 'EMEDSA',
@@ -306,6 +326,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 103,
+      verificado: 'Verificado'
         },
         {
           nombre: 'Ambulancia SAMED',
@@ -320,6 +341,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
           prioridad: 1,
           idTipoNegocio: 1,
           idVendedor: 101,
+      verificado: 'Verificado'
           },
           {
           nombre: 'MIA Atencion Medica',
@@ -334,6 +356,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
           prioridad: 1,
           idTipoNegocio: 1,
           idVendedor: 102,
+          verificado: 'Sin verificar'
           },
           {
           nombre: 'UDEM',
@@ -348,6 +371,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
           prioridad: 3,
           idTipoNegocio: 1,
           idVendedor: 103,
+      verificado: 'Verificado'
           },
           {
           nombre: 'Ambulancias SEMP',
@@ -362,6 +386,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
           prioridad: 2,
           idTipoNegocio: 1,
           idVendedor: 101,
+          verificado: 'Sin verificar'
           },
           {
           nombre: 'CIEM Parqueo 4',
@@ -376,6 +401,7 @@ export class NegociosAmbulanciasComponent  implements AfterViewInit{@ViewChild(M
           prioridad: 2,
           idTipoNegocio: 1,
           idVendedor: 102,
+      verificado: 'Verificado'
           }
         ]);
         ciudades = [

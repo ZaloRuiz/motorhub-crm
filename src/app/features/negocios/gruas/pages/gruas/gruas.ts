@@ -43,6 +43,14 @@ export class NegociosGruasComponent implements AfterViewInit {
   get totalNegocios(): number {
     return this.dataSource.filteredData.length;
   }
+
+  get estadoVerificado(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Verificado').length;
+  }
+  
+  get estadoSinverificar(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Sin verificar').length;
+  }
   
   get tipoIntegral(): number {
     return this.dataSource.filteredData.filter(x => x.tipoGrua === 'Integral').length;
@@ -70,8 +78,9 @@ export class NegociosGruasComponent implements AfterViewInit {
           .toLowerCase()
           .includes(filtros.busqueda.toLowerCase().trim());
   
-      const coincideEstado =
-        !filtros.estado || data.estado === filtros.estado;
+      const coincideVerificado =
+      !filtros.verificado ||
+      data.verificado === filtros.verificado;
   
       const coincideTipo =
         !filtros.tipo || data.tipoGrua === filtros.tipo;
@@ -81,7 +90,7 @@ export class NegociosGruasComponent implements AfterViewInit {
   
       return (
         coincideBusqueda &&
-        coincideEstado &&
+        coincideVerificado &&
         coincideTipo &&
         coincideCiudad
       );
@@ -98,7 +107,7 @@ export class NegociosGruasComponent implements AfterViewInit {
   limpiarFiltros(): void {
     this.filtros = {
       busqueda: '',
-      estado: '',
+      verificado: '',
       tipo: '',
       ciudad: ''
     };
@@ -112,13 +121,12 @@ export class NegociosGruasComponent implements AfterViewInit {
     'contacto',
     'telefono',
     'ciudad',
-    'tipoGrua',
-    'estado',
+    'verificado',
     'acciones'
   ];
   filtros = {
     busqueda: '',
-    estado: '',
+    verificado: '',
     tipo: '',
     ciudad: ''
   };
@@ -143,6 +151,7 @@ export class NegociosGruasComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 101,
       tipoGrua: 'Arrastre con gancho',
+      verificado: 'Sin verificar'
       },
       {
       nombre: 'Grua Service',
@@ -157,6 +166,7 @@ export class NegociosGruasComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 102,
       tipoGrua: 'Arrastre con elevador',
+          verificado: 'Verificado'
       },
       {
       nombre: 'Servicio de asistencia vehicular Garage Premium',
@@ -171,6 +181,7 @@ export class NegociosGruasComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 101,
       tipoGrua: 'Integral',
+      verificado: 'Sin verificar'
       },
       {
       nombre: 'Express Gruas',
@@ -185,6 +196,7 @@ export class NegociosGruasComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 103,
       tipoGrua: 'Plataforma',
+      verificado: 'Sin verificar'
       },
       {
         nombre: 'Servicio de grua Perez',
@@ -199,6 +211,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 102,
         tipoGrua: 'Arrastre con gancho',
+          verificado: 'Verificado'
         },
         {
         nombre: 'Gruas Los Junos',
@@ -213,6 +226,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 101,
         tipoGrua: 'Plataforma',
+      verificado: 'Sin verificar'
         },
         {
         nombre: 'Pro Gruas',
@@ -227,6 +241,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 103,
         tipoGrua: 'Plataforma',
+          verificado: 'Verificado'
         },
         {
         nombre: 'Servicios San Pedro',
@@ -241,6 +256,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 102,
         tipoGrua: 'Integral',
+          verificado: 'Verificado'
         },
         {
         nombre: 'Masters Gruas',
@@ -255,6 +271,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 101,
         tipoGrua: 'Arrastre con elevador',
+      verificado: 'Sin verificar'
         },
         {
         nombre: 'Don Julio Servicios',
@@ -269,6 +286,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 103,
         tipoGrua: 'Plataforma',
+      verificado: 'Sin verificar'
         },
         {
         nombre: 'Gruas Rojas',
@@ -283,6 +301,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 102,
         tipoGrua: 'Arrastre con elevador',
+          verificado: 'Verificado'
         },
         {
         nombre: 'Servicio de asistencia Saucedo',
@@ -297,6 +316,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 101,
         tipoGrua: 'Plataforma',
+      verificado: 'Sin verificar'
         },
         {
         nombre: 'MotorWorks Gruas',
@@ -311,6 +331,7 @@ export class NegociosGruasComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 103,
         tipoGrua: 'Arrastre con elevador',
+      verificado: 'Sin verificar'
         },
         {
           nombre: 'Turbo Servicios Gruas',
@@ -325,6 +346,7 @@ export class NegociosGruasComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 101,
           tipoGrua: 'Arrastre con gancho',
+          verificado: 'Verificado'
           },
           {
           nombre: 'ServiGruas',
@@ -339,6 +361,7 @@ export class NegociosGruasComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 102,
           tipoGrua: 'Plataforma',
+      verificado: 'Sin verificar'
           },
           {
           nombre: 'Gruas Las Palmas',
@@ -353,6 +376,7 @@ export class NegociosGruasComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 103,
           tipoGrua: 'Plataforma',
+      verificado: 'Sin verificar'
           },
           {
           nombre: 'Pro Service Gruas',
@@ -367,6 +391,7 @@ export class NegociosGruasComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 101,
           tipoGrua: 'Arrastre con gancho',
+          verificado: 'Verificado'
           },
           {
           nombre: 'Grua vehicular',
@@ -381,6 +406,7 @@ export class NegociosGruasComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 102,
           tipoGrua: 'Plataforma',
+      verificado: 'Sin verificar'
           }
         ]);
         ciudades = [

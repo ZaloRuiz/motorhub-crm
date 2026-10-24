@@ -49,16 +49,16 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
     return this.dataSource.filteredData.length;
   }
   
-  get tipoA(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'A').length;
+  get estadoNuevo(): number {
+    return this.dataSource.filteredData.filter(x => x.estado === 'Nuevo').length;
   }
   
-  get tipoB(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'B').length;
+  get estadoContactado(): number {
+    return this.dataSource.filteredData.filter(x => x.estado === 'Contactado').length;
   }
   
-  get tipoC(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'C').length;
+  get estadoNegociacion(): number {
+    return this.dataSource.filteredData.filter(x => x.estado === 'Negociacion').length;
   }
 
   constructor(private dialog: MatDialog) {
@@ -183,7 +183,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
       telefono: '72345678',
       ciudad: 'Warnes',
       tipo: 'A',
-      estado: 'Negociación',
+      estado: 'Negociacion',
       direccion: 'Zona Industrial Warnes',
       ubLatitud: '-17.5123',
       ubLongitud: '-63.1734',
@@ -207,7 +207,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
       ciudad: 'Montero',
       tipo: 'C',
       estado: 'Ganado',
-      
       direccion: 'Av. Circunvalación',
       ubLatitud: '-17.3382',
       ubLongitud: '-63.2501',
@@ -230,8 +229,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         telefono: '74567890',
         ciudad: 'Montero',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Negociacion',
         direccion: 'Barrio Centro',
         ubLatitud: '-17.3421',
         ubLongitud: '-63.2554',
@@ -254,8 +252,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         telefono: '75678901',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Negociacion',
         direccion: 'Av. Virgen de Cotoca',
         ubLatitud: '-17.7754',
         ubLongitud: '-63.1321',
@@ -279,7 +276,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         ciudad: 'Warnes',
         tipo: 'A',
         estado: 'Nuevo',
-        
         direccion: 'Zona Norte Warnes',
         ubLatitud: '-17.5087',
         ubLongitud: '-63.1698',
@@ -303,7 +299,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'C',
         estado: 'Nuevo',
-        
         direccion: 'Barrio San Pedro',
         ubLatitud: '-17.7842',
         ubLongitud: '-63.1745',
@@ -326,8 +321,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         telefono: '78901234',
         ciudad: 'Camiri',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Negociacion',
         direccion: 'Zona Central',
         ubLatitud: '-20.0381',
         ubLongitud: '-63.5187',
@@ -351,7 +345,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         ciudad: 'Warnes',
         tipo: 'B',
         estado: 'Nuevo',
-        
         direccion: 'Carretera al Norte',
         ubLatitud: '-17.5201',
         ubLongitud: '-63.1810',
@@ -374,8 +367,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         telefono: '70111222',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Negociacion',
         direccion: 'Av. Alemana',
         ubLatitud: '-17.7610',
         ubLongitud: '-63.1701',
@@ -398,8 +390,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         telefono: '70222333',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
-        estado: 'Negociación',
-        
+        estado: 'Negociacion',
         direccion: 'Av. Cristo Redentor',
         ubLatitud: '-17.7350',
         ubLongitud: '-63.1654',
@@ -422,8 +413,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
         telefono: '70333444',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
-        estado: 'Negociación',
-        
+        estado: 'Negociacion',
         direccion: 'Av. Beni',
         ubLatitud: '-17.7488',
         ubLongitud: '-63.1569',
@@ -447,7 +437,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
           ciudad: 'Santa Cruz de la Sierra',
           tipo: 'A',
           estado: 'Contactado',
-          
           direccion: 'Av. Mutualista',
           ubLatitud: '-17.7812',
           ubLongitud: '-63.1458',
@@ -470,8 +459,7 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
           telefono: '70555666',
           ciudad: 'Cochabamba',
           tipo: 'A',
-          estado: 'Negociación',
-          
+          estado: 'Negociacion',
           direccion: 'Av. América',
           ubLatitud: '-17.3895',
           ubLongitud: '-66.1568',
@@ -495,7 +483,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
           ciudad: 'Montero',
           tipo: 'C',
           estado: 'Nuevo',
-          
           direccion: 'Barrio Villa Busch',
           ubLatitud: '-17.3465',
           ubLongitud: '-63.2492',
@@ -519,7 +506,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
           ciudad: 'Camiri',
           tipo: 'B',
           estado: 'Contactado',
-          
           direccion: 'Av. Petrolera',
           ubLatitud: '-20.0405',
           ubLongitud: '-63.5202',
@@ -543,7 +529,6 @@ export class ProspectosLubricentrosComponent implements AfterViewInit {
           ciudad: 'Warnes',
           tipo: 'B',
           estado: 'Ganado',
-          
           direccion: 'Zona Industrial',
           ubLatitud: '-17.5174',
           ubLongitud: '-63.1763',

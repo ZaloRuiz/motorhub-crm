@@ -76,7 +76,7 @@
 
 .kpi-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(5, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -99,16 +99,20 @@
   border-top-color: #032d57;
 }
 
+.kpi-verificado{
+  border-top-color: #f86002;
+}
+
 .kpi-a {
   border-top-color: #0979eb;
 }
 
 .kpi-b {
-  border-top-color: #d97706;
+  border-top-color: #c734b3;
 }
 
 .kpi-c {
-  border-top-color: #64748b;
+  border-top-color: #1bb98a;
 }
 
 .kpi-card mat-card-content {
@@ -325,6 +329,8 @@ table {
   white-space: nowrap;
 }
 
+
+
 .tipo-A {
   background: #eff6ff;
   color: #075db5;
@@ -339,6 +345,18 @@ table {
   background: #f1f5f9;
   color: #475569;
 }
+
+/* Estado verificado */
+  
+  .estado-Verificado {
+    background: #f1f5f9;
+    color: #e2600f;
+  }
+  
+  .estado-Sinverificar {
+    background: #eff6ff;
+    color: #2146ad;
+  }
 
 /* Estado comercial */
 

@@ -49,6 +49,14 @@ export class NegociosTalleresComponent implements AfterViewInit {
   get totalNegocios(): number {
     return this.dataSource.filteredData.length;
   }
+
+  get estadoVerificado(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Verificado').length;
+  }
+  
+  get estadoSinverificar(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Sin verificar').length;
+  }
   
   get tipoA(): number {
     return this.dataSource.filteredData.filter(x => x.tipo === 'A').length;
@@ -71,9 +79,9 @@ export class NegociosTalleresComponent implements AfterViewInit {
         !filtros.busqueda ||
         data.nombre.toLowerCase().includes(filtros.busqueda.toLowerCase());
   
-      const coincideEstado =
-        !filtros.estado ||
-        data.estado === filtros.estado;
+        const coincideVerificado =
+        !filtros.verificado ||
+        data.verificado === filtros.verificado;
   
       const coincideTipo =
         !filtros.tipo ||
@@ -85,7 +93,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
   
       return (
         coincideBusqueda &&
-        coincideEstado &&
+        coincideVerificado &&
         coincideTipo &&
         coincideCiudad
       );
@@ -102,7 +110,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
   limpiarFiltros(): void {
     this.filtros = {
       busqueda: '',
-      estado: '',
+      verificado: '',
       tipo: '',
       ciudad: ''
     };
@@ -115,13 +123,13 @@ export class NegociosTalleresComponent implements AfterViewInit {
     'telefono',
     'ciudad',
     'tipo',
-    'estado',
+    'verificado',
     'especialidad',
     'acciones'
   ];
   filtros = {
     busqueda: '',
-    estado: '',
+    verificado: '',
     tipo: '',
     ciudad: ''
   };
@@ -140,7 +148,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
       ciudad: 'Santa Cruz de la Sierra',
       tipo: 'A',
       estado: 'Nuevo',
-      
       direccion: 'Av. Banzer Km 8',
       ubLatitud: '-17.7445',
       ubLongitud: '-63.1561',
@@ -148,14 +155,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 101,
       especialidad: 'Mecánica General',
-      fechaActual: '15/06/2026',
-      proximoContacto: '20/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Solicitó información',
-      proximaAccion: 'Enviar propuesta comercial',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Elevador, Scanner',
-      caracteristicasAdicional: 'Área de recepción climatizada'
+      verificado: 'Sin verificar'
       },
       {
       nombre: 'Moto Service',
@@ -164,7 +164,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
       ciudad: 'Santa Cruz de la Sierra',
       tipo: 'B',
       estado: 'Contactado',
-      
       direccion: 'Av. Santos Dumont',
       ubLatitud: '-17.8123',
       ubLongitud: '-63.1812',
@@ -172,14 +171,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 102,
       especialidad: 'Motocicletas',
-      fechaActual: '14/06/2026',
-      proximoContacto: '18/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Interesado',
-      proximaAccion: 'Agendar visita',
-      tipoVehiculo: 'Motocicletas',
-      caracteristicasEtiqueta: 'Motores, Inyección',
-      caracteristicasAdicional: 'Especialista en motos deportivas'
+      verificado: 'Verificado'
       },
       {
       nombre: 'Garage Premium',
@@ -188,7 +180,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
       ciudad: 'Warnes',
       tipo: 'A',
       estado: 'Negociación',
-      
       direccion: 'Zona Industrial Warnes',
       ubLatitud: '-17.5123',
       ubLongitud: '-63.1734',
@@ -196,14 +187,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 101,
       especialidad: 'Suspensión y Frenos',
-      fechaActual: '12/06/2026',
-      proximoContacto: '19/06/2026',
-      metodoContacto: 'Visita',
-      respuestaContacto: 'Evaluando propuesta',
-      proximaAccion: 'Presentar contrato',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-      caracteristicasAdicional: 'Instalaciones modernas'
+      verificado: 'Sin verificar'
       },
       {
       nombre: 'Taller Express',
@@ -212,7 +196,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
       ciudad: 'Montero',
       tipo: 'C',
       estado: 'Ganado',
-      
       direccion: 'Av. Circunvalación',
       ubLatitud: '-17.3382',
       ubLongitud: '-63.2501',
@@ -220,14 +203,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
       idTipoNegocio: 1,
       idVendedor: 103,
       especialidad: 'Electricidad Automotriz',
-      fechaActual: '10/06/2026',
-      proximoContacto: '25/06/2026',
-      metodoContacto: 'Seguimiento',
-      respuestaContacto: 'Aceptó trabajar con nosotros',
-      proximaAccion: 'Capacitación inicial',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Scanner',
-      caracteristicasAdicional: 'Taller consolidado'
+      verificado: 'Verificado'
       },
       {
         nombre: 'Taller Perez',
@@ -236,7 +212,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Montero',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Barrio Centro',
         ubLatitud: '-17.3421',
         ubLongitud: '-63.2554',
@@ -244,14 +219,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 102,
         especialidad: 'Mecánica General',
-        fechaActual: '13/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Solicitó propuesta',
-        proximaAccion: 'Presentar convenio',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador',
-        caracteristicasAdicional: 'Negocio familiar'
+        verificado: 'Sin verificar'
         },
         {
         nombre: 'Taller Los Junos',
@@ -260,7 +228,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Av. Virgen de Cotoca',
         ubLatitud: '-17.7754',
         ubLongitud: '-63.1321',
@@ -268,14 +235,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 101,
         especialidad: 'Suspensión',
-        fechaActual: '11/06/2026',
-        proximoContacto: '17/06/2026',
-        metodoContacto: 'Llamada',
-        respuestaContacto: 'Interesado',
-        proximaAccion: 'Coordinar visita',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Alineadora',
-        caracteristicasAdicional: 'Buen flujo de clientes'
+        verificado: 'Verificado'
         },
         {
         nombre: 'Pro Mecanics',
@@ -284,7 +244,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Warnes',
         tipo: 'A',
         estado: 'Nuevo',
-        
         direccion: 'Zona Norte Warnes',
         ubLatitud: '-17.5087',
         ubLongitud: '-63.1698',
@@ -292,14 +251,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 103,
         especialidad: 'Diagnóstico Computarizado',
-        fechaActual: '16/06/2026',
-        proximoContacto: '19/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Pendiente',
-        proximaAccion: 'Primer contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner, Elevador',
-        caracteristicasAdicional: 'Infraestructura moderna'
+        verificado: 'Verificado'
         },
         {
         nombre: 'Taller San Pedro',
@@ -308,7 +260,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'C',
         estado: 'Nuevo',
-        
         direccion: 'Barrio San Pedro',
         ubLatitud: '-17.7842',
         ubLongitud: '-63.1745',
@@ -316,14 +267,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 102,
         especialidad: 'Mecánica General',
-        fechaActual: '15/06/2026',
-        proximoContacto: '21/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Sin respuesta',
-        proximaAccion: 'Reintentar contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Herramientas básicas',
-        caracteristicasAdicional: 'Taller pequeño'
+        verificado: 'Sin verificar'
         },
         {
         nombre: 'Masters',
@@ -332,7 +276,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Camiri',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Zona Central',
         ubLatitud: '-20.0381',
         ubLongitud: '-63.5187',
@@ -340,14 +283,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 101,
         especialidad: 'Motores',
-        fechaActual: '09/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Analizando propuesta',
-        proximaAccion: 'Seguimiento',
-        tipoVehiculo: 'Camionetas',
-        caracteristicasEtiqueta: 'Banco de pruebas',
-        caracteristicasAdicional: 'Experiencia en motores diésel'
+        verificado: 'Verificado'
         },
         {
         nombre: 'Don Julio',
@@ -356,7 +292,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Warnes',
         tipo: 'B',
         estado: 'Nuevo',
-        
         direccion: 'Carretera al Norte',
         ubLatitud: '-17.5201',
         ubLongitud: '-63.1810',
@@ -364,14 +299,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 103,
         especialidad: 'Mecánica General',
-        fechaActual: '16/06/2026',
-        proximoContacto: '20/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Pendiente',
-        proximaAccion: 'Primer contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador',
-        caracteristicasAdicional: 'Buen potencial comercial'
+        verificado: 'Sin verificar'
         },
         {
         nombre: 'Taller Rojas',
@@ -380,7 +308,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Av. Alemana',
         ubLatitud: '-17.7610',
         ubLongitud: '-63.1701',
@@ -388,14 +315,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 102,
         especialidad: 'Electricidad Automotriz',
-        fechaActual: '08/06/2026',
-        proximoContacto: '17/06/2026',
-        metodoContacto: 'Llamada',
-        respuestaContacto: 'Interesado',
-        proximaAccion: 'Enviar información',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner',
-        caracteristicasAdicional: 'Especialista en sistemas eléctricos'
+        verificado: 'Sin verificar'
         },
         {
         nombre: 'Saucedo Motors',
@@ -404,7 +324,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
         estado: 'Negociación',
-        
         direccion: 'Av. Cristo Redentor',
         ubLatitud: '-17.7350',
         ubLongitud: '-63.1654',
@@ -412,14 +331,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 101,
         especialidad: 'Mecánica Integral',
-        fechaActual: '07/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Muy interesado',
-        proximaAccion: 'Revisión contractual',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-        caracteristicasAdicional: 'Instalaciones premium'
+        verificado: 'Verificado'
         },
         {
         nombre: 'AutoWorks',
@@ -428,7 +340,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
         estado: 'Negociación',
-        
         direccion: 'Av. Beni',
         ubLatitud: '-17.7488',
         ubLongitud: '-63.1569',
@@ -436,14 +347,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
         idTipoNegocio: 1,
         idVendedor: 103,
         especialidad: 'Diagnóstico y Electrónica',
-        fechaActual: '06/06/2026',
-        proximoContacto: '19/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Evaluando beneficios',
-        proximaAccion: 'Presentar propuesta final',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner, Elevador',
-        caracteristicasAdicional: 'Taller de alta tecnología'
+        verificado: 'Sin verificar'
         },
         {
           nombre: 'Turbo Center',
@@ -452,7 +356,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
           ciudad: 'Santa Cruz de la Sierra',
           tipo: 'A',
           estado: 'Contactado',
-          
           direccion: 'Av. Mutualista',
           ubLatitud: '-17.7812',
           ubLongitud: '-63.1458',
@@ -460,14 +363,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 101,
           especialidad: 'Motores Turbo',
-          fechaActual: '16/06/2026',
-          proximoContacto: '21/06/2026',
-          metodoContacto: 'Llamada',
-          respuestaContacto: 'Interesado en conocer beneficios',
-          proximaAccion: 'Agendar demostración',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Scanner, Banco de pruebas',
-          caracteristicasAdicional: 'Especialista en vehículos turbo'
+          verificado: 'Verificado'
           },
           {
           nombre: 'Elite Garage',
@@ -476,7 +372,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
           ciudad: 'Cochabamba',
           tipo: 'A',
           estado: 'Negociación',
-          
           direccion: 'Av. América',
           ubLatitud: '-17.3895',
           ubLongitud: '-66.1568',
@@ -484,14 +379,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 102,
           especialidad: 'Mecánica Premium',
-          fechaActual: '15/06/2026',
-          proximoContacto: '22/06/2026',
-          metodoContacto: 'Visita',
-          respuestaContacto: 'Solicitó propuesta formal',
-          proximaAccion: 'Presentar propuesta económica',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-          caracteristicasAdicional: 'Atención a vehículos de gama alta'
+          verificado: 'Verificado'
           },
           {
           nombre: 'Taller El Mecánico',
@@ -500,7 +388,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
           ciudad: 'Montero',
           tipo: 'C',
           estado: 'Nuevo',
-          
           direccion: 'Barrio Villa Busch',
           ubLatitud: '-17.3465',
           ubLongitud: '-63.2492',
@@ -508,14 +395,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 103,
           especialidad: 'Mecánica General',
-          fechaActual: '17/06/2026',
-          proximoContacto: '23/06/2026',
-          metodoContacto: 'WhatsApp',
-          respuestaContacto: 'Pendiente',
-          proximaAccion: 'Realizar primer contacto',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Herramientas básicas',
-          caracteristicasAdicional: 'Taller de barrio con clientela estable'
+          verificado: 'Sin verificar'
           },
           {
           nombre: 'Diesel Pro',
@@ -524,7 +404,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
           ciudad: 'Camiri',
           tipo: 'B',
           estado: 'Contactado',
-          
           direccion: 'Av. Petrolera',
           ubLatitud: '-20.0405',
           ubLongitud: '-63.5202',
@@ -532,14 +411,7 @@ export class NegociosTalleresComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 101,
           especialidad: 'Motores Diésel',
-          fechaActual: '16/06/2026',
-          proximoContacto: '20/06/2026',
-          metodoContacto: 'Llamada',
-          respuestaContacto: 'Mostró interés',
-          proximaAccion: 'Coordinar visita técnica',
-          tipoVehiculo: 'Camiones',
-          caracteristicasEtiqueta: 'Banco de pruebas',
-          caracteristicasAdicional: 'Especializado en transporte pesado'
+          verificado: 'Sin verificar'
           },
           {
           nombre: 'Auto Clínica',
@@ -548,7 +420,6 @@ export class NegociosTalleresComponent implements AfterViewInit {
           ciudad: 'Warnes',
           tipo: 'B',
           estado: 'Ganado',
-          
           direccion: 'Zona Industrial',
           ubLatitud: '-17.5174',
           ubLongitud: '-63.1763',
@@ -556,15 +427,24 @@ export class NegociosTalleresComponent implements AfterViewInit {
           idTipoNegocio: 1,
           idVendedor: 102,
           especialidad: 'Mantenimiento Preventivo',
-          fechaActual: '14/06/2026',
-          proximoContacto: '30/06/2026',
-          metodoContacto: 'Seguimiento',
-          respuestaContacto: 'Aceptó la propuesta',
-          proximaAccion: 'Capacitación y onboarding',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Elevador, Scanner',
-          caracteristicasAdicional: 'Cliente recientemente incorporado'
-          }
+          verificado: 'Verificado'
+          },
+          {
+            nombre: 'MecanicPros',
+            contacto: 'Carlos Mario Rojas',
+            telefono: '70888123',
+            ciudad: 'Santa Cruz de la Sierra',
+            tipo: 'B',
+            estado: 'Ganado',
+            direccion: 'Zona Centro',
+            ubLatitud: '-17.5174',
+            ubLongitud: '-63.1763',
+            prioridad: 2,
+            idTipoNegocio: 1,
+            idVendedor: 102,
+            especialidad: 'Mantenimiento Correectivo',
+            verificado: 'Sin verificar'
+            }
   ]);
   ciudades = [
     ...new Set(

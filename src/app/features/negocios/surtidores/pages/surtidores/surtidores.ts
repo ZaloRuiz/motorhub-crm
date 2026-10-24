@@ -44,6 +44,14 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
   get totalNegocios(): number {
     return this.dataSource.filteredData.length;
   }
+
+  get estadoVerificado(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Verificado').length;
+  }
+  
+  get estadoSinverificar(): number {
+    return this.dataSource.filteredData.filter(x => x.verificado === 'Sin verificar').length;
+  }
   
   get tipoGasolina(): number {
     return this.dataSource.filteredData.filter(x => x.combustibles.includes('Gasolina')).length;
@@ -66,9 +74,9 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
         !filtros.busqueda ||
         data.nombre.toLowerCase().includes(filtros.busqueda.toLowerCase());
   
-      const coincideEstado =
-        !filtros.estado ||
-        data.estado === filtros.estado;
+      const coincideVerificado =
+        !filtros.verificado ||
+        data.verificado === filtros.verificado;
   
         const coincideCombustibles =
         !filtros.combustible ||
@@ -81,7 +89,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
   
       return (
         coincideBusqueda &&
-        coincideEstado &&
+        coincideVerificado &&
         coincideCombustibles &&
         coincideCiudad
       );
@@ -98,7 +106,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
   limpiarFiltros(): void {
     this.filtros = {
       busqueda: '',
-      estado: '',
+      verificado: '',
       combustible: '',
       ciudad: ''
     };
@@ -110,12 +118,12 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
     'contacto',
     'telefono',
     'ciudad',
-    'estado', 
+    'verificado', 
     'acciones'
   ];
   filtros = {
     busqueda: '',
-    estado: '',
+    verificado: '',
     combustible: '',
     ciudad: ''
   };
@@ -140,13 +148,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       idTipoNegocio: 1,
       combustibles: ['Gasolina', 'Gas'],
       idVendedor: 101,
-      fechaActual: '15/06/2026',
-      proximoContacto: '20/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Solicitó información',
-      proximaAccion: 'Enviar propuesta comercial',
-      caracteristicasEtiqueta: 'Gasolina, Diésel, GNV',
-      caracteristicasAdicional: 'Atención para vehículos livianos y pesados'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Surtidor 3F',
@@ -160,13 +162,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas', 'Diesel'],
       idVendedor: 102,
-      fechaActual: '14/06/2026',
-      proximoContacto: '18/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Interesado',
-      proximaAccion: 'Agendar visita',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Servicio de abastecimiento para automóviles y camionetas'
+      verificado: 'Verificado'
     },
     {
       nombre: 'Estación El Cristo',
@@ -180,13 +176,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 1,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas'],
       idVendedor: 103,
-      fechaActual: '12/06/2026',
-      proximoContacto: '19/06/2026',
-      metodoContacto: 'Visita',
-      respuestaContacto: 'Evaluando propuesta',
-      proximaAccion: 'Presentar propuesta comercial',
-      caracteristicasEtiqueta: 'Gasolina, Diésel, GNV',
-      caracteristicasAdicional: 'Ubicación estratégica para transporte urbano'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Surtidor La Ramada',
@@ -200,13 +190,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Diesel'],
       idVendedor: 104,
-      fechaActual: '16/06/2026',
-      proximoContacto: '21/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Pendiente de respuesta',
-      proximaAccion: 'Realizar seguimiento',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Atención a vehículos particulares y comerciales'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Estación Mutualista',
@@ -220,13 +204,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 3,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas', 'Diesel'],
       idVendedor: 105,
-      fechaActual: '13/06/2026',
-      proximoContacto: '22/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Solicitó información general',
-      proximaAccion: 'Enviar información de MotorHub',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Estación de abastecimiento para vehículos livianos'
+      verificado: 'Verificado'
     },
     {
       nombre: 'Surtidor Pampa de la Isla',
@@ -240,13 +218,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 1,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas', 'Diesel'],
       idVendedor: 101,
-      fechaActual: '11/06/2026',
-      proximoContacto: '18/06/2026',
-      metodoContacto: 'Visita',
-      respuestaContacto: 'Interesado en conocer la plataforma',
-      proximaAccion: 'Coordinar segunda reunión',
-      caracteristicasEtiqueta: 'Gasolina, Diésel, GNV',
-      caracteristicasAdicional: 'Orientado a vehículos particulares y transporte'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Estación Doble Vía La Guardia',
@@ -260,13 +232,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Diesel'],
       idVendedor: 102,
-      fechaActual: '17/06/2026',
-      proximoContacto: '23/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Sin respuesta',
-      proximaAccion: 'Intentar nuevo contacto',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Punto de abastecimiento en corredor vial'
+      verificado: 'Verificado'
     },
     {
       nombre: 'Surtidor Warnes Norte',
@@ -280,13 +246,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 1,
       idTipoNegocio: 1,combustibles: ['Gas'],
       idVendedor: 103,
-      fechaActual: '15/06/2026',
-      proximoContacto: '20/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Interesado en una demostración',
-      proximaAccion: 'Coordinar demostración',
-      caracteristicasEtiqueta: 'Gasolina, Diésel, GNV',
-      caracteristicasAdicional: 'Atención a vehículos particulares y transporte pesado'
+      verificado: 'Verificado'
     },
     {
       nombre: 'Estación Satélite Norte',
@@ -300,13 +260,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas', 'Diesel'],
       idVendedor: 104,
-      fechaActual: '12/06/2026',
-      proximoContacto: '19/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Solicitó condiciones comerciales',
-      proximaAccion: 'Enviar propuesta comercial',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Servicio para la zona urbana y alrededores'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Surtidor Montero Central',
@@ -320,13 +274,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 1,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas'],
       idVendedor: 105,
-      fechaActual: '18/06/2026',
-      proximoContacto: '24/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Pendiente de respuesta',
-      proximaAccion: 'Contactar al administrador',
-      caracteristicasEtiqueta: 'Gasolina, Diésel, GNV',
-      caracteristicasAdicional: 'Atención a automóviles, motocicletas y transporte'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Estación Guabirá',
@@ -340,13 +288,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas'],
       idVendedor: 101,
-      fechaActual: '14/06/2026',
-      proximoContacto: '21/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Aceptó recibir información',
-      proximaAccion: 'Enviar presentación',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Servicio de abastecimiento para transporte regional'
+      verificado: 'Verificado'
     },
     {
       nombre: 'Surtidor Cotoca',
@@ -360,13 +302,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 3,
       idTipoNegocio: 1,combustibles: ['Gas'],
       idVendedor: 102,
-      fechaActual: '16/06/2026',
-      proximoContacto: '23/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Sin respuesta',
-      proximaAccion: 'Realizar seguimiento',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Punto de abastecimiento en carretera'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Estación El Torno',
@@ -380,13 +316,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Diesel'],
       idVendedor: 103,
-      fechaActual: '13/06/2026',
-      proximoContacto: '20/06/2026',
-      metodoContacto: 'Visita',
-      respuestaContacto: 'Interesada en conocer los beneficios',
-      proximaAccion: 'Programar reunión',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Atención a usuarios de la carretera y comunidades cercanas'
+      verificado: 'Verificado'
     },
     {
       nombre: 'Surtidor La Guardia Centro',
@@ -400,13 +330,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 1,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas', 'Diesel'],
       idVendedor: 104,
-      fechaActual: '12/06/2026',
-      proximoContacto: '19/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Revisando la propuesta',
-      proximaAccion: 'Consultar decisión comercial',
-      caracteristicasEtiqueta: 'Gasolina, Diésel, GNV',
-      caracteristicasAdicional: 'Abastecimiento para transporte particular y comercial'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Estación San Ignacio',
@@ -420,13 +344,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 3,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas'],
       idVendedor: 105,
-      fechaActual: '17/06/2026',
-      proximoContacto: '25/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Pendiente de respuesta',
-      proximaAccion: 'Volver a contactar',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Servicio para vehículos particulares y transporte local'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Surtidor Puerto Suárez',
@@ -440,13 +358,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Diesel'],
       idVendedor: 101,
-      fechaActual: '15/06/2026',
-      proximoContacto: '22/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Solicitó detalles del servicio',
-      proximaAccion: 'Enviar información',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Atención a vehículos particulares y transporte fronterizo'
+      verificado: 'Verificado'
     },
     {
       nombre: 'Estación San José de Chiquitos',
@@ -460,13 +372,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 1,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Diesel'],
       idVendedor: 102,
-      fechaActual: '18/06/2026',
-      proximoContacto: '26/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Pendiente de contacto',
-      proximaAccion: 'Presentar MotorHub',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Abastecimiento para transporte interprovincial'
+      verificado: 'Sin verificar'
     },
     {
       nombre: 'Surtidor Yapacaní',
@@ -480,13 +386,7 @@ export class NegociosSurtidoresComponent implements AfterViewInit {
       prioridad: 3,
       idTipoNegocio: 1,combustibles: ['Gasolina', 'Gas', 'Diesel'],
       idVendedor: 103,
-      fechaActual: '10/06/2026',
-      proximoContacto: '25/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'No está interesado por el momento',
-      proximaAccion: 'Reevaluar contacto en el futuro',
-      caracteristicasEtiqueta: 'Gasolina, Diésel',
-      caracteristicasAdicional: 'Prospecto de demostración para seguimiento comercial'
+      verificado: 'Sin verificar'
     }
   ]);
   ciudades = [

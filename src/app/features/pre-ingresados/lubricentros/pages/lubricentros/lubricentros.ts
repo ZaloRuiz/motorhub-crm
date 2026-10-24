@@ -47,16 +47,16 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
     return this.dataSource.filteredData.length;
   }
   
-  get tipoA(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'A').length;
+  get estadoPendiente(): number {
+    return this.dataSource.filteredData.filter(x => x.estado === 'Pendiente').length;
   }
   
-  get tipoB(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'B').length;
+  get estadoContactado(): number {
+    return this.dataSource.filteredData.filter(x => x.estado === 'Contactado').length;
   }
   
-  get tipoC(): number {
-    return this.dataSource.filteredData.filter(x => x.tipo === 'C').length;
+  get estadoPerdido(): number {
+    return this.dataSource.filteredData.filter(x => x.estado === 'Perdido').length;
   }
 
   constructor(private dialog: MatDialog) {
@@ -111,7 +111,6 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
     'contacto',
     'telefono',
     'ciudad',
-    'tipo',
     'estado',
     'acciones'
   ];
@@ -135,22 +134,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
       telefono: '70123456',
       ciudad: 'Santa Cruz de la Sierra',
       tipo: 'A',
-      estado: 'Nuevo',
+      estado: 'Pendiente',
       direccion: 'Av. Banzer Km 8',
       ubLatitud: '-17.7445',
       ubLongitud: '-63.1561',
       prioridad: 1,
-      idTipoNegocio: 1,
+      idTipoNegocio: 4,
       idVendedor: 101,
-      especialidad: 'Mecánica General',
-      fechaActual: '15/06/2026',
-      proximoContacto: '20/06/2026',
-      metodoContacto: 'WhatsApp',
-      respuestaContacto: 'Solicitó información',
-      proximaAccion: 'Enviar propuesta comercial',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Elevador, Scanner',
-      caracteristicasAdicional: 'Área de recepción climatizada'
       },
       {
       nombre: 'Moto Service',
@@ -165,15 +155,6 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
       prioridad: 2,
       idTipoNegocio: 1,
       idVendedor: 102,
-      especialidad: 'Motocicletas',
-      fechaActual: '14/06/2026',
-      proximoContacto: '18/06/2026',
-      metodoContacto: 'Llamada',
-      respuestaContacto: 'Interesado',
-      proximaAccion: 'Agendar visita',
-      tipoVehiculo: 'Motocicletas',
-      caracteristicasEtiqueta: 'Motores, Inyección',
-      caracteristicasAdicional: 'Especialista en motos deportivas'
       },
       {
       nombre: 'Garage Premium',
@@ -181,22 +162,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
       telefono: '72345678',
       ciudad: 'Warnes',
       tipo: 'A',
-      estado: 'Negociación',
+      estado: 'Pendiente',
       direccion: 'Zona Industrial Warnes',
       ubLatitud: '-17.5123',
       ubLongitud: '-63.1734',
       prioridad: 1,
       idTipoNegocio: 1,
       idVendedor: 101,
-      especialidad: 'Suspensión y Frenos',
-      fechaActual: '12/06/2026',
-      proximoContacto: '19/06/2026',
-      metodoContacto: 'Visita',
-      respuestaContacto: 'Evaluando propuesta',
-      proximaAccion: 'Presentar contrato',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-      caracteristicasAdicional: 'Instalaciones modernas'
       },
       {
       nombre: 'Express Lubricantes',
@@ -204,23 +176,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
       telefono: '73456789',
       ciudad: 'Montero',
       tipo: 'C',
-      estado: 'Ganado',
-      
+      estado: 'Pendiente',
       direccion: 'Av. Circunvalación',
       ubLatitud: '-17.3382',
       ubLongitud: '-63.2501',
       prioridad: 3,
       idTipoNegocio: 1,
       idVendedor: 103,
-      especialidad: 'Electricidad Automotriz',
-      fechaActual: '10/06/2026',
-      proximoContacto: '25/06/2026',
-      metodoContacto: 'Seguimiento',
-      respuestaContacto: 'Aceptó trabajar con nosotros',
-      proximaAccion: 'Capacitación inicial',
-      tipoVehiculo: 'Automóviles',
-      caracteristicasEtiqueta: 'Scanner',
-      caracteristicasAdicional: 'Taller consolidado'
       },
       {
         nombre: 'Lubricantes Perez',
@@ -228,23 +190,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '74567890',
         ciudad: 'Montero',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Contactado',
         direccion: 'Barrio Centro',
         ubLatitud: '-17.3421',
         ubLongitud: '-63.2554',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 102,
-        especialidad: 'Mecánica General',
-        fechaActual: '13/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Solicitó propuesta',
-        proximaAccion: 'Presentar convenio',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador',
-        caracteristicasAdicional: 'Negocio familiar'
         },
         {
         nombre: 'Lubricentro Los Junos',
@@ -252,23 +204,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '75678901',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Contactado',
         direccion: 'Av. Virgen de Cotoca',
         ubLatitud: '-17.7754',
         ubLongitud: '-63.1321',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 101,
-        especialidad: 'Suspensión',
-        fechaActual: '11/06/2026',
-        proximoContacto: '17/06/2026',
-        metodoContacto: 'Llamada',
-        respuestaContacto: 'Interesado',
-        proximaAccion: 'Coordinar visita',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Alineadora',
-        caracteristicasAdicional: 'Buen flujo de clientes'
         },
         {
         nombre: 'Pro Mecanics',
@@ -276,23 +218,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '76789012',
         ciudad: 'Warnes',
         tipo: 'A',
-        estado: 'Nuevo',
-        
+        estado: 'Perdido',
         direccion: 'Zona Norte Warnes',
         ubLatitud: '-17.5087',
         ubLongitud: '-63.1698',
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 103,
-        especialidad: 'Diagnóstico Computarizado',
-        fechaActual: '16/06/2026',
-        proximoContacto: '19/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Pendiente',
-        proximaAccion: 'Primer contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner, Elevador',
-        caracteristicasAdicional: 'Infraestructura moderna'
         },
         {
         nombre: 'Lubricentro San Pedro',
@@ -300,23 +232,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '77890123',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'C',
-        estado: 'Nuevo',
-        
+        estado: 'Pendiente',
         direccion: 'Barrio San Pedro',
         ubLatitud: '-17.7842',
         ubLongitud: '-63.1745',
         prioridad: 3,
         idTipoNegocio: 1,
         idVendedor: 102,
-        especialidad: 'Mecánica General',
-        fechaActual: '15/06/2026',
-        proximoContacto: '21/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Sin respuesta',
-        proximaAccion: 'Reintentar contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Herramientas básicas',
-        caracteristicasAdicional: 'Taller pequeño'
         },
         {
         nombre: 'Masters',
@@ -324,23 +246,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '78901234',
         ciudad: 'Camiri',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Pendiente',
         direccion: 'Zona Central',
         ubLatitud: '-20.0381',
         ubLongitud: '-63.5187',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 101,
-        especialidad: 'Motores',
-        fechaActual: '09/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Analizando propuesta',
-        proximaAccion: 'Seguimiento',
-        tipoVehiculo: 'Camionetas',
-        caracteristicasEtiqueta: 'Banco de pruebas',
-        caracteristicasAdicional: 'Experiencia en motores diésel'
         },
         {
         nombre: 'Don Julio',
@@ -348,23 +260,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '79012345',
         ciudad: 'Warnes',
         tipo: 'B',
-        estado: 'Nuevo',
-        
+        estado: 'Pendiente',
         direccion: 'Carretera al Norte',
         ubLatitud: '-17.5201',
         ubLongitud: '-63.1810',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 103,
-        especialidad: 'Mecánica General',
-        fechaActual: '16/06/2026',
-        proximoContacto: '20/06/2026',
-        metodoContacto: 'WhatsApp',
-        respuestaContacto: 'Pendiente',
-        proximaAccion: 'Primer contacto',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador',
-        caracteristicasAdicional: 'Buen potencial comercial'
         },
         {
         nombre: 'Lubricentro Rojas',
@@ -372,23 +274,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '70111222',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
-        estado: 'Negociación',
-        
+        estado: 'Perdido',
         direccion: 'Av. Alemana',
         ubLatitud: '-17.7610',
         ubLongitud: '-63.1701',
         prioridad: 2,
         idTipoNegocio: 1,
         idVendedor: 102,
-        especialidad: 'Electricidad Automotriz',
-        fechaActual: '08/06/2026',
-        proximoContacto: '17/06/2026',
-        metodoContacto: 'Llamada',
-        respuestaContacto: 'Interesado',
-        proximaAccion: 'Enviar información',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner',
-        caracteristicasAdicional: 'Especialista en sistemas eléctricos'
         },
         {
         nombre: 'Lubricentros Saucedo',
@@ -396,23 +288,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '70222333',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
-        estado: 'Negociación',
-        
+        estado: 'Pendiente',
         direccion: 'Av. Cristo Redentor',
         ubLatitud: '-17.7350',
         ubLongitud: '-63.1654',
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 101,
-        especialidad: 'Mecánica Integral',
-        fechaActual: '07/06/2026',
-        proximoContacto: '18/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Muy interesado',
-        proximaAccion: 'Revisión contractual',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-        caracteristicasAdicional: 'Instalaciones premium'
         },
         {
         nombre: 'AutoWorks Lubricantes',
@@ -420,23 +302,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
         telefono: '70333444',
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
-        estado: 'Negociación',
-        
+        estado: 'Pendiente',
         direccion: 'Av. Beni',
         ubLatitud: '-17.7488',
         ubLongitud: '-63.1569',
         prioridad: 1,
         idTipoNegocio: 1,
         idVendedor: 103,
-        especialidad: 'Diagnóstico y Electrónica',
-        fechaActual: '06/06/2026',
-        proximoContacto: '19/06/2026',
-        metodoContacto: 'Visita',
-        respuestaContacto: 'Evaluando beneficios',
-        proximaAccion: 'Presentar propuesta final',
-        tipoVehiculo: 'Automóviles',
-        caracteristicasEtiqueta: 'Scanner, Elevador',
-        caracteristicasAdicional: 'Taller de alta tecnología'
         },
         {
           nombre: 'Turbo Lubricenter',
@@ -445,22 +317,12 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
           ciudad: 'Santa Cruz de la Sierra',
           tipo: 'A',
           estado: 'Contactado',
-          
           direccion: 'Av. Mutualista',
           ubLatitud: '-17.7812',
           ubLongitud: '-63.1458',
           prioridad: 1,
           idTipoNegocio: 1,
           idVendedor: 101,
-          especialidad: 'Motores Turbo',
-          fechaActual: '16/06/2026',
-          proximoContacto: '21/06/2026',
-          metodoContacto: 'Llamada',
-          respuestaContacto: 'Interesado en conocer beneficios',
-          proximaAccion: 'Agendar demostración',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Scanner, Banco de pruebas',
-          caracteristicasAdicional: 'Especialista en vehículos turbo'
           },
           {
           nombre: 'Elite Lubricantes',
@@ -468,23 +330,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
           telefono: '70555666',
           ciudad: 'Cochabamba',
           tipo: 'A',
-          estado: 'Negociación',
-          
+          estado: 'Pendiente',
           direccion: 'Av. América',
           ubLatitud: '-17.3895',
           ubLongitud: '-66.1568',
           prioridad: 1,
           idTipoNegocio: 1,
           idVendedor: 102,
-          especialidad: 'Mecánica Premium',
-          fechaActual: '15/06/2026',
-          proximoContacto: '22/06/2026',
-          metodoContacto: 'Visita',
-          respuestaContacto: 'Solicitó propuesta formal',
-          proximaAccion: 'Presentar propuesta económica',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Elevador, Scanner, Alineadora',
-          caracteristicasAdicional: 'Atención a vehículos de gama alta'
           },
           {
           nombre: 'Lubricentro El Mecánico',
@@ -492,23 +344,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
           telefono: '70666777',
           ciudad: 'Montero',
           tipo: 'C',
-          estado: 'Nuevo',
-          
+          estado: 'Pendiente',
           direccion: 'Barrio Villa Busch',
           ubLatitud: '-17.3465',
           ubLongitud: '-63.2492',
           prioridad: 3,
           idTipoNegocio: 1,
           idVendedor: 103,
-          especialidad: 'Mecánica General',
-          fechaActual: '17/06/2026',
-          proximoContacto: '23/06/2026',
-          metodoContacto: 'WhatsApp',
-          respuestaContacto: 'Pendiente',
-          proximaAccion: 'Realizar primer contacto',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Herramientas básicas',
-          caracteristicasAdicional: 'Taller de barrio con clientela estable'
           },
           {
           nombre: 'Lubri Pro',
@@ -517,22 +359,12 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
           ciudad: 'Camiri',
           tipo: 'B',
           estado: 'Contactado',
-          
           direccion: 'Av. Petrolera',
           ubLatitud: '-20.0405',
           ubLongitud: '-63.5202',
           prioridad: 2,
           idTipoNegocio: 1,
           idVendedor: 101,
-          especialidad: 'Motores Diésel',
-          fechaActual: '16/06/2026',
-          proximoContacto: '20/06/2026',
-          metodoContacto: 'Llamada',
-          respuestaContacto: 'Mostró interés',
-          proximaAccion: 'Coordinar visita técnica',
-          tipoVehiculo: 'Camiones',
-          caracteristicasEtiqueta: 'Banco de pruebas',
-          caracteristicasAdicional: 'Especializado en transporte pesado'
           },
           {
           nombre: 'Auto Clínica',
@@ -540,23 +372,13 @@ export class PreIngresadosLubricentrosComponent implements AfterViewInit {
           telefono: '70888999',
           ciudad: 'Warnes',
           tipo: 'B',
-          estado: 'Ganado',
-          
+          estado: 'Pendiente',
           direccion: 'Zona Industrial',
           ubLatitud: '-17.5174',
           ubLongitud: '-63.1763',
           prioridad: 2,
           idTipoNegocio: 1,
           idVendedor: 102,
-          especialidad: 'Mantenimiento Preventivo',
-          fechaActual: '14/06/2026',
-          proximoContacto: '30/06/2026',
-          metodoContacto: 'Seguimiento',
-          respuestaContacto: 'Aceptó la propuesta',
-          proximaAccion: 'Capacitación y onboarding',
-          tipoVehiculo: 'Automóviles',
-          caracteristicasEtiqueta: 'Elevador, Scanner',
-          caracteristicasAdicional: 'Cliente recientemente incorporado'
           }
         ]);
         ciudades = [

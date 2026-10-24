@@ -28,39 +28,39 @@
     <mat-card class="kpi-card kpi-a">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Tipo A</span>
+          <span class="kpi-title">Pendiente</span>
           <span class="kpi-icon">
             <mat-icon>star</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ tipoA }}</div>
-        <div class="kpi-caption">Clasificación comercial A</div>
+        <div class="kpi-value">{{ estadoPendiente }}</div>
+        <div class="kpi-caption">Estado de contacto</div>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="kpi-card kpi-b">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Tipo B</span>
+          <span class="kpi-title">Contactado</span>
           <span class="kpi-icon">
             <mat-icon>trending_up</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ tipoB }}</div>
-        <div class="kpi-caption">Clasificación comercial B</div>
+        <div class="kpi-value">{{ estadoContactado }}</div>
+        <div class="kpi-caption">Estado de contacto</div>
       </mat-card-content>
     </mat-card>
 
     <mat-card class="kpi-card kpi-c">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Tipo C</span>
+          <span class="kpi-title">Perdido</span>
           <span class="kpi-icon">
             <mat-icon>segment</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ tipoC }}</div>
-        <div class="kpi-caption">Clasificación comercial C</div>
+        <div class="kpi-value">{{ estadoPerdido }}</div>
+        <div class="kpi-caption">Estado de contacto</div>
       </mat-card-content>
     </mat-card>
 
@@ -104,15 +104,13 @@
             (selectionChange)="aplicarFiltros()"
           >
             <mat-option value="">Todos los estados</mat-option>
-            <mat-option value="Nuevo">Nuevo</mat-option>
+            <mat-option value="Pendiente">Pendiente</mat-option>
             <mat-option value="Contactado">Contactado</mat-option>
-            <mat-option value="Negociación">Negociación</mat-option>
-            <mat-option value="Ganado">Ganado</mat-option>
             <mat-option value="Perdido">Perdido</mat-option>
           </mat-select>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <!-- <mat-form-field appearance="outline">
           <mat-label>Clasificación</mat-label>
           <mat-select
             [(ngModel)]="filtros.tipo"
@@ -123,7 +121,7 @@
             <mat-option value="B">Tipo B</mat-option>
             <mat-option value="C">Tipo C</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
         <mat-form-field appearance="outline">
           <mat-label>Ciudad</mat-label>
@@ -196,17 +194,6 @@
             </th>
             <td mat-cell *matCellDef="let row">
               {{ row.ciudad || '—' }}
-            </td>
-          </ng-container>
-
-          <ng-container matColumnDef="tipo">
-            <th mat-header-cell *matHeaderCellDef mat-sort-header>
-              Tipo
-            </th>
-            <td mat-cell *matCellDef="let row">
-              <span class="tipo-chip" [ngClass]="'tipo-' + row.tipo">
-                Tipo {{ row.tipo }}
-              </span>
             </td>
           </ng-container>
 

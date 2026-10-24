@@ -139,7 +139,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
       ciudad: 'Santa Cruz de la Sierra',
       tipo: 'A',
       estado: 'Nuevo',
-      
       direccion: 'Av. Banzer Km 8',
       ubLatitud: '-17.7445',
       ubLongitud: '-63.1561',
@@ -163,7 +162,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
       ciudad: 'Santa Cruz de la Sierra',
       tipo: 'B',
       estado: 'Contactado',
-      
       direccion: 'Av. Santos Dumont',
       ubLatitud: '-17.8123',
       ubLongitud: '-63.1812',
@@ -187,7 +185,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
       ciudad: 'Warnes',
       tipo: 'A',
       estado: 'Negociación',
-      
       direccion: 'Zona Industrial Warnes',
       ubLatitud: '-17.5123',
       ubLongitud: '-63.1734',
@@ -211,7 +208,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
       ciudad: 'Montero',
       tipo: 'C',
       estado: 'Ganado',
-      
       direccion: 'Av. Circunvalación',
       ubLatitud: '-17.3382',
       ubLongitud: '-63.2501',
@@ -235,7 +231,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Montero',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Barrio Centro',
         ubLatitud: '-17.3421',
         ubLongitud: '-63.2554',
@@ -259,7 +254,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Av. Virgen de Cotoca',
         ubLatitud: '-17.7754',
         ubLongitud: '-63.1321',
@@ -283,7 +277,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Warnes',
         tipo: 'A',
         estado: 'Nuevo',
-        
         direccion: 'Zona Norte Warnes',
         ubLatitud: '-17.5087',
         ubLongitud: '-63.1698',
@@ -307,7 +300,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'C',
         estado: 'Nuevo',
-        
         direccion: 'Barrio San Pedro',
         ubLatitud: '-17.7842',
         ubLongitud: '-63.1745',
@@ -331,7 +323,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Camiri',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Zona Central',
         ubLatitud: '-20.0381',
         ubLongitud: '-63.5187',
@@ -355,7 +346,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Warnes',
         tipo: 'B',
         estado: 'Nuevo',
-        
         direccion: 'Carretera al Norte',
         ubLatitud: '-17.5201',
         ubLongitud: '-63.1810',
@@ -379,7 +369,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'B',
         estado: 'Negociación',
-        
         direccion: 'Av. Alemana',
         ubLatitud: '-17.7610',
         ubLongitud: '-63.1701',
@@ -403,7 +392,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
         estado: 'Negociación',
-        
         direccion: 'Av. Cristo Redentor',
         ubLatitud: '-17.7350',
         ubLongitud: '-63.1654',
@@ -427,7 +415,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
         ciudad: 'Santa Cruz de la Sierra',
         tipo: 'A',
         estado: 'Negociación',
-        
         direccion: 'Av. Beni',
         ubLatitud: '-17.7488',
         ubLongitud: '-63.1569',
@@ -451,7 +438,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
           ciudad: 'Santa Cruz de la Sierra',
           tipo: 'A',
           estado: 'Contactado',
-          
           direccion: 'Av. Mutualista',
           ubLatitud: '-17.7812',
           ubLongitud: '-63.1458',
@@ -475,7 +461,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
           ciudad: 'Cochabamba',
           tipo: 'A',
           estado: 'Negociación',
-          
           direccion: 'Av. América',
           ubLatitud: '-17.3895',
           ubLongitud: '-66.1568',
@@ -499,7 +484,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
           ciudad: 'Montero',
           tipo: 'C',
           estado: 'Nuevo',
-          
           direccion: 'Barrio Villa Busch',
           ubLatitud: '-17.3465',
           ubLongitud: '-63.2492',
@@ -523,7 +507,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
           ciudad: 'Camiri',
           tipo: 'B',
           estado: 'Contactado',
-          
           direccion: 'Av. Petrolera',
           ubLatitud: '-20.0405',
           ubLongitud: '-63.5202',
@@ -547,7 +530,6 @@ export class ProspectosTalleresComponent implements AfterViewInit {
           ciudad: 'Warnes',
           tipo: 'B',
           estado: 'Ganado',
-          
           direccion: 'Zona Industrial',
           ubLatitud: '-17.5174',
           ubLongitud: '-63.1763',

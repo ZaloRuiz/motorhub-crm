@@ -25,55 +25,16 @@
       </mat-card-content>
     </mat-card>
 
-    <mat-card class="kpi-card kpi-a">
+    <mat-card class="kpi-card kpi-verificado">
       <mat-card-content>
         <div class="kpi-top">
-          <span class="kpi-title">Integral</span>
+          <span class="kpi-title">Verificados / Sin verificar</span>
           <span class="kpi-icon">
-            <mat-icon>star</mat-icon>
+            <mat-icon>verified</mat-icon>
           </span>
         </div>
-        <div class="kpi-value">{{ tipoIntegral }}</div>
-        <div class="kpi-caption">Tipo de grua</div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="kpi-card kpi-b">
-      <mat-card-content>
-        <div class="kpi-top">
-          <span class="kpi-title">Plataforma</span>
-          <span class="kpi-icon">
-            <mat-icon>trending_up</mat-icon>
-          </span>
-        </div>
-        <div class="kpi-value">{{ tipoPlataforma }}</div>
-        <div class="kpi-caption">Tipo de grua</div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="kpi-card kpi-c">
-      <mat-card-content>
-        <div class="kpi-top">
-          <span class="kpi-title">Arrastre con gancho</span>
-          <span class="kpi-icon">
-            <mat-icon>segment</mat-icon>
-          </span>
-        </div>
-        <div class="kpi-value">{{ tipoArrastreGancho }}</div>
-        <div class="kpi-caption">Tipo de grua</div>
-      </mat-card-content>
-    </mat-card>
-
-    <mat-card class="kpi-card kpi-c">
-      <mat-card-content>
-        <div class="kpi-top">
-          <span class="kpi-title">Arrastre con elevador</span>
-          <span class="kpi-icon">
-            <mat-icon>segment</mat-icon>
-          </span>
-        </div>
-        <div class="kpi-value">{{ tipoArrastreElevador }}</div>
-        <div class="kpi-caption">Tipo de grua</div>
+        <div class="kpi-value">{{ estadoVerificado }} / {{ estadoSinverificar }}</div>
+        <div class="kpi-caption">Estado de verificacion</div>
       </mat-card-content>
     </mat-card>
 
@@ -108,14 +69,14 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Estado</mat-label>
+        <mat-label>Estado de verificacion</mat-label>
         <mat-select
-          [(ngModel)]="filtros.estado"
-          (ngModelChange)="aplicarFiltros()"
+          [(ngModel)]="filtros.verificado"
+          (selectionChange)="aplicarFiltros()"
         >
           <mat-option value="">Todos los estados</mat-option>
-          <mat-option value="Activo">Activo</mat-option>
-          <mat-option value="Inactivo">Inactivo</mat-option>
+          <mat-option value="Verificado">Verificado</mat-option>
+          <mat-option value="Sin verificar">Sin verificar</mat-option>
         </mat-select>
       </mat-form-field>
 
@@ -174,49 +135,40 @@
         <!-- Nombre -->
         <ng-container matColumnDef="nombre">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Grúa</th>
-          <td mat-cell *matCellDef="let prospecto">
-            <span class="business-name">{{ prospecto.nombre }}</span>
+          <td mat-cell *matCellDef="let row">
+            <span class="business-name">{{ row.nombre }}</span>
           </td>
         </ng-container>
 
         <!-- Contacto -->
         <ng-container matColumnDef="contacto">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Contacto</th>
-          <td mat-cell *matCellDef="let prospecto">
-            {{ prospecto.contacto }}
+          <td mat-cell *matCellDef="let row">
+            {{ row.contacto }}
           </td>
         </ng-container>
 
         <!-- Teléfono -->
         <ng-container matColumnDef="telefono">
           <th mat-header-cell *matHeaderCellDef>Teléfono</th>
-          <td mat-cell *matCellDef="let prospecto">
-            {{ prospecto.telefono }}
+          <td mat-cell *matCellDef="let row">
+            {{ row.telefono }}
           </td>
         </ng-container>
 
         <!-- Ciudad -->
         <ng-container matColumnDef="ciudad">
           <th mat-header-cell *matHeaderCellDef mat-sort-header>Ciudad</th>
-          <td mat-cell *matCellDef="let prospecto">
-            {{ prospecto.ciudad }}
+          <td mat-cell *matCellDef="let row">
+            {{ row.ciudad }}
           </td>
         </ng-container>
 
-        <!-- Tipo de grúa -->
-        <ng-container matColumnDef="tipoGrua">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Tipo de grúa</th>
-          <td mat-cell *matCellDef="let prospecto">
-            <span class="tipo-grua">{{ prospecto.tipoGrua }}</span>
-          </td>
-        </ng-container>
-
-        <!-- Estado -->
-        <ng-container matColumnDef="estado">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>Estado</th>
-          <td mat-cell *matCellDef="let prospecto">
-            <span class="estado-chip" [ngClass]="'estado-' + prospecto.estado">
-              {{ prospecto.estado }}
+        <ng-container matColumnDef="verificado">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Verificado</th>
+          <td mat-cell *matCellDef="let row">
+            <span class="estado-chip" [ngClass]="'estado-' + row.verificado">
+              {{ row.verificado }}
             </span>
           </td>
         </ng-container>
